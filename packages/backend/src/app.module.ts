@@ -8,6 +8,7 @@ import { RoomsModule } from './rooms/rooms.module';
 import { TenantsModule } from './tenants/tenants.module';
 import { UtilityConfigsModule } from './utility-configs/utility-configs.module';
 import { ServiceFeesModule } from './service-fees/service-fees.module';
+import { MeterReadingsModule } from './meter-readings/meter-readings.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { ServiceFeesModule } from './service-fees/service-fees.module';
     TenantsModule,
     UtilityConfigsModule,
     ServiceFeesModule,
+    MeterReadingsModule,
   ],
 })
 export class AppModule {}

@@ -33,11 +33,26 @@ export function TenantFormModal({ roomId, trigger }: TenantFormModalProps) {
   const createTenant = useCreateTenant(roomId);
   const { upload, isUploading, uploadError } = useUploadFile();
 
+  const handleOpenChange = (next: boolean) => {
+    if (!next) {
+      setName('');
+      setPhone('');
+      setIdCard('');
+      setIdCardImageUrl(null);
+      setMoveInDate(new Date().toISOString().split('T')[0]);
+    }
+    setOpen(next);
+  };
+
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     const url = await upload(file);
-    if (url) setIdCardImageUrl(url);
+    if (url) {
+      setIdCardImageUrl(url);
+    } else {
+      e.target.value = ''; // allow re-selecting the same file on retry
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -64,7 +79,7 @@ export function TenantFormModal({ roomId, trigger }: TenantFormModalProps) {
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent className="max-w-sm">
         <DialogHeader>

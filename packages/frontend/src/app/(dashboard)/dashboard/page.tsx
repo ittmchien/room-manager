@@ -24,7 +24,7 @@ function computeStats(invoices: Invoice[] | undefined) {
 }
 
 export default function DashboardPage() {
-  const { data: properties } = useProperties();
+  const { data: properties, isLoading: loadingProperties } = useProperties();
   const propertyId = properties?.[0]?.id ?? '';
   const billingPeriod = getCurrentBillingPeriod();
   const [year, month] = billingPeriod.split('-');
@@ -37,7 +37,17 @@ export default function DashboardPage() {
   const vacantCount = rooms?.filter((r) => r.status === 'VACANT').length ?? 0;
   const { totalRevenue, pendingInvoices } = computeStats(invoices);
 
-  const isLoading = loadingRooms || loadingInvoices;
+  const isLoading = loadingProperties || loadingRooms || loadingInvoices;
+
+  if (!isLoading && !propertyId) {
+    return (
+      <div className="rounded-2xl bg-white p-8 text-center shadow-sm">
+        <p className="text-4xl">🏘️</p>
+        <p className="mt-3 font-semibold text-gray-700">Chưa có khu trọ</p>
+        <p className="mt-1 text-sm text-gray-400">Hoàn thành onboarding để bắt đầu.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-4">
@@ -129,13 +139,6 @@ export default function DashboardPage() {
         )}
       </div>
 
-      {!propertyId && !isLoading && (
-        <div className="rounded-2xl bg-white p-8 text-center shadow-sm">
-          <p className="text-4xl">🏘️</p>
-          <p className="mt-3 font-semibold text-gray-700">Chưa có khu trọ</p>
-          <p className="mt-1 text-sm text-gray-400">Hoàn thành onboarding để bắt đầu.</p>
-        </div>
-      )}
     </div>
   );
 }

@@ -16,7 +16,8 @@ function makeSvg(size) {
 }
 
 function makeMaskableSvg(size) {
-  // Safe zone: 40% padding on each side = content in center 20% of canvas
+  // Safe zone: 20% padding on each side → content occupies center 60% of canvas
+  // (W3C maskable icon safe zone requires center 80%; this is intentionally conservative)
   const padding = Math.round(size * 0.2);
   const innerSize = size - padding * 2;
   return Buffer.from(`

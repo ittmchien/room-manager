@@ -51,6 +51,12 @@ export class InvoicesService {
 
     return Promise.all(
       occupiedRooms.map(async (room) => {
+        // Idempotency: skip if invoice already exists for this room+period
+        const existing = await this.prisma.invoice.findFirst({
+          where: { roomId: room.id, billingPeriod: dto.billingPeriod },
+        });
+        if (existing) return existing;
+
         const activeTenantCount = room.tenants.length;
         const tenantId = room.tenants[0].id;
 
@@ -81,6 +87,10 @@ export class InvoicesService {
           waterFee +
           serviceFeesDetail.reduce((sum, f) => sum + f.amount, 0);
 
+        // dueDate = 15th of the billing month
+        const [periodYear, periodMonth] = dto.billingPeriod.split('-').map(Number);
+        const dueDate = new Date(periodYear, periodMonth - 1, 15, 23, 59, 59, 999);
+
         return this.prisma.invoice.create({
           data: {
             roomId: room.id,
@@ -94,6 +104,7 @@ export class InvoicesService {
             total,
             paidAmount: 0,
             status: 'PENDING',
+            dueDate,
           },
         });
       }),

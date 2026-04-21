@@ -215,6 +215,7 @@ model Invoice {
   tenant   Tenant    @relation(fields: [tenantId], references: [id])
   payments Payment[]
 
+  @@unique([roomId, billingPeriod])
   @@map("invoices")
 }
 

@@ -1,0 +1,98 @@
+'use client';
+
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { createBrowserClient } from '@/lib/supabase/client';
+
+export function useAuth() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
+  const supabase = createBrowserClient();
+
+  const signInWithGoogle = async () => {
+    setLoading(true);
+    setError(null);
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: `${window.location.origin}/dashboard` },
+    });
+    if (error) setError(error.message);
+    setLoading(false);
+  };
+
+  const signInWithOtp = async (phone: string) => {
+    setLoading(true);
+    setError(null);
+    const { error } = await supabase.auth.signInWithOtp({ phone });
+    if (error) setError(error.message);
+    setLoading(false);
+    return !error;
+  };
+
+  const verifyOtp = async (phone: string, token: string) => {
+    setLoading(true);
+    setError(null);
+    const { error } = await supabase.auth.verifyOtp({
+      phone,
+      token,
+      type: 'sms',
+    });
+    if (error) {
+      setError(error.message);
+      setLoading(false);
+      return false;
+    }
+    router.push('/dashboard');
+    return true;
+  };
+
+  const signInWithEmail = async (email: string, password: string) => {
+    setLoading(true);
+    setError(null);
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    if (error) {
+      setError(error.message);
+      setLoading(false);
+      return false;
+    }
+    router.push('/dashboard');
+    return true;
+  };
+
+  const signUp = async (email: string, password: string, name: string) => {
+    setLoading(true);
+    setError(null);
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: { data: { name } },
+    });
+    if (error) {
+      setError(error.message);
+      setLoading(false);
+      return false;
+    }
+    router.push('/onboarding');
+    return true;
+  };
+
+  const signOut = async () => {
+    await supabase.auth.signOut();
+    router.push('/login');
+  };
+
+  return {
+    loading,
+    error,
+    signInWithGoogle,
+    signInWithOtp,
+    verifyOtp,
+    signInWithEmail,
+    signUp,
+    signOut,
+  };
+}

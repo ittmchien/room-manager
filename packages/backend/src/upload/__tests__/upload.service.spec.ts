@@ -45,10 +45,21 @@ describe('UploadService', () => {
     expect(result.key).toMatch(/^uploads\/.+\.jpg$/);
   });
 
-  it('returns shape with key when filename has no extension', async () => {
+  it('handles filename with no extension — key does not contain "undefined"', async () => {
     const result = await service.getPresignedUrl('photo', 'image/jpeg');
     expect(result).toHaveProperty('uploadUrl');
     expect(result).toHaveProperty('fileUrl');
     expect(result).toHaveProperty('key');
+    expect(result.key).not.toContain('undefined');
+    expect(result.key).toMatch(/^uploads\/[a-f0-9-]+$/); // UUID only, no extension
+  });
+
+  it('throws InternalServerErrorException when getSignedUrl fails', async () => {
+    const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
+    getSignedUrl.mockRejectedValueOnce(new Error('R2 unavailable'));
+
+    await expect(service.getPresignedUrl('photo.jpg', 'image/jpeg')).rejects.toThrow(
+      'Failed to generate upload URL',
+    );
   });
 });

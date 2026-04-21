@@ -1,11 +1,11 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsIn, IsNotEmpty, IsString, MaxLength } from 'class-validator';
 
 export class GetPresignedUrlDto {
   @IsString()
   @IsNotEmpty()
+  @MaxLength(255)
   fileName!: string;
 
-  @IsString()
-  @IsNotEmpty()
+  @IsIn(['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'application/pdf'])
   contentType!: string;
 }

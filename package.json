@@ -1,0 +1,20 @@
+{
+  "name": "room-manager",
+  "private": true,
+  "scripts": {
+    "dev:be": "pnpm --filter @room-manager/backend dev",
+    "dev:fe": "pnpm --filter @room-manager/frontend dev",
+    "build:be": "pnpm --filter @room-manager/backend build",
+    "build:fe": "pnpm --filter @room-manager/frontend build",
+    "build:shared": "pnpm --filter @room-manager/shared build",
+    "db:generate": "pnpm --filter @room-manager/backend db:generate",
+    "db:push": "pnpm --filter @room-manager/backend db:push",
+    "db:migrate": "pnpm --filter @room-manager/backend db:migrate",
+    "db:studio": "pnpm --filter @room-manager/backend db:studio",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

@@ -1,7 +1,8 @@
-import { IsDateString, IsOptional, IsString, MaxLength } from 'class-validator';
+import { IsDateString, IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator';
 
 export class CreateTenantDto {
   @IsString()
+  @IsNotEmpty()
   @MaxLength(100)
   name!: string;
 

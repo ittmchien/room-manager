@@ -1,4 +1,4 @@
-import { IsEnum, IsInt, IsOptional, IsString, MaxLength, Min } from 'class-validator';
+import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, Min } from 'class-validator';
 
 export enum RentCalcType {
   FIXED = 'FIXED',
@@ -7,6 +7,7 @@ export enum RentCalcType {
 
 export class CreateRoomDto {
   @IsString()
+  @IsNotEmpty()
   @MaxLength(50)
   name!: string;
 

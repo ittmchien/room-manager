@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { UserRound } from 'lucide-react';
 import { Tenant, useCheckoutTenant } from '@/hooks/use-tenants';
 import { Button } from '@/components/ui/button';
@@ -10,9 +11,15 @@ function formatDate(dateStr: string) {
 
 export function TenantList({ tenants, roomId }: { tenants: Tenant[]; roomId: string }) {
   const checkout = useCheckoutTenant(roomId);
+  const [pendingId, setPendingId] = useState<string | null>(null);
 
   const active = tenants.filter((t) => t.status === 'ACTIVE');
   const movedOut = tenants.filter((t) => t.status === 'MOVED_OUT');
+
+  const handleCheckout = (tenantId: string) => {
+    setPendingId(tenantId);
+    checkout.mutate(tenantId, { onSettled: () => setPendingId(null) });
+  };
 
   return (
     <div className="space-y-3">
@@ -45,10 +52,10 @@ export function TenantList({ tenants, roomId }: { tenants: Tenant[]; roomId: str
             variant="outline"
             size="sm"
             className="text-xs"
-            onClick={() => checkout.mutate(tenant.id)}
-            disabled={checkout.isPending}
+            onClick={() => handleCheckout(tenant.id)}
+            disabled={pendingId === tenant.id}
           >
-            Trả phòng
+            {pendingId === tenant.id ? 'Đang xử lý...' : 'Trả phòng'}
           </Button>
         </div>
       ))}

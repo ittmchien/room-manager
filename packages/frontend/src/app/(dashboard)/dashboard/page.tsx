@@ -6,6 +6,7 @@ import { useProperties } from '@/hooks/use-properties';
 import { useRooms } from '@/hooks/use-rooms';
 import { useInvoices, Invoice } from '@/hooks/use-invoices';
 import { InvoiceStatusBadge } from '@/components/invoices/invoice-status-badge';
+import { PushNotificationBanner } from '@/components/dashboard/push-notification-banner';
 
 function getCurrentBillingPeriod(): string {
   const now = new Date();
@@ -51,6 +52,7 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-4">
+      <PushNotificationBanner />
       {/* Hero */}
       <div className="rounded-2xl bg-gradient-to-br from-blue-600 to-blue-500 p-5 text-white shadow-lg shadow-blue-200">
         <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-blue-100">

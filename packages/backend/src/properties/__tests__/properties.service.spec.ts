@@ -38,7 +38,6 @@ describe('PropertiesService', () => {
   describe('create', () => {
     it('should create first property on free tier', async () => {
       prisma.property.count.mockResolvedValue(0);
-      prisma.userFeature.findUnique.mockResolvedValue(null);
       prisma.property.create.mockResolvedValue({
         id: 'prop-1',
         ownerId: 'user-1',
@@ -97,6 +96,20 @@ describe('PropertiesService', () => {
       prisma.property.findFirst.mockResolvedValue(null);
 
       await expect(service.remove('user-1', 'prop-99')).rejects.toThrow(NotFoundException);
+    });
+  });
+
+  describe('update', () => {
+    it('should update property fields', async () => {
+      prisma.property.findFirst.mockResolvedValue({ id: 'prop-1', ownerId: 'user-1', name: 'Old', address: null });
+      prisma.property.update.mockResolvedValue({ id: 'prop-1', ownerId: 'user-1', name: 'New Name', address: null });
+
+      const result = await service.update('user-1', 'prop-1', { name: 'New Name' });
+      expect(result.name).toBe('New Name');
+      expect(prisma.property.update).toHaveBeenCalledWith({
+        where: { id: 'prop-1' },
+        data: { name: 'New Name', address: undefined },
+      });
     });
   });
 });

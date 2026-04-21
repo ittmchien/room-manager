@@ -3,11 +3,10 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { FEATURE_KEYS, FREE_PROPERTY_LIMIT } from '@room-manager/shared';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreatePropertyDto } from './dto/create-property.dto';
 import { UpdatePropertyDto } from './dto/update-property.dto';
-
-const FREE_PROPERTY_LIMIT = 1;
 
 @Injectable()
 export class PropertiesService {
@@ -18,7 +17,7 @@ export class PropertiesService {
 
     if (count >= FREE_PROPERTY_LIMIT) {
       const hasFeature = await this.prisma.userFeature.findUnique({
-        where: { userId_featureKey: { userId, featureKey: 'multi_property' } },
+        where: { userId_featureKey: { userId, featureKey: FEATURE_KEYS.MULTI_PROPERTY } },
       });
       if (!hasFeature) {
         throw new ForbiddenException(
@@ -51,7 +50,10 @@ export class PropertiesService {
 
   async update(userId: string, id: string, dto: UpdatePropertyDto) {
     await this.findOne(userId, id);
-    return this.prisma.property.update({ where: { id }, data: dto });
+    return this.prisma.property.update({
+      where: { id },
+      data: { name: dto.name, address: dto.address },
+    });
   }
 
   async remove(userId: string, id: string) {

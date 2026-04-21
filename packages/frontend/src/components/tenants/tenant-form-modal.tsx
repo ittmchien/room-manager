@@ -32,17 +32,21 @@ export function TenantFormModal({ roomId, trigger }: TenantFormModalProps) {
     e.preventDefault();
     if (!name || !moveInDate) return;
 
-    await createTenant.mutateAsync({
-      name,
-      phone: phone || undefined,
-      idCard: idCard || undefined,
-      moveInDate,
-    });
-
-    setName('');
-    setPhone('');
-    setIdCard('');
-    setOpen(false);
+    try {
+      await createTenant.mutateAsync({
+        name,
+        phone: phone || undefined,
+        idCard: idCard || undefined,
+        moveInDate,
+      });
+      setName('');
+      setPhone('');
+      setIdCard('');
+      setMoveInDate(new Date().toISOString().split('T')[0]);
+      setOpen(false);
+    } catch {
+      // Error displayed via createTenant.error
+    }
   };
 
   return (

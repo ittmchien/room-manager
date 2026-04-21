@@ -29,16 +29,19 @@ export function RoomFormModal({ propertyId, trigger }: RoomFormModalProps) {
     e.preventDefault();
     if (!name || !rentPrice) return;
 
-    await createRoom.mutateAsync({
-      name,
-      floor: floor ? parseInt(floor) : undefined,
-      rentPrice: parseInt(rentPrice),
-    });
-
-    setName('');
-    setFloor('');
-    setRentPrice('');
-    setOpen(false);
+    try {
+      await createRoom.mutateAsync({
+        name,
+        floor: floor ? parseInt(floor) : undefined,
+        rentPrice: parseInt(rentPrice),
+      });
+      setName('');
+      setFloor('');
+      setRentPrice('');
+      setOpen(false);
+    } catch {
+      // Error displayed via createRoom.error
+    }
   };
 
   return (

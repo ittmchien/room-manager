@@ -1,0 +1,382 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String   @id @default(cuid())
+  supabaseUserId  String   @unique @map("supabase_user_id")
+  email           String?
+  phone           String?
+  name            String
+  avatar          String?
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  properties     Property[]
+  userFeatures   UserFeature[]
+  purchaseHistory PurchaseHistory[]
+  subscriptions  Subscription[]
+
+  @@map("users")
+}
+
+model Property {
+  id        String   @id @default(cuid())
+  ownerId   String   @map("owner_id")
+  name      String
+  address   String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  owner          User            @relation(fields: [ownerId], references: [id])
+  rooms          Room[]
+  serviceFees    ServiceFee[]
+  utilityConfigs UtilityConfig[]
+  expenses       Expense[]
+
+  @@map("properties")
+}
+
+enum RoomStatus {
+  VACANT
+  OCCUPIED
+  MAINTENANCE
+}
+
+enum RentCalcType {
+  FIXED
+  PER_PERSON
+}
+
+model Room {
+  id                 String       @id @default(cuid())
+  propertyId         String       @map("property_id")
+  name               String
+  floor              Int?
+  rentPrice          Int          @map("rent_price")
+  rentCalcType       RentCalcType @default(FIXED) @map("rent_calc_type")
+  rentPerPersonPrice Int?         @map("rent_per_person_price")
+  status             RoomStatus   @default(VACANT)
+  createdAt          DateTime     @default(now()) @map("created_at")
+  updatedAt          DateTime     @updatedAt @map("updated_at")
+
+  property        Property         @relation(fields: [propertyId], references: [id])
+  tenants         Tenant[]
+  meterReadings   MeterReading[]
+  invoices        Invoice[]
+  contracts       Contract[]
+  expenses        Expense[]
+  roomServiceFees RoomServiceFee[]
+
+  @@map("rooms")
+}
+
+enum TenantStatus {
+  ACTIVE
+  MOVED_OUT
+}
+
+model Tenant {
+  id           String       @id @default(cuid())
+  roomId       String       @map("room_id")
+  name         String
+  phone        String?
+  idCard       String?      @map("id_card")
+  idCardImage  String?      @map("id_card_image")
+  moveInDate   DateTime     @map("move_in_date")
+  moveOutDate  DateTime?    @map("move_out_date")
+  status       TenantStatus @default(ACTIVE)
+  createdAt    DateTime     @default(now()) @map("created_at")
+  updatedAt    DateTime     @updatedAt @map("updated_at")
+
+  room      Room       @relation(fields: [roomId], references: [id])
+  invoices  Invoice[]
+  contracts Contract[]
+
+  @@map("tenants")
+}
+
+enum UtilityType {
+  ELECTRIC
+  WATER
+}
+
+enum UtilityCalcType {
+  FIXED
+  TIERED
+  PER_PERSON
+  FIXED_PER_ROOM
+}
+
+model UtilityConfig {
+  id             String          @id @default(cuid())
+  propertyId     String          @map("property_id")
+  type           UtilityType
+  calcType       UtilityCalcType @map("calc_type")
+  unitPrice      Int?            @map("unit_price")
+  perPersonPrice Int?            @map("per_person_price")
+  fixedRoomPrice Int?            @map("fixed_room_price")
+  tiers          Json?
+  createdAt      DateTime        @default(now()) @map("created_at")
+  updatedAt      DateTime        @updatedAt @map("updated_at")
+
+  property Property @relation(fields: [propertyId], references: [id])
+
+  @@unique([propertyId, type])
+  @@map("utility_configs")
+}
+
+enum FeeCalcType {
+  FIXED_PER_ROOM
+  PER_PERSON
+  PER_QUANTITY
+}
+
+enum FeeApplyTo {
+  ALL
+  SELECTED_ROOMS
+}
+
+model ServiceFee {
+  id         String     @id @default(cuid())
+  propertyId String     @map("property_id")
+  name       String
+  calcType   FeeCalcType @map("calc_type")
+  unitPrice  Int        @map("unit_price")
+  applyTo    FeeApplyTo @default(ALL) @map("apply_to")
+  createdAt  DateTime   @default(now()) @map("created_at")
+  updatedAt  DateTime   @updatedAt @map("updated_at")
+
+  property        Property         @relation(fields: [propertyId], references: [id])
+  roomServiceFees RoomServiceFee[]
+
+  @@map("service_fees")
+}
+
+model RoomServiceFee {
+  id           String  @id @default(cuid())
+  roomId       String  @map("room_id")
+  serviceFeeId String  @map("service_fee_id")
+  enabled      Boolean @default(true)
+  customPrice  Int?    @map("custom_price")
+  quantity     Int?
+
+  room       Room       @relation(fields: [roomId], references: [id])
+  serviceFee ServiceFee @relation(fields: [serviceFeeId], references: [id])
+
+  @@unique([roomId, serviceFeeId])
+  @@map("room_service_fees")
+}
+
+model MeterReading {
+  id            String      @id @default(cuid())
+  roomId        String      @map("room_id")
+  type          UtilityType
+  readingValue  Int         @map("reading_value")
+  previousValue Int         @map("previous_value")
+  readingDate   DateTime    @map("reading_date")
+  createdAt     DateTime    @default(now()) @map("created_at")
+
+  room Room @relation(fields: [roomId], references: [id])
+
+  @@map("meter_readings")
+}
+
+enum InvoiceStatus {
+  PENDING
+  PARTIAL
+  PAID
+}
+
+model Invoice {
+  id                String        @id @default(cuid())
+  roomId            String        @map("room_id")
+  tenantId          String        @map("tenant_id")
+  billingPeriod     String        @map("billing_period")
+  roomFee           Int           @map("room_fee")
+  electricFee       Int           @default(0) @map("electric_fee")
+  waterFee          Int           @default(0) @map("water_fee")
+  serviceFeesDetail Json?         @map("service_fees_detail")
+  discount          Int           @default(0)
+  total             Int
+  paidAmount        Int           @default(0) @map("paid_amount")
+  status            InvoiceStatus @default(PENDING)
+  dueDate           DateTime?     @map("due_date")
+  paidDate          DateTime?     @map("paid_date")
+  createdAt         DateTime      @default(now()) @map("created_at")
+  updatedAt         DateTime      @updatedAt @map("updated_at")
+
+  room     Room      @relation(fields: [roomId], references: [id])
+  tenant   Tenant    @relation(fields: [tenantId], references: [id])
+  payments Payment[]
+
+  @@map("invoices")
+}
+
+enum PaymentMethod {
+  CASH
+  TRANSFER
+  OTHER
+}
+
+model Payment {
+  id          String        @id @default(cuid())
+  invoiceId   String        @map("invoice_id")
+  amount      Int
+  paymentDate DateTime      @map("payment_date")
+  method      PaymentMethod @default(CASH)
+  note        String?
+  createdAt   DateTime      @default(now()) @map("created_at")
+
+  invoice Invoice @relation(fields: [invoiceId], references: [id])
+
+  @@map("payments")
+}
+
+enum DepositStatus {
+  PENDING
+  PAID
+  RETURNED
+  DEDUCTED
+}
+
+model Contract {
+  id            String        @id @default(cuid())
+  roomId        String        @map("room_id")
+  tenantId      String        @map("tenant_id")
+  startDate     DateTime      @map("start_date")
+  endDate       DateTime?     @map("end_date")
+  depositAmount Int           @default(0) @map("deposit_amount")
+  depositStatus DepositStatus @default(PENDING) @map("deposit_status")
+  terms         String?
+  templateId    String?       @map("template_id")
+  createdAt     DateTime      @default(now()) @map("created_at")
+  updatedAt     DateTime      @updatedAt @map("updated_at")
+
+  room   Room   @relation(fields: [roomId], references: [id])
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+
+  @@map("contracts")
+}
+
+enum ExpenseType {
+  INCOME
+  EXPENSE
+}
+
+model Expense {
+  id         String      @id @default(cuid())
+  propertyId String      @map("property_id")
+  roomId     String?     @map("room_id")
+  category   String
+  type       ExpenseType
+  amount     Int
+  date       DateTime
+  note       String?
+  createdAt  DateTime    @default(now()) @map("created_at")
+
+  property Property @relation(fields: [propertyId], references: [id])
+  room     Room?    @relation(fields: [roomId], references: [id])
+
+  @@map("expenses")
+}
+
+model UserFeature {
+  id          String    @id @default(cuid())
+  userId      String    @map("user_id")
+  featureKey  String    @map("feature_key")
+  purchasedAt DateTime  @default(now()) @map("purchased_at")
+  expiresAt   DateTime? @map("expires_at")
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([userId, featureKey])
+  @@map("user_features")
+}
+
+enum PurchaseStatus {
+  ACTIVE
+  UPGRADED
+  VOID
+}
+
+model PurchaseHistory {
+  id          String         @id @default(cuid())
+  userId      String         @map("user_id")
+  featureKey  String         @map("feature_key")
+  amountPaid  Int            @map("amount_paid")
+  purchasedAt DateTime       @default(now()) @map("purchased_at")
+  status      PurchaseStatus @default(ACTIVE)
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("purchase_history")
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELLED
+  EXPIRED
+}
+
+model Subscription {
+  id                 String             @id @default(cuid())
+  userId             String             @map("user_id")
+  plan               String
+  status             SubscriptionStatus @default(ACTIVE)
+  currentPeriodStart DateTime           @map("current_period_start")
+  currentPeriodEnd   DateTime           @map("current_period_end")
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("subscriptions")
+}
+
+enum PricingTierType {
+  SINGLE
+  SLOT
+  BUNDLE
+}
+
+model PricingTier {
+  id               String          @id @default(cuid())
+  featureKey       String          @map("feature_key")
+  tierType         PricingTierType @map("tier_type")
+  tierName         String          @map("tier_name")
+  price            Int
+  discountPercent  Int             @default(0) @map("discount_percent")
+  includedFeatures Json?           @map("included_features")
+  slotSize         Int?            @map("slot_size")
+  isActive         Boolean         @default(true) @map("is_active")
+
+  @@map("pricing_tiers")
+}
+
+model AdConfig {
+  id       String  @id @default(cuid())
+  position String
+  type     String
+  enabled  Boolean @default(true)
+  content  Json?
+
+  impressions AdImpression[]
+
+  @@map("ad_config")
+}
+
+model AdImpression {
+  id         String   @id @default(cuid())
+  adConfigId String   @map("ad_config_id")
+  userId     String?  @map("user_id")
+  type       String
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  adConfig AdConfig @relation(fields: [adConfigId], references: [id])
+
+  @@map("ad_impressions")
+}

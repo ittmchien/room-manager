@@ -10,6 +10,7 @@ import { UtilityConfigsModule } from './utility-configs/utility-configs.module';
 import { ServiceFeesModule } from './service-fees/service-fees.module';
 import { MeterReadingsModule } from './meter-readings/meter-readings.module';
 import { InvoicesModule } from './invoices/invoices.module';
+import { PaymentsModule } from './payments/payments.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { InvoicesModule } from './invoices/invoices.module';
     ServiceFeesModule,
     MeterReadingsModule,
     InvoicesModule,
+    PaymentsModule,
   ],
 })
 export class AppModule {}

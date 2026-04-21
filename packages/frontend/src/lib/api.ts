@@ -1,23 +1,31 @@
+import { createBrowserClient } from '@/lib/supabase/client';
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+
+async function getAccessToken(): Promise<string | null> {
+  const supabase = createBrowserClient();
+  const { data: { session } } = await supabase.auth.getSession();
+  return session?.access_token ?? null;
+}
 
 export async function apiFetch<T>(
   path: string,
   options: RequestInit = {},
-  accessToken?: string,
 ): Promise<T> {
+  const token = await getAccessToken();
+
   const response = await fetch(`${API_URL}${path}`, {
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...(accessToken && {
-        Authorization: `Bearer ${accessToken}`,
-      }),
+      ...(token && { Authorization: `Bearer ${token}` }),
       ...options.headers,
     },
   });
 
   if (!response.ok) {
-    throw new Error(`API error: ${response.status}`);
+    const body = await response.json().catch(() => ({}));
+    throw new Error(body.message ?? `API error: ${response.status}`);
   }
 
   return response.json();

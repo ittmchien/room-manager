@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { Providers } from '@/components/providers';
 
 export const metadata: Metadata = {
   title: 'Room Manager',
@@ -13,7 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="vi">
-      <body className="min-h-screen bg-gray-50 antialiased">{children}</body>
+      <body className="min-h-screen bg-gray-50 antialiased">
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

@@ -18,6 +18,7 @@ export interface CreateTenantInput {
   name: string;
   phone?: string;
   idCard?: string;
+  idCardImage?: string;
   moveInDate: string;
 }
 

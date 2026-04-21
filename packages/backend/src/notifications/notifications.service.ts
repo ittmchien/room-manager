@@ -13,9 +13,9 @@ export class NotificationsService {
     private config: ConfigService,
   ) {
     webpush.setVapidDetails(
-      this.config.get<string>('VAPID_SUBJECT')!,
-      this.config.get<string>('VAPID_PUBLIC_KEY')!,
-      this.config.get<string>('VAPID_PRIVATE_KEY')!,
+      this.config.getOrThrow<string>('VAPID_SUBJECT'),
+      this.config.getOrThrow<string>('VAPID_PUBLIC_KEY'),
+      this.config.getOrThrow<string>('VAPID_PRIVATE_KEY'),
     );
   }
 

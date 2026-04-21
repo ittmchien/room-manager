@@ -82,6 +82,20 @@ describe('InvoicesService', () => {
       expect(prisma.invoice.create).not.toHaveBeenCalled();
     });
 
+    it('should skip creation and return existing invoice when already generated', async () => {
+      const existing = { id: 'inv-existing', total: 3000000, status: 'PENDING' };
+      prisma.property.findFirst.mockResolvedValue({ id: 'prop-1' });
+      prisma.room.findMany.mockResolvedValue([
+        { id: 'room-1', rentPrice: 3000000, rentCalcType: 'FIXED', rentPerPersonPrice: null, tenants: [{ id: 'tenant-1' }] },
+      ]);
+      prisma.serviceFee.findMany.mockResolvedValue([]);
+      prisma.invoice.findFirst.mockResolvedValue(existing);
+
+      const results = await service.generate('user-1', { propertyId: 'prop-1', billingPeriod: '2026-04' });
+      expect(results[0]).toEqual(existing);
+      expect(prisma.invoice.create).not.toHaveBeenCalled();
+    });
+
     it('should throw NotFoundException if property not owned', async () => {
       prisma.property.findFirst.mockResolvedValue(null);
       await expect(

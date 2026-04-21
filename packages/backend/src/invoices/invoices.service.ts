@@ -89,7 +89,7 @@ export class InvoicesService {
 
         // dueDate = 15th of the billing month
         const [periodYear, periodMonth] = dto.billingPeriod.split('-').map(Number);
-        const dueDate = new Date(periodYear, periodMonth - 1, 15, 23, 59, 59, 999);
+        const dueDate = new Date(Date.UTC(periodYear, periodMonth - 1, 15, 23, 59, 59, 999));
 
         return this.prisma.invoice.create({
           data: {

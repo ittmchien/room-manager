@@ -11,6 +11,7 @@ import { ServiceFeesModule } from './service-fees/service-fees.module';
 import { MeterReadingsModule } from './meter-readings/meter-readings.module';
 import { InvoicesModule } from './invoices/invoices.module';
 import { PaymentsModule } from './payments/payments.module';
+import { UploadModule } from './upload/upload.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { PaymentsModule } from './payments/payments.module';
     MeterReadingsModule,
     InvoicesModule,
     PaymentsModule,
+    UploadModule,
   ],
 })
 export class AppModule {}

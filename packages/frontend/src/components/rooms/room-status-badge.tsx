@@ -2,21 +2,17 @@ import { cn } from '@/lib/utils';
 
 type RoomStatus = 'VACANT' | 'OCCUPIED' | 'MAINTENANCE';
 
-const statusConfig: Record<RoomStatus, { label: string; className: string }> = {
-  VACANT: { label: 'Trống', className: 'bg-gray-100 text-gray-600' },
-  OCCUPIED: { label: 'Đang thuê', className: 'bg-blue-100 text-blue-700' },
-  MAINTENANCE: { label: 'Sửa chữa', className: 'bg-orange-100 text-orange-700' },
+const statusConfig: Record<RoomStatus, { label: string; dotClass: string; textClass: string }> = {
+  OCCUPIED: { label: 'Đang thuê', dotClass: 'bg-emerald-500', textClass: 'text-emerald-700' },
+  VACANT: { label: 'Trống', dotClass: 'bg-gray-400', textClass: 'text-gray-500' },
+  MAINTENANCE: { label: 'Sửa chữa', dotClass: 'bg-amber-500', textClass: 'text-amber-700' },
 };
 
 export function RoomStatusBadge({ status }: { status: RoomStatus }) {
   const config = statusConfig[status];
   return (
-    <span
-      className={cn(
-        'rounded-full px-2.5 py-0.5 text-xs font-medium',
-        config.className,
-      )}
-    >
+    <span className={cn('flex items-center gap-1.5 text-xs font-medium', config.textClass)}>
+      <span className={cn('h-2 w-2 rounded-full', config.dotClass)} />
       {config.label}
     </span>
   );

@@ -1,14 +1,10 @@
 import { IsEnum, IsInt, IsOptional, IsString, MaxLength, Min } from 'class-validator';
+import { RentCalcType } from './create-room.dto';
 
 export enum RoomStatus {
   VACANT = 'VACANT',
   OCCUPIED = 'OCCUPIED',
   MAINTENANCE = 'MAINTENANCE',
-}
-
-export enum RentCalcType {
-  FIXED = 'FIXED',
-  PER_PERSON = 'PER_PERSON',
 }
 
 export class UpdateRoomDto {

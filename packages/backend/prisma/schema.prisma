@@ -17,10 +17,11 @@ model User {
   createdAt       DateTime @default(now()) @map("created_at")
   updatedAt       DateTime @updatedAt @map("updated_at")
 
-  properties     Property[]
-  userFeatures   UserFeature[]
-  purchaseHistory PurchaseHistory[]
-  subscriptions  Subscription[]
+  properties        Property[]
+  userFeatures      UserFeature[]
+  purchaseHistory   PurchaseHistory[]
+  subscriptions     Subscription[]
+  pushSubscriptions PushSubscription[]
 
   @@map("users")
 }
@@ -356,6 +357,19 @@ model PricingTier {
   isActive         Boolean         @default(true) @map("is_active")
 
   @@map("pricing_tiers")
+}
+
+model PushSubscription {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  endpoint  String   @unique
+  p256dhKey String   @map("p256dh_key")
+  authKey   String   @map("auth_key")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("push_subscriptions")
 }
 
 model AdConfig {

@@ -2,6 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
 import { PrismaService } from '../prisma/prisma.service';
 import { InvoicesService } from '../invoices/invoices.service';
+import { NotificationsService } from '../notifications/notifications.service';
 
 @Injectable()
 export class BillingService {
@@ -10,6 +11,7 @@ export class BillingService {
   constructor(
     private prisma: PrismaService,
     private invoicesService: InvoicesService,
+    private notificationsService: NotificationsService,
   ) {}
 
   /** 1st of each month at 08:00 — auto-generate invoices for the current month */
@@ -37,14 +39,30 @@ export class BillingService {
     }
   }
 
-  /** Daily at 09:00 — find overdue invoices and log them */
+  /** Daily at 09:00 — find overdue invoices and send push notifications */
   @Cron('0 9 * * *')
   async checkOverdueInvoices() {
     this.logger.log('Checking overdue invoices...');
 
     const overdue = await this.getOverdueInvoices();
     this.logger.log(`Found ${overdue.length} overdue invoices`);
-    // Push notification will be triggered here in next task
+
+    // Group by owner and send one push per owner
+    const byOwner = new Map<string, typeof overdue>();
+    for (const inv of overdue) {
+      const ownerId = inv.room.property.ownerId;
+      if (!byOwner.has(ownerId)) byOwner.set(ownerId, []);
+      byOwner.get(ownerId)!.push(inv);
+    }
+
+    for (const [ownerId, invoices] of byOwner) {
+      const count = invoices.length;
+      await this.notificationsService.sendToUser(ownerId, {
+        title: 'Nhắc thanh toán',
+        body: `Có ${count} hóa đơn chưa thanh toán`,
+        url: '/invoices',
+      });
+    }
   }
 
   /** Expose for programmatic use */

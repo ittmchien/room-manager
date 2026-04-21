@@ -7,6 +7,7 @@ import { PropertiesModule } from './properties/properties.module';
 import { RoomsModule } from './rooms/rooms.module';
 import { TenantsModule } from './tenants/tenants.module';
 import { UtilityConfigsModule } from './utility-configs/utility-configs.module';
+import { ServiceFeesModule } from './service-fees/service-fees.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { UtilityConfigsModule } from './utility-configs/utility-configs.module';
     RoomsModule,
     TenantsModule,
     UtilityConfigsModule,
+    ServiceFeesModule,
   ],
 })
 export class AppModule {}

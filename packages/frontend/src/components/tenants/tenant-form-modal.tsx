@@ -31,7 +31,7 @@ export function TenantFormModal({ roomId, trigger }: TenantFormModalProps) {
     new Date().toISOString().split('T')[0],
   );
   const createTenant = useCreateTenant(roomId);
-  const { upload, isUploading, uploadError } = useUploadFile();
+  const { upload, isUploading, uploadError, resetError } = useUploadFile();
 
   const handleOpenChange = (next: boolean) => {
     if (!next) {
@@ -40,6 +40,7 @@ export function TenantFormModal({ roomId, trigger }: TenantFormModalProps) {
       setIdCard('');
       setIdCardImageUrl(null);
       setMoveInDate(new Date().toISOString().split('T')[0]);
+      resetError();
     }
     setOpen(next);
   };
@@ -47,6 +48,10 @@ export function TenantFormModal({ roomId, trigger }: TenantFormModalProps) {
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    if (file.size > 10 * 1024 * 1024) {
+      e.target.value = '';
+      return;
+    }
     const url = await upload(file);
     if (url) {
       setIdCardImageUrl(url);

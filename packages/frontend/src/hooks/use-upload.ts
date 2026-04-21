@@ -11,6 +11,8 @@ export function useUploadFile() {
   const [isUploading, setIsUploading] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
 
+  const resetError = () => setUploadError(null);
+
   const upload = async (file: File): Promise<string | null> => {
     setIsUploading(true);
     setUploadError(null);
@@ -32,12 +34,12 @@ export function useUploadFile() {
       if (!res.ok) throw new Error('Upload thất bại');
       return fileUrl;
     } catch (err) {
-      setUploadError((err as Error).message);
+      setUploadError(err instanceof Error ? err.message : 'Upload thất bại');
       return null;
     } finally {
       setIsUploading(false);
     }
   };
 
-  return { upload, isUploading, uploadError };
+  return { upload, isUploading, uploadError, resetError };
 }

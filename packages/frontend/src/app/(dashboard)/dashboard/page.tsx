@@ -25,7 +25,7 @@ function computeStats(invoices: Invoice[] | undefined) {
 
 export default function DashboardPage() {
   const { data: properties, isLoading: loadingProperties } = useProperties();
-  const propertyId = properties?.[0]?.id ?? '';
+  const propertyId = properties?.[0]?.id ?? ''; // TODO: property selector (Phase 5 multi-property)
   const billingPeriod = getCurrentBillingPeriod();
   const [year, month] = billingPeriod.split('-');
 

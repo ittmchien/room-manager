@@ -3,6 +3,7 @@
   "short_name": "Room Mgr",
   "description": "Quản lý phòng trọ dễ dàng",
   "start_url": "/dashboard",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#F0F4FF",
   "theme_color": "#2563EB",
@@ -18,7 +19,13 @@
       "src": "/icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }

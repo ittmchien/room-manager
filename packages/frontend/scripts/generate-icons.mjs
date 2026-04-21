@@ -15,14 +15,27 @@ function makeSvg(size) {
 </svg>`);
 }
 
+function makeMaskableSvg(size) {
+  // Safe zone: 40% padding on each side = content in center 20% of canvas
+  const padding = Math.round(size * 0.2);
+  const innerSize = size - padding * 2;
+  return Buffer.from(`
+<svg width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
+  <rect width="${size}" height="${size}" fill="#2563EB"/>
+  <rect x="${padding}" y="${padding}" width="${innerSize}" height="${innerSize}" rx="${Math.round(innerSize * 0.12)}" fill="white"/>
+</svg>`);
+}
+
 const sizes = [
-  { name: 'icon-192.png', size: 192 },
-  { name: 'icon-512.png', size: 512 },
-  { name: 'apple-touch-icon.png', size: 180 },
+  { name: 'icon-192.png', size: 192, maskable: false },
+  { name: 'icon-512.png', size: 512, maskable: false },
+  { name: 'icon-512-maskable.png', size: 512, maskable: true },
+  { name: 'apple-touch-icon.png', size: 180, maskable: false },
 ];
 
-for (const { name, size } of sizes) {
-  await sharp(makeSvg(size), { density: 300 })
+for (const { name, size, maskable } of sizes) {
+  const svg = maskable ? makeMaskableSvg(size) : makeSvg(size);
+  await sharp(svg)
     .png()
     .toFile(join(outDir, name));
   console.log(`Generated ${name}`);

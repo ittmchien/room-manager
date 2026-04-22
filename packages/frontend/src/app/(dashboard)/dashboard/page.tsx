@@ -1,12 +1,15 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Receipt, Gauge, TrendingUp } from 'lucide-react';
-import { useProperties } from '@/hooks/use-properties';
+import { Receipt, Gauge, TrendingUp, Home, Users, DoorOpen } from 'lucide-react';
+import { Button, Skeleton } from 'antd-mobile';
 import { useRooms } from '@/hooks/use-rooms';
 import { useInvoices, Invoice } from '@/hooks/use-invoices';
 import { InvoiceStatusBadge } from '@/components/invoices/invoice-status-badge';
 import { PushNotificationBanner } from '@/components/dashboard/push-notification-banner';
+import { AdBanner } from '@/components/ads/ad-banner';
+import { useProperty } from '@/contexts/property-context';
 
 function getCurrentBillingPeriod(): string {
   const now = new Date();
@@ -25,8 +28,8 @@ function computeStats(invoices: Invoice[] | undefined) {
 }
 
 export default function DashboardPage() {
-  const { data: properties, isLoading: loadingProperties } = useProperties();
-  const propertyId = properties?.[0]?.id ?? ''; // TODO: property selector (Phase 5 multi-property)
+  const router = useRouter();
+  const { propertyId } = useProperty();
   const billingPeriod = getCurrentBillingPeriod();
   const [year, month] = billingPeriod.split('-');
 
@@ -38,9 +41,9 @@ export default function DashboardPage() {
   const vacantCount = rooms?.filter((r) => r.status === 'VACANT').length ?? 0;
   const { totalRevenue, pendingInvoices } = computeStats(invoices);
 
-  const isLoading = loadingProperties || loadingRooms || loadingInvoices;
+  const isLoading = loadingRooms || loadingInvoices;
 
-  if (!isLoading && !propertyId) {
+  if (!propertyId) {
     return (
       <div className="rounded-2xl bg-white p-8 text-center shadow-sm">
         <p className="text-4xl">🏘️</p>
@@ -52,6 +55,7 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-4">
+      <AdBanner position="top" />
       <PushNotificationBanner />
       {/* Hero */}
       <div className="rounded-2xl bg-gradient-to-br from-blue-600 to-blue-500 p-5 text-white shadow-lg shadow-blue-200">
@@ -65,37 +69,42 @@ export default function DashboardPage() {
           <p className="mt-1 text-3xl font-bold">{formatPrice(totalRevenue)}</p>
         )}
         <div className="mt-4 flex gap-2">
-          <Link
-            href="/invoices"
-            className="flex items-center gap-1.5 rounded-xl bg-white/20 px-3 py-2 text-sm font-medium text-white backdrop-blur-sm transition hover:bg-white/30"
+          <Button
+            size="small"
+            onClick={() => router.push('/invoices')}
+            className="!rounded-xl !bg-white/20 !border-none !text-white !text-sm !font-medium"
           >
-            <Receipt className="h-4 w-4" />
+            <Receipt className="mr-1 inline h-4 w-4" />
             Hóa đơn
-          </Link>
-          <Link
-            href="/meters"
-            className="flex items-center gap-1.5 rounded-xl bg-white/20 px-3 py-2 text-sm font-medium text-white backdrop-blur-sm transition hover:bg-white/30"
+          </Button>
+          <Button
+            size="small"
+            onClick={() => router.push('/meters')}
+            className="!rounded-xl !bg-white/20 !border-none !text-white !text-sm !font-medium"
           >
-            <Gauge className="h-4 w-4" />
+            <Gauge className="mr-1 inline h-4 w-4" />
             Ghi số
-          </Link>
+          </Button>
         </div>
       </div>
 
       {/* Stats grid */}
       <div className="grid grid-cols-3 gap-3">
         {[
-          { label: 'Tổng phòng', value: totalRooms, color: 'text-gray-900' },
-          { label: 'Đang thuê', value: occupiedCount, color: 'text-emerald-600' },
-          { label: 'Trống', value: vacantCount, color: 'text-gray-400' },
+          { label: 'Tổng phòng', value: totalRooms, color: 'text-gray-900', icon: Home, iconBg: 'bg-gray-100', iconColor: 'text-gray-500' },
+          { label: 'Đang thuê', value: occupiedCount, color: 'text-emerald-600', icon: Users, iconBg: 'bg-emerald-50', iconColor: 'text-emerald-500' },
+          { label: 'Phòng trống', value: vacantCount, color: 'text-blue-500', icon: DoorOpen, iconBg: 'bg-blue-50', iconColor: 'text-blue-400' },
         ].map((stat) => (
-          <div key={stat.label} className="rounded-2xl bg-white p-4 shadow-sm shadow-blue-100/30">
-            <p className="text-xs text-gray-400">{stat.label}</p>
+          <div key={stat.label} className="rounded-2xl bg-white p-3 shadow-sm shadow-blue-100/30">
+            <div className={`inline-flex h-7 w-7 items-center justify-center rounded-lg ${stat.iconBg}`}>
+              <stat.icon className={`h-3.5 w-3.5 ${stat.iconColor}`} />
+            </div>
             {isLoading ? (
-              <div className="mt-1 h-7 w-10 animate-pulse rounded bg-gray-100" />
+              <div className="mt-2 h-7 w-10 animate-pulse rounded bg-gray-100" />
             ) : (
-              <p className={`mt-0.5 text-2xl font-bold ${stat.color}`}>{stat.value}</p>
+              <p className={`mt-1.5 text-2xl font-bold ${stat.color}`}>{stat.value}</p>
             )}
+            <p className="mt-0.5 text-[11px] text-gray-400 leading-tight">{stat.label}</p>
           </div>
         ))}
       </div>
@@ -121,10 +130,10 @@ export default function DashboardPage() {
         ) : (
           <div className="divide-y divide-gray-50">
             {pendingInvoices.slice(0, 5).map((inv) => (
-              <Link
+              <button
                 key={inv.id}
-                href={`/invoices/${inv.id}`}
-                className="flex items-center justify-between px-4 py-3 hover:bg-gray-50/60"
+                onClick={() => router.push(`/invoices/${inv.id}`)}
+                className="flex w-full items-center justify-between px-4 py-3 text-left hover:bg-gray-50/60 active:bg-gray-50"
               >
                 <div>
                   <p className="text-sm font-medium text-gray-800">
@@ -135,7 +144,7 @@ export default function DashboardPage() {
                   </p>
                 </div>
                 <InvoiceStatusBadge status={inv.status} />
-              </Link>
+              </button>
             ))}
           </div>
         )}

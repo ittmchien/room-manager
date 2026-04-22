@@ -1,32 +1,80 @@
 'use client';
 
+import { useState, useEffect } from 'react';
+import { Button, NoticeBar } from 'antd-mobile';
 import { Bell } from 'lucide-react';
-import { usePushSubscription } from '@/hooks/use-push-subscription';
+import { apiFetch } from '@/lib/api';
+
+function urlBase64ToUint8Array(base64String: string): Uint8Array {
+  const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
+  const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
+  const rawData = window.atob(base64);
+  return Uint8Array.from([...rawData].map((char) => char.charCodeAt(0)));
+}
 
 export function PushNotificationBanner() {
-  const { permission, isSubscribed, isLoading, isSupported, error, subscribe } = usePushSubscription();
+  const [state, setState] = useState<'idle' | 'loading' | 'done' | 'denied'>('idle');
 
-  // Only render on client after support is confirmed
-  if (!isSupported || isSubscribed || permission === 'denied' || permission === 'granted') return null;
+  useEffect(() => {
+    if (typeof window === 'undefined' || !('Notification' in window)) return;
+    if (Notification.permission === 'granted') setState('done');
+    if (Notification.permission === 'denied') setState('denied');
+  }, []);
+
+  if (state === 'done' || state === 'denied') return null;
+
+  const handleSubscribe = async () => {
+    setState('loading');
+    try {
+      const permission = await Notification.requestPermission();
+      if (permission !== 'granted') { setState('denied'); return; }
+
+      const registration = await navigator.serviceWorker.ready;
+      const vapidKey = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
+      if (!vapidKey) { setState('idle'); return; }
+
+      const subscription = await registration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(vapidKey),
+      });
+
+      const { endpoint, keys } = subscription.toJSON() as {
+        endpoint: string;
+        keys: { p256dh: string; auth: string };
+      };
+
+      await apiFetch('/notifications/subscribe', {
+        method: 'POST',
+        body: JSON.stringify({ endpoint, p256dhKey: keys.p256dh, authKey: keys.auth }),
+      });
+
+      setState('done');
+    } catch {
+      setState('idle');
+    }
+  };
 
   return (
-    <div className="flex items-center justify-between rounded-2xl bg-blue-50 px-4 py-3">
-      <div className="flex items-center gap-2.5">
-        <Bell className="h-4 w-4 text-blue-600" />
-        <div>
-          <p className="text-sm font-medium text-blue-800">
-            Bật thông báo để nhắc tiền thuê
-          </p>
-          {error && <p className="text-xs text-red-500 mt-0.5">{error}</p>}
+    <NoticeBar
+      content={
+        <div className="flex items-center justify-between w-full">
+          <div className="flex items-center gap-2">
+            <Bell className="h-4 w-4" />
+            <span className="text-sm">Bật thông báo để nhận nhắc nhở thanh toán</span>
+          </div>
+          <Button
+            size="mini"
+            color="primary"
+            loading={state === 'loading'}
+            onClick={handleSubscribe}
+            className="ml-2 !rounded-lg flex-shrink-0"
+          >
+            Bật
+          </Button>
         </div>
-      </div>
-      <button
-        onClick={subscribe}
-        disabled={isLoading}
-        className="rounded-xl bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white disabled:opacity-60"
-      >
-        {isLoading ? 'Đang bật...' : 'Bật'}
-      </button>
-    </div>
+      }
+      color="info"
+      closeable
+    />
   );
 }

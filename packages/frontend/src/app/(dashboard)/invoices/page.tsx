@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 import { Plus } from 'lucide-react';
-import { useProperties } from '@/hooks/use-properties';
+import { Button, Skeleton, ErrorBlock } from 'antd-mobile';
 import { useInvoices, useGenerateInvoices } from '@/hooks/use-invoices';
+import { useProperty } from '@/contexts/property-context';
 import { InvoiceCard } from '@/components/invoices/invoice-card';
-import { Button } from '@/components/ui/button';
 
 function getCurrentBillingPeriod(): string {
   const now = new Date();
@@ -13,8 +13,7 @@ function getCurrentBillingPeriod(): string {
 }
 
 export default function InvoicesPage() {
-  const { data: properties } = useProperties();
-  const propertyId = properties?.[0]?.id ?? '';
+  const { propertyId } = useProperty();
   const [billingPeriod] = useState(getCurrentBillingPeriod);
 
   const { data: invoices, isLoading } = useInvoices(propertyId, billingPeriod);
@@ -38,8 +37,8 @@ export default function InvoicesPage() {
           <p className="text-sm text-gray-500">Tháng {month}/{year}</p>
         </div>
         {propertyId && (
-          <Button size="sm" className="gap-1" onClick={handleGenerate} disabled={generate.isPending}>
-            <Plus className="h-4 w-4" />
+          <Button size="small" color="primary" className="!rounded-[20px]" onClick={handleGenerate} loading={generate.isPending}>
+            <Plus className="mr-1 h-4 w-4 inline" />
             {generate.isPending ? 'Đang tạo...' : 'Tạo hóa đơn'}
           </Button>
         )}
@@ -54,16 +53,15 @@ export default function InvoicesPage() {
         </div>
       ) : isLoading ? (
         <div className="space-y-3">
-          {[1, 2, 3].map((i) => <div key={i} className="h-20 animate-pulse rounded-xl bg-white" />)}
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="rounded-2xl bg-white p-4 shadow-sm">
+              <Skeleton.Title animated className="w-1/2" />
+              <Skeleton.Paragraph lineCount={2} animated />
+            </div>
+          ))}
         </div>
       ) : invoices?.length === 0 ? (
-        <div className="rounded-xl bg-white p-8 text-center shadow-sm">
-          <p className="text-4xl">🧾</p>
-          <p className="mt-3 font-medium">Chưa có hóa đơn</p>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Bấm &quot;Tạo hóa đơn&quot; để tạo cho tháng này.
-          </p>
-        </div>
+        <ErrorBlock status="empty" description="Chưa có hóa đơn. Bấm 'Tạo hóa đơn' để bắt đầu." />
       ) : (
         <div className="space-y-3">
           {invoices?.map((invoice) => <InvoiceCard key={invoice.id} invoice={invoice} />)}

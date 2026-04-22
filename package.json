@@ -16,5 +16,9 @@
   },
   "engines": {
     "node": ">=22"
+  },
+  "dependencies": {
+    "@ant-design/icons": "~6.1.1",
+    "antd-mobile-icons": "^0.3.0"
   }
 }

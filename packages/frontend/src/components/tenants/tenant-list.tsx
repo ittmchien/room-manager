@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import { List, Button, Dialog, Tag } from 'antd-mobile';
 import { UserRound } from 'lucide-react';
 import { Tenant, useCheckoutTenant } from '@/hooks/use-tenants';
-import { Button } from '@/components/ui/button';
 
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString('vi-VN');
@@ -16,73 +16,85 @@ export function TenantList({ tenants, roomId }: { tenants: Tenant[]; roomId: str
   const active = tenants.filter((t) => t.status === 'ACTIVE');
   const movedOut = tenants.filter((t) => t.status === 'MOVED_OUT');
 
-  const handleCheckout = (tenantId: string) => {
+  const handleCheckout = async (tenantId: string, name: string) => {
+    const confirmed = await Dialog.confirm({
+      content: `Xác nhận trả phòng cho ${name}?`,
+      confirmText: 'Trả phòng',
+      cancelText: 'Huỷ',
+    });
+    if (!confirmed) return;
     setPendingId(tenantId);
     checkout.mutate(tenantId, { onSettled: () => setPendingId(null) });
   };
 
+  if (active.length === 0 && movedOut.length === 0) {
+    return (
+      <div className="py-6 text-center text-sm text-gray-400">Chưa có người thuê</div>
+    );
+  }
+
   return (
-    <div className="space-y-3">
-      {active.length === 0 && movedOut.length === 0 && (
-        <div className="py-4 text-center text-sm text-gray-500">
-          Chưa có người thuê
-        </div>
+    <div className="space-y-2">
+      {active.length > 0 && (
+        <List style={{ '--border-top': 'none', '--border-bottom': 'none', '--border-inner': 'none' }}>
+          {active.map((tenant) => (
+            <List.Item
+              key={tenant.id}
+              prefix={
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100">
+                  <UserRound className="h-5 w-5 text-blue-600" />
+                </div>
+              }
+              description={
+                <span className="text-xs text-gray-400">
+                  {tenant.phone && `${tenant.phone} · `}Vào {formatDate(tenant.moveInDate)}
+                </span>
+              }
+              extra={
+                <Button
+                  size="mini"
+                  color="danger"
+                  fill="outline"
+                  loading={pendingId === tenant.id}
+                  onClick={() => handleCheckout(tenant.id, tenant.name)}
+                >
+                  Trả phòng
+                </Button>
+              }
+              style={{ '--padding-left': '0', '--padding-right': '0' }}
+            >
+              <span className="font-semibold text-gray-900">{tenant.name}</span>
+            </List.Item>
+          ))}
+        </List>
       )}
 
-      {active.map((tenant) => (
-        <div
-          key={tenant.id}
-          className="flex items-start justify-between rounded-xl bg-white p-4 shadow-sm"
-        >
-          <div className="flex items-start gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-100">
-              <UserRound className="h-5 w-5 text-blue-600" />
-            </div>
-            <div>
-              <p className="font-medium">{tenant.name}</p>
-              {tenant.phone && (
-                <p className="text-sm text-gray-500">{tenant.phone}</p>
-              )}
-              <p className="text-xs text-gray-400">
-                Vào {formatDate(tenant.moveInDate)}
-              </p>
-            </div>
-          </div>
-          <Button
-            variant="outline"
-            size="sm"
-            className="text-xs"
-            onClick={() => handleCheckout(tenant.id)}
-            disabled={pendingId === tenant.id}
-          >
-            {pendingId === tenant.id ? 'Đang xử lý...' : 'Trả phòng'}
-          </Button>
-        </div>
-      ))}
-
       {movedOut.length > 0 && (
-        <details className="mt-4">
-          <summary className="cursor-pointer text-sm text-gray-400">
+        <details className="mt-2">
+          <summary className="cursor-pointer text-sm text-gray-400 py-1">
             {movedOut.length} người đã trả phòng
           </summary>
-          <div className="mt-2 space-y-2">
+          <List className="mt-2" style={{ '--border-top': 'none', '--border-bottom': 'none', '--border-inner': 'none' }}>
             {movedOut.map((tenant) => (
-              <div
+              <List.Item
                 key={tenant.id}
-                className="flex items-center gap-3 rounded-lg bg-gray-50 px-3 py-2"
-              >
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200">
-                  <UserRound className="h-4 w-4 text-gray-400" />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">{tenant.name}</p>
-                  <p className="text-xs text-gray-400">
+                prefix={
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100">
+                    <UserRound className="h-4 w-4 text-gray-400" />
+                  </div>
+                }
+                description={
+                  <span className="text-xs text-gray-400">
                     {formatDate(tenant.moveInDate)} → {tenant.moveOutDate ? formatDate(tenant.moveOutDate) : '?'}
-                  </p>
-                </div>
-              </div>
+                  </span>
+                }
+                extra={<Tag color="default">Đã trả</Tag>}
+                style={{ '--padding-left': '0', '--padding-right': '0' }}
+              >
+                <span className="text-sm text-gray-500">{tenant.name}</span>
+              </List.Item>
             ))}
-          </div>
+          </List>
         </details>
       )}
     </div>

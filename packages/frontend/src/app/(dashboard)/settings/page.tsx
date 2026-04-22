@@ -1,14 +1,14 @@
 'use client';
 
-import { useProperties } from '@/hooks/use-properties';
+import { Skeleton } from 'antd-mobile';
+import { useProperty } from '@/contexts/property-context';
 import { useUtilityConfigs } from '@/hooks/use-utility-configs';
 import { useServiceFees } from '@/hooks/use-service-fees';
 import { UtilityConfigForm } from '@/components/settings/utility-config-form';
 import { ServiceFeeList } from '@/components/settings/service-fee-list';
 
 export default function SettingsPage() {
-  const { data: properties } = useProperties();
-  const propertyId = properties?.[0]?.id ?? '';
+  const { propertyId } = useProperty();
 
   const { data: utilityConfigs, isLoading: loadingConfigs } = useUtilityConfigs(propertyId);
   const { data: serviceFees, isLoading: loadingFees } = useServiceFees(propertyId);
@@ -26,32 +26,38 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-xl font-bold">Cài đặt</h1>
+    <div className="space-y-5">
+      <h1 className="text-xl font-bold text-gray-900">Cài đặt</h1>
 
-      <div className="rounded-xl bg-white p-4 shadow-sm space-y-4">
-        <h2 className="font-semibold">Giá điện nước</h2>
-        {loadingConfigs ? (
-          <div className="space-y-3">
-            {[1, 2].map((i) => <div key={i} className="h-10 animate-pulse rounded bg-gray-100" />)}
-          </div>
-        ) : (
-          <div className="space-y-4">
-            <UtilityConfigForm propertyId={propertyId} type="ELECTRIC" config={electricConfig} label="Điện (VND/kWh)" />
-            <UtilityConfigForm propertyId={propertyId} type="WATER" config={waterConfig} label="Nước (VND/m³)" />
-          </div>
-        )}
+      <div className="overflow-hidden rounded-2xl bg-white shadow-sm shadow-blue-100/30">
+        <div className="border-b border-gray-50 px-4 py-3">
+          <h2 className="text-sm font-semibold text-gray-700">Giá điện nước</h2>
+          <p className="text-xs text-gray-400 mt-0.5">Áp dụng khi tính hóa đơn hàng tháng</p>
+        </div>
+        <div className="p-4">
+          {loadingConfigs ? (
+            <Skeleton.Paragraph lineCount={2} animated />
+          ) : (
+            <div className="space-y-4">
+              <UtilityConfigForm propertyId={propertyId} type="ELECTRIC" config={electricConfig} label="Điện (VND/kWh)" />
+              <UtilityConfigForm propertyId={propertyId} type="WATER" config={waterConfig} label="Nước (VND/m³)" />
+            </div>
+          )}
+        </div>
       </div>
 
-      <div className="rounded-xl bg-white p-4 shadow-sm space-y-4">
-        <h2 className="font-semibold">Phí dịch vụ</h2>
-        {loadingFees ? (
-          <div className="space-y-2">
-            {[1, 2].map((i) => <div key={i} className="h-14 animate-pulse rounded bg-gray-100" />)}
-          </div>
-        ) : (
-          <ServiceFeeList propertyId={propertyId} fees={serviceFees ?? []} />
-        )}
+      <div className="overflow-hidden rounded-2xl bg-white shadow-sm shadow-blue-100/30">
+        <div className="border-b border-gray-50 px-4 py-3">
+          <h2 className="text-sm font-semibold text-gray-700">Phí dịch vụ</h2>
+          <p className="text-xs text-gray-400 mt-0.5">Phí cố định tính thêm vào hóa đơn</p>
+        </div>
+        <div className="p-4">
+          {loadingFees ? (
+            <Skeleton.Paragraph lineCount={2} animated />
+          ) : (
+            <ServiceFeeList propertyId={propertyId} fees={serviceFees ?? []} />
+          )}
+        </div>
       </div>
     </div>
   );

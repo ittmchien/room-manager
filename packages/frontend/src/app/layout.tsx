@@ -1,23 +1,23 @@
-import type { Metadata, Viewport } from 'next';
-import './globals.css';
-import { Providers } from '@/components/providers';
+import { Providers } from "@/components/providers";
+import type { Metadata, Viewport } from "next";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: 'Room Manager',
-  description: 'Quản lý phòng trọ dễ dàng',
-  manifest: '/manifest.json',
+  title: "Room Manager",
+  description: "Quản lý phòng trọ dễ dàng",
+  manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
-    statusBarStyle: 'default',
-    title: 'Room Manager',
+    statusBarStyle: "default",
+    title: "Room Manager",
   },
   icons: {
-    apple: '/icons/apple-touch-icon.png',
+    apple: "/icons/apple-touch-icon.png",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: '#2563EB',
+  themeColor: "#2563EB",
 };
 
 export default function RootLayout({
@@ -27,8 +27,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="vi">
-      <body className="min-h-screen bg-[#F0F4FF] antialiased">
-        <Providers>{children}</Providers>
+      <body className="bg-gray-200 antialiased">
+        <Providers>
+          <div className="relative mx-auto min-h-dvh w-full max-w-[425px] bg-white shadow-[0_0_60px_rgba(0,0,0,0.12)]">
+            {children}
+          </div>
+        </Providers>
       </body>
     </html>
   );

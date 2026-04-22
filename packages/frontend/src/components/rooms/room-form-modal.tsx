@@ -1,16 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { Popup, Button, Input } from 'antd-mobile';
 import { useCreateRoom } from '@/hooks/use-rooms';
 
 interface RoomFormModalProps {
@@ -25,70 +16,83 @@ export function RoomFormModal({ propertyId, trigger }: RoomFormModalProps) {
   const [rentPrice, setRentPrice] = useState('');
   const createRoom = useCreateRoom(propertyId);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     if (!name || !rentPrice) return;
-
     try {
       await createRoom.mutateAsync({
         name,
         floor: floor ? parseInt(floor) : undefined,
         rentPrice: parseInt(rentPrice),
       });
-      setName('');
-      setFloor('');
-      setRentPrice('');
+      setName(''); setFloor(''); setRentPrice('');
       setOpen(false);
-    } catch {
-      // Error displayed via createRoom.error
-    }
+    } catch {}
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent className="max-w-sm">
-        <DialogHeader>
-          <DialogTitle>Thêm phòng mới</DialogTitle>
-        </DialogHeader>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4 pt-2">
-          <div className="space-y-2">
-            <Label>Tên/Số phòng</Label>
-            <Input
-              placeholder="VD: Phòng 101"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
+    <>
+      <div onClick={() => setOpen(true)}>{trigger}</div>
+      <Popup
+        visible={open}
+        onMaskClick={() => setOpen(false)}
+        position="bottom"
+        bodyStyle={{ borderRadius: '16px 16px 0 0' }}
+      >
+        <div className="p-4 pb-8">
+          <div className="mb-4 flex items-center justify-between">
+            <h3 className="text-lg font-bold">Thêm phòng mới</h3>
+            <Button fill="none" size="small" onClick={() => setOpen(false)} className="!text-gray-400">Đóng</Button>
           </div>
-          <div className="space-y-2">
-            <Label>Tầng (tuỳ chọn)</Label>
-            <Input
-              type="number"
-              placeholder="1"
-              value={floor}
-              onChange={(e) => setFloor(e.target.value)}
-            />
+
+          <div className="space-y-4">
+            <div className="rounded-xl bg-gray-50 px-3">
+              <p className="pt-2.5 text-xs text-gray-400">Tên / Số phòng *</p>
+              <Input
+                placeholder="VD: Phòng 101"
+                value={name}
+                onChange={setName}
+                style={{ '--font-size': '15px' } as React.CSSProperties}
+              />
+            </div>
+            <div className="rounded-xl bg-gray-50 px-3">
+              <p className="pt-2.5 text-xs text-gray-400">Tầng (tuỳ chọn)</p>
+              <Input
+                type="number"
+                placeholder="1"
+                value={floor}
+                onChange={setFloor}
+                style={{ '--font-size': '15px' } as React.CSSProperties}
+              />
+            </div>
+            <div className="rounded-xl bg-gray-50 px-3">
+              <p className="pt-2.5 text-xs text-gray-400">Giá thuê/tháng (VNĐ) *</p>
+              <Input
+                type="number"
+                placeholder="2.000.000"
+                value={rentPrice}
+                onChange={setRentPrice}
+                style={{ '--font-size': '15px' } as React.CSSProperties}
+              />
+            </div>
           </div>
-          <div className="space-y-2">
-            <Label>Giá thuê/tháng (VNĐ)</Label>
-            <Input
-              type="number"
-              placeholder="2000000"
-              value={rentPrice}
-              onChange={(e) => setRentPrice(e.target.value)}
-              required
-              min={0}
-            />
-          </div>
+
           {createRoom.error && (
-            <p className="text-sm text-red-500">{(createRoom.error as Error).message}</p>
+            <p className="mt-3 text-sm text-red-500">{(createRoom.error as Error).message}</p>
           )}
-          <Button type="submit" className="w-full" disabled={createRoom.isPending}>
-            {createRoom.isPending ? 'Đang thêm...' : 'Thêm phòng'}
+
+          <Button
+            block
+            color="primary"
+            size="large"
+            className="mt-5 rounded-xl!"
+            loading={createRoom.isPending}
+            disabled={!name || !rentPrice}
+            onClick={handleSubmit}
+          >
+            Thêm phòng
           </Button>
-        </form>
-      </DialogContent>
-    </Dialog>
+        </div>
+      </Popup>
+    </>
   );
 }

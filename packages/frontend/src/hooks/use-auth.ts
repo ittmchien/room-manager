@@ -33,11 +33,7 @@ export function useAuth() {
   const verifyOtp = async (phone: string, token: string) => {
     setLoading(true);
     setError(null);
-    const { error } = await supabase.auth.verifyOtp({
-      phone,
-      token,
-      type: 'sms',
-    });
+    const { error } = await supabase.auth.verifyOtp({ phone, token, type: 'sms' });
     if (error) {
       setError(error.message);
       setLoading(false);
@@ -50,10 +46,7 @@ export function useAuth() {
   const signInWithEmail = async (email: string, password: string) => {
     setLoading(true);
     setError(null);
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) {
       setError(error.message);
       setLoading(false);
@@ -66,13 +59,20 @@ export function useAuth() {
   const signUp = async (email: string, password: string, name: string) => {
     setLoading(true);
     setError(null);
-    const { error } = await supabase.auth.signUp({
+    const { error: signUpError } = await supabase.auth.signUp({
       email,
       password,
       options: { data: { name } },
     });
-    if (error) {
-      setError(error.message);
+    if (signUpError) {
+      setError(signUpError.message);
+      setLoading(false);
+      return false;
+    }
+    // Auto sign in immediately after registration
+    const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+    if (signInError) {
+      setError(signInError.message);
       setLoading(false);
       return false;
     }
@@ -85,14 +85,5 @@ export function useAuth() {
     router.push('/login');
   };
 
-  return {
-    loading,
-    error,
-    signInWithGoogle,
-    signInWithOtp,
-    verifyOtp,
-    signInWithEmail,
-    signUp,
-    signOut,
-  };
+  return { loading, error, signInWithGoogle, signInWithOtp, verifyOtp, signInWithEmail, signUp, signOut };
 }

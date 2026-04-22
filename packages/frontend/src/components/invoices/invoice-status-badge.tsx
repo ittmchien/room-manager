@@ -1,16 +1,12 @@
-import { cn } from '@/lib/utils';
+import { Tag } from 'antd-mobile';
 
 const STATUS_CONFIG = {
-  PENDING: { label: 'Chưa thanh toán', className: 'bg-yellow-100 text-yellow-700' },
-  PARTIAL: { label: 'Thanh toán một phần', className: 'bg-blue-100 text-blue-700' },
-  PAID: { label: 'Đã thanh toán', className: 'bg-green-100 text-green-700' },
+  PAID: { label: 'Đã thanh toán', color: 'success' as const },
+  PARTIAL: { label: 'Thu 1 phần', color: 'warning' as const },
+  PENDING: { label: 'Chưa thu', color: 'danger' as const },
 };
 
 export function InvoiceStatusBadge({ status }: { status: 'PENDING' | 'PARTIAL' | 'PAID' }) {
-  const config = STATUS_CONFIG[status];
-  return (
-    <span className={cn('rounded-full px-2 py-0.5 text-xs font-medium', config.className)}>
-      {config.label}
-    </span>
-  );
+  const { label, color } = STATUS_CONFIG[status];
+  return <Tag color={color}>{label}</Tag>;
 }

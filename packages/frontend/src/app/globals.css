@@ -1,10 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap');
+@layer theme, base, antd, components, utilities;
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap");
 @import "tailwindcss";
+@import "antd-mobile/bundle/style.css";
 
 :root {
-  --font-sans: 'Be Vietnam Pro', sans-serif;
-  --color-primary: #2563EB;
-  --color-bg: #F0F4FF;
+  --font-sans: "Be Vietnam Pro", sans-serif;
+  --adm-color-primary: #2563eb;
+  --adm-font-family: "Be Vietnam Pro", sans-serif;
 }
 
 body {

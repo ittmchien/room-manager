@@ -1,9 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { Input, Button, Toast } from 'antd-mobile';
 import { UtilityConfig, useUpsertUtilityConfig } from '@/hooks/use-utility-configs';
 
 interface Props {
@@ -20,29 +18,36 @@ export function UtilityConfigForm({ propertyId, type, config, label }: Props) {
   const handleSave = async () => {
     try {
       await upsert.mutateAsync({ type, data: { calcType: 'FIXED', unitPrice: parseInt(unitPrice) || 0 } });
+      Toast.show({ icon: 'success', content: 'Đã lưu' });
     } catch {
-      // error via upsert.error
+      Toast.show({ icon: 'fail', content: 'Lỗi khi lưu' });
     }
   };
 
   return (
-    <div className="space-y-2">
-      <Label>{label}</Label>
+    <div>
+      <p className="mb-1.5 text-sm text-gray-600">{label}</p>
       <div className="flex gap-2">
-        <Input
-          type="number"
-          min={0}
-          placeholder="Đơn giá (VND)"
-          value={unitPrice}
-          onChange={(e) => setUnitPrice(e.target.value)}
-          className="max-w-xs"
-        />
-        <Button size="sm" onClick={handleSave} disabled={upsert.isPending}>
-          {upsert.isPending ? 'Đang lưu...' : 'Lưu'}
+        <div className="flex-1 rounded-xl bg-gray-50 px-3">
+          <Input
+            type="number"
+            min={0}
+            placeholder="Đơn giá (VND)"
+            value={unitPrice}
+            onChange={setUnitPrice}
+            style={{ '--font-size': '15px' } as React.CSSProperties}
+          />
+        </div>
+        <Button
+          color="primary"
+          size="small"
+          className="rounded-xl!"
+          loading={upsert.isPending}
+          onClick={handleSave}
+        >
+          Lưu
         </Button>
       </div>
-      {upsert.isSuccess && <p className="text-xs text-green-600">Đã lưu</p>}
-      {upsert.error && <p className="text-xs text-red-500">{(upsert.error as Error).message}</p>}
     </div>
   );
 }

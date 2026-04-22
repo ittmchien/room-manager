@@ -1,7 +1,7 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  transpilePackages: ['@room-manager/shared'],
+  transpilePackages: ['@room-manager/shared', 'antd-mobile'],
   images: {
     remotePatterns: [
       {

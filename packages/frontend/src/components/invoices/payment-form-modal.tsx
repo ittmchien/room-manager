@@ -1,11 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Popup, Button, Input, Selector } from 'antd-mobile';
 import { useCreatePayment } from '@/hooks/use-payments';
 
 interface Props {
@@ -14,59 +10,94 @@ interface Props {
   trigger: React.ReactNode;
 }
 
+const METHOD_OPTIONS = [
+  { label: 'Tiền mặt', value: 'CASH' },
+  { label: 'Chuyển khoản', value: 'TRANSFER' },
+  { label: 'Khác', value: 'OTHER' },
+];
+
 export function PaymentFormModal({ invoiceId, remaining, trigger }: Props) {
   const [open, setOpen] = useState(false);
   const [amount, setAmount] = useState(remaining.toString());
-  const [method, setMethod] = useState('CASH');
+  const [method, setMethod] = useState<string[]>(['CASH']);
   const [note, setNote] = useState('');
   const createPayment = useCreatePayment(invoiceId);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     try {
       await createPayment.mutateAsync({
         amount: parseInt(amount),
         paymentDate: new Date().toISOString().split('T')[0],
-        method,
+        method: method[0] ?? 'CASH',
         note: note || undefined,
       });
       setOpen(false);
-    } catch {
-      // error via createPayment.error
-    }
+    } catch {}
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent className="max-w-sm">
-        <DialogHeader><DialogTitle>Ghi nhận thanh toán</DialogTitle></DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-1.5">
-            <Label>Số tiền (VND)</Label>
-            <Input required type="number" min={1} value={amount} onChange={(e) => setAmount(e.target.value)} />
+    <>
+      <div onClick={() => setOpen(true)}>{trigger}</div>
+      <Popup
+        visible={open}
+        onMaskClick={() => setOpen(false)}
+        position="bottom"
+        bodyStyle={{ borderRadius: '16px 16px 0 0' }}
+      >
+        <div className="p-4 pb-8">
+          <div className="mb-4 flex items-center justify-between">
+            <h3 className="text-lg font-bold">Ghi nhận thanh toán</h3>
+            <Button fill="none" size="small" onClick={() => setOpen(false)} className="!text-gray-400">Đóng</Button>
           </div>
-          <div className="space-y-1.5">
-            <Label>Hình thức</Label>
-            <Select value={method} onValueChange={setMethod}>
-              <SelectTrigger><SelectValue /></SelectTrigger>
-              <SelectContent>
-                <SelectItem value="CASH">Tiền mặt</SelectItem>
-                <SelectItem value="TRANSFER">Chuyển khoản</SelectItem>
-                <SelectItem value="OTHER">Khác</SelectItem>
-              </SelectContent>
-            </Select>
+
+          <div className="space-y-4">
+            <div className="rounded-xl bg-gray-50 px-3">
+              <p className="pt-2.5 text-xs text-gray-400">Số tiền (VND)</p>
+              <Input
+                type="number"
+                value={amount}
+                onChange={setAmount}
+                style={{ '--font-size': '15px' } as React.CSSProperties}
+              />
+            </div>
+
+            <div>
+              <p className="mb-2 text-xs text-gray-400">Hình thức</p>
+              <Selector
+                options={METHOD_OPTIONS}
+                value={method}
+                onChange={setMethod}
+                style={{ '--border-radius': '10px', '--checked-color': '#2563EB' } as React.CSSProperties}
+              />
+            </div>
+
+            <div className="rounded-xl bg-gray-50 px-3">
+              <p className="pt-2.5 text-xs text-gray-400">Ghi chú (tuỳ chọn)</p>
+              <Input
+                placeholder="Ghi chú..."
+                value={note}
+                onChange={setNote}
+                style={{ '--font-size': '15px' } as React.CSSProperties}
+              />
+            </div>
           </div>
-          <div className="space-y-1.5">
-            <Label>Ghi chú (không bắt buộc)</Label>
-            <Input placeholder="Ghi chú..." value={note} onChange={(e) => setNote(e.target.value)} />
-          </div>
-          {createPayment.error && <p className="text-sm text-red-500">{(createPayment.error as Error).message}</p>}
-          <Button type="submit" className="w-full" disabled={createPayment.isPending}>
-            {createPayment.isPending ? 'Đang ghi nhận...' : 'Ghi nhận'}
+
+          {createPayment.error && (
+            <p className="mt-3 text-sm text-red-500">{(createPayment.error as Error).message}</p>
+          )}
+
+          <Button
+            block
+            color="primary"
+            size="large"
+            className="mt-5 rounded-xl!"
+            loading={createPayment.isPending}
+            onClick={handleSubmit}
+          >
+            Ghi nhận
           </Button>
-        </form>
-      </DialogContent>
-    </Dialog>
+        </div>
+      </Popup>
+    </>
   );
 }

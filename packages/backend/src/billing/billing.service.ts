@@ -3,6 +3,7 @@ import { Cron } from '@nestjs/schedule';
 import { PrismaService } from '../prisma/prisma.service';
 import { InvoicesService } from '../invoices/invoices.service';
 import { NotificationsService } from '../notifications/notifications.service';
+import { ContractsService } from '../contracts/contracts.service';
 
 @Injectable()
 export class BillingService {
@@ -12,6 +13,7 @@ export class BillingService {
     private prisma: PrismaService,
     private invoicesService: InvoicesService,
     private notificationsService: NotificationsService,
+    private contractsService: ContractsService,
   ) {}
 
   /** 1st of each month at 08:00 — auto-generate invoices for the current month */
@@ -61,6 +63,29 @@ export class BillingService {
         title: 'Nhắc thanh toán',
         body: `Có ${count} hóa đơn chưa thanh toán`,
         url: '/invoices',
+      });
+    }
+  }
+
+  /** Daily at 09:30 — notify owners of contracts expiring within 30 days */
+  @Cron('30 9 * * *')
+  async checkExpiringContracts() {
+    this.logger.log('Checking expiring contracts...');
+
+    const expiring = await this.contractsService.getExpiringContracts(30);
+
+    const byOwner = new Map<string, typeof expiring>();
+    for (const contract of expiring) {
+      const ownerId = contract.room.property.ownerId;
+      if (!byOwner.has(ownerId)) byOwner.set(ownerId, []);
+      byOwner.get(ownerId)!.push(contract);
+    }
+
+    for (const [ownerId, contracts] of byOwner) {
+      await this.notificationsService.sendToUser(ownerId, {
+        title: 'Hợp đồng sắp hết hạn',
+        body: `Có ${contracts.length} hợp đồng sắp hết hạn trong 30 ngày tới`,
+        url: '/contracts',
       });
     }
   }

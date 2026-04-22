@@ -45,12 +45,16 @@ export class InvoicesService {
 
     const occupiedRooms = rooms.filter((r) => r.tenants.length > 0);
 
+    const targetRooms = dto.roomId
+      ? occupiedRooms.filter((r) => r.id === dto.roomId)
+      : occupiedRooms;
+
     const serviceFees = await this.prisma.serviceFee.findMany({
       where: { propertyId: dto.propertyId, applyTo: 'ALL' },
     });
 
     return Promise.all(
-      occupiedRooms.map(async (room) => {
+      targetRooms.map(async (room) => {
         // Idempotency: skip if invoice already exists for this room+period
         const existing = await this.prisma.invoice.findFirst({
           where: { roomId: room.id, billingPeriod: dto.billingPeriod },

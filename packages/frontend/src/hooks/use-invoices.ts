@@ -57,7 +57,7 @@ export function useInvoice(id: string) {
 export function useGenerateInvoices() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (data: { propertyId: string; billingPeriod: string }) =>
+    mutationFn: (data: { propertyId: string; billingPeriod: string; roomId?: string }) =>
       apiFetch('/invoices/generate', { method: 'POST', body: JSON.stringify(data) }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['invoices'] });

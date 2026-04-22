@@ -2,14 +2,13 @@
 
 import { usePathname, useRouter } from 'next/navigation';
 import { TabBar } from 'antd-mobile';
-import { LayoutGrid, DoorOpen, Receipt, Gauge, Settings } from 'lucide-react';
+import { LayoutGrid, DoorOpen, Receipt, Settings } from 'lucide-react';
 // Feature gating for bottom-nav tabs uses useHasFeature — no static env-var checks here.
 
 const tabs = [
   { key: '/dashboard', title: 'Tổng quan', icon: LayoutGrid },
   { key: '/rooms', title: 'Phòng', icon: DoorOpen },
   { key: '/invoices', title: 'Hóa đơn', icon: Receipt },
-  { key: '/meters', title: 'Chỉ số', icon: Gauge },
   { key: '/settings', title: 'Cài đặt', icon: Settings },
 ];
 

@@ -3,9 +3,10 @@
 import { useState } from 'react';
 import { Plus } from 'lucide-react';
 import { Button, Skeleton, ErrorBlock } from 'antd-mobile';
-import { useInvoices, useGenerateInvoices } from '@/hooks/use-invoices';
+import { useInvoices } from '@/hooks/use-invoices';
 import { useProperty } from '@/contexts/property-context';
 import { InvoiceCard } from '@/components/invoices/invoice-card';
+import { GenerateInvoiceModal } from '@/components/invoices/generate-invoice-modal';
 
 function getCurrentBillingPeriod(): string {
   const now = new Date();
@@ -15,19 +16,11 @@ function getCurrentBillingPeriod(): string {
 export default function InvoicesPage() {
   const { propertyId } = useProperty();
   const [billingPeriod] = useState(getCurrentBillingPeriod);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const { data: invoices, isLoading } = useInvoices(propertyId, billingPeriod);
-  const generate = useGenerateInvoices();
 
   const [year, month] = billingPeriod.split('-');
-
-  const handleGenerate = async () => {
-    try {
-      await generate.mutateAsync({ propertyId, billingPeriod });
-    } catch {
-      // error via generate.error
-    }
-  };
 
   return (
     <div className="space-y-4">
@@ -37,14 +30,17 @@ export default function InvoicesPage() {
           <p className="text-sm text-gray-500">Tháng {month}/{year}</p>
         </div>
         {propertyId && (
-          <Button size="small" color="primary" className="!rounded-[20px]" onClick={handleGenerate} loading={generate.isPending}>
+          <Button
+            size="small"
+            color="primary"
+            className="!rounded-[20px]"
+            onClick={() => setModalOpen(true)}
+          >
             <Plus className="mr-1 h-4 w-4 inline" />
-            {generate.isPending ? 'Đang tạo...' : 'Tạo hóa đơn'}
+            Tạo hóa đơn
           </Button>
         )}
       </div>
-
-      {generate.error && <p className="text-sm text-red-500">{(generate.error as Error).message}</p>}
 
       {!propertyId ? (
         <div className="rounded-xl bg-white p-8 text-center shadow-sm">
@@ -67,6 +63,12 @@ export default function InvoicesPage() {
           {invoices?.map((invoice) => <InvoiceCard key={invoice.id} invoice={invoice} />)}
         </div>
       )}
+
+      <GenerateInvoiceModal
+        visible={modalOpen}
+        onClose={() => setModalOpen(false)}
+        propertyId={propertyId}
+      />
     </div>
   );
 }

@@ -6,7 +6,6 @@ import {
   LayoutGrid,
   DoorOpen,
   Receipt,
-  Gauge,
   Settings,
   Users,
   FileText,
@@ -22,7 +21,6 @@ const mainNavItems = [
   { href: '/dashboard', label: 'Tổng quan', icon: LayoutGrid },
   { href: '/rooms', label: 'Phòng', icon: DoorOpen },
   { href: '/invoices', label: 'Hóa đơn', icon: Receipt },
-  { href: '/meters', label: 'Chỉ số', icon: Gauge },
   { href: '/settings', label: 'Cài đặt', icon: Settings },
 ];
 

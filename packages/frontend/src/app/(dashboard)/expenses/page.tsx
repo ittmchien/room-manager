@@ -94,7 +94,7 @@ export default function ExpensesPage() {
       ) : expenses?.length === 0 ? (
         <ErrorBlock status="empty" description="Chưa có khoản thu/chi nào" />
       ) : (
-        <List style={{ '--border-top': 'none', '--border-bottom': 'none' } as React.CSSProperties}>
+        <List className="[--border-top:none] [--border-bottom:none]">
           {expenses?.map((e) => (
             <List.Item
               key={e.id}

@@ -36,7 +36,7 @@ export function TenantList({ tenants, roomId }: { tenants: Tenant[]; roomId: str
   return (
     <div className="space-y-2">
       {active.length > 0 && (
-        <List style={{ '--border-top': 'none', '--border-bottom': 'none', '--border-inner': 'none' }}>
+        <List className="[--border-top:none] [--border-bottom:none] [--border-inner:none]">
           {active.map((tenant) => (
             <List.Item
               key={tenant.id}
@@ -61,7 +61,7 @@ export function TenantList({ tenants, roomId }: { tenants: Tenant[]; roomId: str
                   Trả phòng
                 </Button>
               }
-              style={{ '--padding-left': '0', '--padding-right': '0' }}
+              className="[--padding-left:0] [--padding-right:0]"
             >
               <span className="font-semibold text-gray-900">{tenant.name}</span>
             </List.Item>
@@ -74,7 +74,7 @@ export function TenantList({ tenants, roomId }: { tenants: Tenant[]; roomId: str
           <summary className="cursor-pointer text-sm text-gray-400 py-1">
             {movedOut.length} người đã trả phòng
           </summary>
-          <List className="mt-2" style={{ '--border-top': 'none', '--border-bottom': 'none', '--border-inner': 'none' }}>
+          <List className="mt-2 [--border-top:none] [--border-bottom:none] [--border-inner:none]">
             {movedOut.map((tenant) => (
               <List.Item
                 key={tenant.id}
@@ -89,7 +89,7 @@ export function TenantList({ tenants, roomId }: { tenants: Tenant[]; roomId: str
                   </span>
                 }
                 extra={<Tag color="default">Đã trả</Tag>}
-                style={{ '--padding-left': '0', '--padding-right': '0' }}
+                className="[--padding-left:0] [--padding-right:0]"
               >
                 <span className="text-sm text-gray-500">{tenant.name}</span>
               </List.Item>

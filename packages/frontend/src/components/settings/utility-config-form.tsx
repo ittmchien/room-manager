@@ -35,7 +35,7 @@ export function UtilityConfigForm({ propertyId, type, config, label }: Props) {
             placeholder="Đơn giá (VND)"
             value={unitPrice}
             onChange={setUnitPrice}
-            style={{ '--font-size': '15px' } as React.CSSProperties}
+            className="[--font-size:15px]"
           />
         </div>
         <Button

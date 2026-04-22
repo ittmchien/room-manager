@@ -40,7 +40,7 @@ export function RegisterForm() {
             placeholder="Nguyễn Văn A"
             value={name}
             onChange={setName}
-            style={{ '--font-size': '15px' } as React.CSSProperties}
+            className="[--font-size:15px]"
           />
         </div>
 
@@ -52,7 +52,7 @@ export function RegisterForm() {
             placeholder="your@email.com"
             value={email}
             onChange={setEmail}
-            style={{ '--font-size': '15px' } as React.CSSProperties}
+            className="[--font-size:15px]"
           />
         </div>
 
@@ -66,7 +66,7 @@ export function RegisterForm() {
                 placeholder="Tối thiểu 6 ký tự"
                 value={password}
                 onChange={setPassword}
-                style={{ '--font-size': '15px' } as React.CSSProperties}
+                className="[--font-size:15px]"
               />
             </div>
             <Button
@@ -83,7 +83,7 @@ export function RegisterForm() {
         <Checkbox
           checked={agreed}
           onChange={setAgreed}
-          style={{ '--icon-size': '16px', '--font-size': '14px', '--gap': '10px' } as React.CSSProperties}
+          className="[--icon-size:16px] [--font-size:14px] [--gap:10px]"
         >
           <span className="text-gray-500 leading-relaxed">
             Tôi đồng ý với{' '}

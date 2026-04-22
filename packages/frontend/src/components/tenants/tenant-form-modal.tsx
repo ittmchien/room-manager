@@ -76,17 +76,17 @@ export function TenantFormModal({ roomId, trigger }: TenantFormModalProps) {
             <div className="rounded-xl bg-gray-50 px-3">
               <p className="pt-2.5 text-xs text-gray-400">Họ và tên *</p>
               <Input placeholder="Nguyễn Văn A" value={name} onChange={setName}
-                style={{ '--font-size': '15px' } as React.CSSProperties} />
+                className="[--font-size:15px]" />
             </div>
             <div className="rounded-xl bg-gray-50 px-3">
               <p className="pt-2.5 text-xs text-gray-400">Số điện thoại</p>
               <Input type="tel" placeholder="0901234567" value={phone} onChange={setPhone}
-                style={{ '--font-size': '15px' } as React.CSSProperties} />
+                className="[--font-size:15px]" />
             </div>
             <div className="rounded-xl bg-gray-50 px-3">
               <p className="pt-2.5 text-xs text-gray-400">Số CCCD (tuỳ chọn)</p>
               <Input placeholder="001234567890" value={idCard} onChange={setIdCard}
-                style={{ '--font-size': '15px' } as React.CSSProperties} />
+                className="[--font-size:15px]" />
             </div>
 
             {/* CCCD image */}

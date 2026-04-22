@@ -75,7 +75,7 @@ export function ExpenseFormModal({ propertyId, trigger }: Props) {
                 options={TYPE_OPTIONS}
                 value={type}
                 onChange={setType}
-                style={{ '--border-radius': '10px', '--checked-color': '#2563EB' } as React.CSSProperties}
+                className="[--border-radius:10px] [--checked-color:#2563EB]"
               />
             </div>
 
@@ -85,7 +85,7 @@ export function ExpenseFormModal({ propertyId, trigger }: Props) {
                 options={CATEGORY_OPTIONS}
                 value={category}
                 onChange={setCategory}
-                style={{ '--border-radius': '10px', '--checked-color': '#2563EB' } as React.CSSProperties}
+                className="[--border-radius:10px] [--checked-color:#2563EB]"
               />
             </div>
 
@@ -96,7 +96,7 @@ export function ExpenseFormModal({ propertyId, trigger }: Props) {
                 placeholder="0"
                 value={amount}
                 onChange={setAmount}
-                style={{ '--font-size': '15px' } as React.CSSProperties}
+                className="[--font-size:15px]"
               />
             </div>
 
@@ -116,7 +116,7 @@ export function ExpenseFormModal({ propertyId, trigger }: Props) {
                 placeholder="Mô tả..."
                 value={note}
                 onChange={setNote}
-                style={{ '--font-size': '15px' } as React.CSSProperties}
+                className="[--font-size:15px]"
               />
             </div>
           </div>

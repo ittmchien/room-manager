@@ -33,7 +33,7 @@ export function PhoneLoginForm() {
             placeholder="+84 xxx xxx xxx"
             value={phone}
             onChange={setPhone}
-            style={{ '--font-size': '15px' } as React.CSSProperties}
+            className="[--font-size:15px]"
           />
         </div>
         <Button
@@ -64,8 +64,7 @@ export function PhoneLoginForm() {
           value={otp}
           onChange={setOtp}
           maxLength={6}
-          style={{ '--font-size': '24px' } as React.CSSProperties}
-        className="tracking-[0.4em] font-bold"
+          className="tracking-[0.4em] font-bold [--font-size:24px]"
         />
       </div>
       <Button

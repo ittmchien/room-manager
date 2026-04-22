@@ -51,7 +51,7 @@ export function RoomFormModal({ propertyId, trigger }: RoomFormModalProps) {
                 placeholder="VD: Phòng 101"
                 value={name}
                 onChange={setName}
-                style={{ '--font-size': '15px' } as React.CSSProperties}
+                className="[--font-size:15px]"
               />
             </div>
             <div className="rounded-xl bg-gray-50 px-3">
@@ -61,7 +61,7 @@ export function RoomFormModal({ propertyId, trigger }: RoomFormModalProps) {
                 placeholder="1"
                 value={floor}
                 onChange={setFloor}
-                style={{ '--font-size': '15px' } as React.CSSProperties}
+                className="[--font-size:15px]"
               />
             </div>
             <div className="rounded-xl bg-gray-50 px-3">
@@ -71,7 +71,7 @@ export function RoomFormModal({ propertyId, trigger }: RoomFormModalProps) {
                 placeholder="2.000.000"
                 value={rentPrice}
                 onChange={setRentPrice}
-                style={{ '--font-size': '15px' } as React.CSSProperties}
+                className="[--font-size:15px]"
               />
             </div>
           </div>

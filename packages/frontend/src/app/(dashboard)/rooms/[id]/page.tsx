@@ -60,7 +60,7 @@ export default function RoomDetailPage({ params }: { params: Promise<{ id: strin
 
       <div className="px-4 space-y-4">
         {/* Rent card */}
-        <Card style={{ '--border-radius': '16px' }}>
+        <Card className="[--border-radius:16px]">
           <p className="text-xs font-semibold uppercase tracking-wider text-gray-400">GIÁ THUÊ</p>
           <p className="mt-1 text-2xl font-bold text-gray-900">{formatPrice(room.rentPrice)}</p>
           <p className="text-sm text-gray-400">

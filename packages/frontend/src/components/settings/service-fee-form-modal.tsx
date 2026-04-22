@@ -54,7 +54,7 @@ export function ServiceFeeFormModal({ propertyId, trigger }: Props) {
             <div className="rounded-xl bg-gray-50 px-3">
               <p className="pt-2.5 text-xs text-gray-400">Tên phí *</p>
               <Input placeholder="Phí vệ sinh..." value={name} onChange={setName}
-                style={{ '--font-size': '15px' } as React.CSSProperties} />
+                className="[--font-size:15px]" />
             </div>
 
             <div>
@@ -63,14 +63,14 @@ export function ServiceFeeFormModal({ propertyId, trigger }: Props) {
                 options={CALC_OPTIONS}
                 value={calcType}
                 onChange={setCalcType}
-                style={{ '--border-radius': '10px', '--checked-color': '#2563EB' } as React.CSSProperties}
+                className="[--border-radius:10px] [--checked-color:#2563EB]"
               />
             </div>
 
             <div className="rounded-xl bg-gray-50 px-3">
               <p className="pt-2.5 text-xs text-gray-400">Đơn giá (VND) *</p>
               <Input type="number" placeholder="50.000" value={unitPrice} onChange={setUnitPrice}
-                style={{ '--font-size': '15px' } as React.CSSProperties} />
+                className="[--font-size:15px]" />
             </div>
           </div>
 

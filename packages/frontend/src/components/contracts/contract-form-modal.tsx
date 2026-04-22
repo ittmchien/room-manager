@@ -103,7 +103,7 @@ export function ContractFormModal({ propertyId, trigger }: Props) {
                 options={roomOptions}
                 value={[roomId]}
                 onChange={handleRoomChange}
-                style={{ '--border-radius': '10px', '--checked-color': '#2563EB' } as React.CSSProperties}
+                className="[--border-radius:10px] [--checked-color:#2563EB]"
               />
             </div>
 
@@ -118,7 +118,7 @@ export function ContractFormModal({ propertyId, trigger }: Props) {
                   options={tenantOptions}
                   value={[tenantId]}
                   onChange={(v) => setTenantId(v[0] ?? '')}
-                  style={{ '--border-radius': '10px', '--checked-color': '#2563EB' } as React.CSSProperties}
+                  className="[--border-radius:10px] [--checked-color:#2563EB]"
                 />
               )}
             </div>
@@ -150,7 +150,7 @@ export function ContractFormModal({ propertyId, trigger }: Props) {
                 placeholder="0"
                 value={depositAmount}
                 onChange={setDepositAmount}
-                style={{ '--font-size': '15px' } as React.CSSProperties}
+                className="[--font-size:15px]"
               />
             </div>
 
@@ -160,7 +160,7 @@ export function ContractFormModal({ propertyId, trigger }: Props) {
                 options={DEPOSIT_OPTIONS}
                 value={depositStatus}
                 onChange={setDepositStatus}
-                style={{ '--border-radius': '10px', '--checked-color': '#2563EB' } as React.CSSProperties}
+                className="[--border-radius:10px] [--checked-color:#2563EB]"
               />
             </div>
 
@@ -170,7 +170,7 @@ export function ContractFormModal({ propertyId, trigger }: Props) {
                 placeholder="Ghi chú điều khoản..."
                 value={terms}
                 onChange={setTerms}
-                style={{ '--font-size': '15px' } as React.CSSProperties}
+                className="[--font-size:15px]"
               />
             </div>
           </div>

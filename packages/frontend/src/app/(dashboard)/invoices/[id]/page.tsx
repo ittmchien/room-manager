@@ -71,7 +71,7 @@ export default function InvoiceDetailPage({ params }: { params: Promise<{ id: st
         )}
 
         {/* Invoice detail */}
-        <Card style={{ '--border-radius': '16px' }}>
+        <Card className="[--border-radius:16px]">
           <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-gray-400">Chi tiết hóa đơn</p>
           <Row label="Tiền phòng" value={`${invoice.roomFee.toLocaleString('vi-VN')}đ`} />
           {invoice.electricFee > 0 && <Row label="Tiền điện" value={`${invoice.electricFee.toLocaleString('vi-VN')}đ`} />}
@@ -87,7 +87,7 @@ export default function InvoiceDetailPage({ params }: { params: Promise<{ id: st
 
         {/* Payment history */}
         {invoice.payments && invoice.payments.length > 0 && (
-          <Card style={{ '--border-radius': '16px' }}>
+          <Card className="[--border-radius:16px]">
             <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-gray-400">Lịch sử thanh toán</p>
             {invoice.payments.map((payment) => (
               <div key={payment.id} className="flex items-center justify-between py-2.5 border-b border-gray-50 last:border-0">

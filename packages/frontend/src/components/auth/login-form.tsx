@@ -64,7 +64,7 @@ export function LoginForm() {
             placeholder="your@email.com"
             value={email}
             onChange={setEmail}
-            style={{ '--font-size': '15px' } as React.CSSProperties}
+            className="[--font-size:15px]"
           />
         </div>
 
@@ -77,7 +77,7 @@ export function LoginForm() {
                 placeholder="••••••••"
                 value={password}
                 onChange={setPassword}
-                style={{ '--font-size': '15px' } as React.CSSProperties}
+                className="[--font-size:15px]"
               />
             </div>
             <Button

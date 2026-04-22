@@ -12,3 +12,13 @@
 body {
   font-family: var(--font-sans);
 }
+
+/* Constrain antd-mobile portals to the max-w-md (448px) app container.
+   .adm-mask is intentionally excluded — mask should cover the full viewport. */
+/* .adm-popup,
+.adm-center-popup {
+  left: 50% !important;
+  right: auto !important;
+  width: min(100vw, 448px) !important;
+  transform: translateX(-50%) !important;
+} */

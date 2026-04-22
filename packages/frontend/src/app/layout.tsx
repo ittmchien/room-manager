@@ -29,7 +29,7 @@ export default function RootLayout({
     <html lang="vi">
       <body className="bg-gray-200 antialiased">
         <Providers>
-          <div className="relative mx-auto min-h-dvh w-full max-w-[425px] bg-white shadow-[0_0_60px_rgba(0,0,0,0.12)]">
+          <div id="app-root" className="relative mx-auto min-h-dvh w-full max-w-md bg-white shadow-[0_0_60px_rgba(0,0,0,0.12)]">
             {children}
           </div>
         </Providers>

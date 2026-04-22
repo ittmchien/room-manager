@@ -24,8 +24,7 @@ export function TopBar() {
             <span className="absolute right-0.5 top-0.5 h-2 w-2 rounded-full bg-red-500 ring-2 ring-white" />
           </button>
         }
-        className="bg-white border-b border-gray-100"
-        style={{ '--height': '56px' } as React.CSSProperties}
+        className="bg-white border-b border-gray-100 [--height:56px]"
       >
         <button
           onClick={() => properties && properties.length > 1 && setSelectorOpen(true)}

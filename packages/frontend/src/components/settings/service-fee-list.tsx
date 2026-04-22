@@ -37,7 +37,7 @@ export function ServiceFeeList({ propertyId, fees }: Props) {
   return (
     <div className="space-y-1">
       {fees.length > 0 && (
-        <List style={{ "--border-top": "none", "--border-bottom": "none" }}>
+        <List className="[--border-top:none] [--border-bottom:none]">
           {fees.map((fee) => (
             <List.Item
               key={fee.id}

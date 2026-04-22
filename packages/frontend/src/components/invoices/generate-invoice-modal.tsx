@@ -1,12 +1,22 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useGenerateInvoices } from "@/hooks/use-invoices";
 import {
-  Popup, Button, Input, Picker, DatePicker, Toast, ErrorBlock, Skeleton,
-} from 'antd-mobile';
-import { useRooms } from '@/hooks/use-rooms';
-import { useMeterReadings, useCreateMeterReading } from '@/hooks/use-meter-readings';
-import { useGenerateInvoices } from '@/hooks/use-invoices';
+  useCreateMeterReading,
+  useMeterReadings,
+} from "@/hooks/use-meter-readings";
+import { useRooms } from "@/hooks/use-rooms";
+import {
+  Button,
+  DatePicker,
+  ErrorBlock,
+  Input,
+  Picker,
+  Popup,
+  Skeleton,
+  Toast,
+} from "antd-mobile";
+import { useEffect, useState } from "react";
 
 interface Props {
   visible: boolean;
@@ -15,7 +25,7 @@ interface Props {
 }
 
 function getBillingPeriod(date: Date): string {
-  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`;
 }
 
 function MeterSection({
@@ -32,7 +42,10 @@ function MeterSection({
   onChange: (v: string) => void;
 }) {
   const current = parseInt(value);
-  const usage = !isNaN(current) && previousValue !== null ? Math.max(0, current - previousValue) : null;
+  const usage =
+    !isNaN(current) && previousValue !== null
+      ? Math.max(0, current - previousValue)
+      : null;
 
   return (
     <div className="space-y-2">
@@ -41,25 +54,29 @@ function MeterSection({
         <div className="flex justify-between text-sm text-gray-500">
           <span>Chỉ số cũ</span>
           <span className="font-medium text-gray-900">
-            {previousValue !== null ? `${previousValue} ${unit}` : '—'}
+            {previousValue !== null ? `${previousValue} ${unit}` : "—"}
           </span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-sm text-gray-500 w-20 shrink-0">Chỉ số mới</span>
+          <span className="text-sm text-gray-500 w-20 shrink-0">
+            Chỉ số mới
+          </span>
           <Input
             type="number"
             placeholder="Nhập chỉ số"
             value={value}
             onChange={onChange}
             min={previousValue ?? 0}
-            style={{ '--font-size': '15px', '--placeholder-color': '#9ca3af' } as React.CSSProperties}
+            className="[--font-size:15px] [--placeholder-color:#9ca3af]"
           />
           <span className="text-sm text-gray-400 shrink-0">{unit}</span>
         </div>
         {usage !== null && (
           <div className="flex justify-between text-sm">
             <span className="text-gray-500">Sử dụng</span>
-            <span className="font-semibold text-blue-600">{usage} {unit}</span>
+            <span className="font-semibold text-blue-600">
+              {usage} {unit}
+            </span>
           </div>
         )}
       </div>
@@ -68,13 +85,13 @@ function MeterSection({
 }
 
 export function GenerateInvoiceModal({ visible, onClose, propertyId }: Props) {
-  const [selectedRoomId, setSelectedRoomId] = useState<string>('');
+  const [selectedRoomId, setSelectedRoomId] = useState<string>("");
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [electricValue, setElectricValue] = useState('');
-  const [waterValue, setWaterValue] = useState('');
+  const [electricValue, setElectricValue] = useState("");
+  const [waterValue, setWaterValue] = useState("");
 
   const { data: rooms, isLoading: loadingRooms } = useRooms(propertyId);
-  const occupiedRooms = rooms?.filter((r) => r.status === 'OCCUPIED') ?? [];
+  const occupiedRooms = rooms?.filter((r) => r.status === "OCCUPIED") ?? [];
 
   // Auto-select first occupied room
   useEffect(() => {
@@ -83,8 +100,11 @@ export function GenerateInvoiceModal({ visible, onClose, propertyId }: Props) {
     }
   }, [occupiedRooms, selectedRoomId]);
 
-  const { data: electricReadings } = useMeterReadings(selectedRoomId, 'ELECTRIC');
-  const { data: waterReadings } = useMeterReadings(selectedRoomId, 'WATER');
+  const { data: electricReadings } = useMeterReadings(
+    selectedRoomId,
+    "ELECTRIC",
+  );
+  const { data: waterReadings } = useMeterReadings(selectedRoomId, "WATER");
   const previousElectric = electricReadings?.[0]?.readingValue ?? null;
   const previousWater = waterReadings?.[0]?.readingValue ?? null;
 
@@ -92,17 +112,17 @@ export function GenerateInvoiceModal({ visible, onClose, propertyId }: Props) {
   const generate = useGenerateInvoices();
 
   const billingPeriod = getBillingPeriod(selectedDate);
-  const readingDate = new Date().toISOString().split('T')[0];
+  const readingDate = new Date().toISOString().split("T")[0];
 
   const reset = () => {
-    setElectricValue('');
-    setWaterValue('');
+    setElectricValue("");
+    setWaterValue("");
   };
 
   const handleRoomChange = (roomId: string) => {
     setSelectedRoomId(roomId);
-    setElectricValue('');
-    setWaterValue('');
+    setElectricValue("");
+    setWaterValue("");
   };
 
   const handleSubmit = async () => {
@@ -115,7 +135,7 @@ export function GenerateInvoiceModal({ visible, onClose, propertyId }: Props) {
       // Save meter readings if entered
       if (!isNaN(electricNum) && electricNum >= 0) {
         await createMeter.mutateAsync({
-          type: 'ELECTRIC',
+          type: "ELECTRIC",
           readingValue: electricNum,
           previousValue: previousElectric ?? 0,
           readingDate,
@@ -123,7 +143,7 @@ export function GenerateInvoiceModal({ visible, onClose, propertyId }: Props) {
       }
       if (!isNaN(waterNum) && waterNum >= 0) {
         await createMeter.mutateAsync({
-          type: 'WATER',
+          type: "WATER",
           readingValue: waterNum,
           previousValue: previousWater ?? 0,
           readingDate,
@@ -131,17 +151,26 @@ export function GenerateInvoiceModal({ visible, onClose, propertyId }: Props) {
       }
 
       // Generate invoice for this room
-      await generate.mutateAsync({ propertyId, billingPeriod, roomId: selectedRoomId });
+      await generate.mutateAsync({
+        propertyId,
+        billingPeriod,
+        roomId: selectedRoomId,
+      });
 
-      Toast.show({ icon: 'success', content: 'Đã tạo hóa đơn' });
+      Toast.show({ icon: "success", content: "Đã tạo hóa đơn" });
       reset();
       onClose();
     } catch (err) {
-      Toast.show({ icon: 'fail', content: (err as Error).message ?? 'Lỗi tạo hóa đơn' });
+      Toast.show({
+        icon: "fail",
+        content: (err as Error).message ?? "Lỗi tạo hóa đơn",
+      });
     }
   };
 
-  const roomColumns = [occupiedRooms.map((r) => ({ label: r.name, value: r.id }))];
+  const roomColumns = [
+    occupiedRooms.map((r) => ({ label: r.name, value: r.id })),
+  ];
   const selectedRoom = occupiedRooms.find((r) => r.id === selectedRoomId);
   const isPending = createMeter.isPending || generate.isPending;
 
@@ -150,13 +179,18 @@ export function GenerateInvoiceModal({ visible, onClose, propertyId }: Props) {
       visible={visible}
       onMaskClick={onClose}
       position="bottom"
-      bodyStyle={{ borderRadius: '16px 16px 0 0' }}
+      bodyStyle={{ borderRadius: "16px 16px 0 0" }}
     >
       <div className="max-h-[90vh] overflow-y-auto p-4 pb-8">
         {/* Header */}
         <div className="mb-4 flex items-center justify-between">
           <h3 className="text-lg font-bold">Tạo hóa đơn</h3>
-          <Button fill="none" size="small" onClick={onClose} className="!text-gray-400">
+          <Button
+            fill="none"
+            size="small"
+            onClick={onClose}
+            className="!text-gray-400"
+          >
             Đóng
           </Button>
         </div>
@@ -181,7 +215,7 @@ export function GenerateInvoiceModal({ visible, onClose, propertyId }: Props) {
                     className="w-full rounded-xl bg-gray-50 px-4 py-3 text-left flex items-center justify-between"
                   >
                     <span className="text-[15px] text-gray-900">
-                      {selectedRoom?.name ?? 'Chọn phòng'}
+                      {selectedRoom?.name ?? "Chọn phòng"}
                     </span>
                     <span className="text-gray-400 text-sm">▾</span>
                   </button>
@@ -206,7 +240,8 @@ export function GenerateInvoiceModal({ visible, onClose, propertyId }: Props) {
                     className="w-full rounded-xl bg-gray-50 px-4 py-3 text-left flex items-center justify-between"
                   >
                     <span className="text-[15px] text-gray-900">
-                      Tháng {selectedDate.getMonth() + 1}/{selectedDate.getFullYear()}
+                      Tháng {selectedDate.getMonth() + 1}/
+                      {selectedDate.getFullYear()}
                     </span>
                     <span className="text-gray-400 text-sm">▾</span>
                   </button>

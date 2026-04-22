@@ -57,7 +57,7 @@ export function PaymentFormModal({ invoiceId, remaining, trigger }: Props) {
                 type="number"
                 value={amount}
                 onChange={setAmount}
-                style={{ '--font-size': '15px' } as React.CSSProperties}
+                className="[--font-size:15px]"
               />
             </div>
 
@@ -67,7 +67,7 @@ export function PaymentFormModal({ invoiceId, remaining, trigger }: Props) {
                 options={METHOD_OPTIONS}
                 value={method}
                 onChange={setMethod}
-                style={{ '--border-radius': '10px', '--checked-color': '#2563EB' } as React.CSSProperties}
+                className="[--border-radius:10px] [--checked-color:#2563EB]"
               />
             </div>
 
@@ -77,7 +77,7 @@ export function PaymentFormModal({ invoiceId, remaining, trigger }: Props) {
                 placeholder="Ghi chú..."
                 value={note}
                 onChange={setNote}
-                style={{ '--font-size': '15px' } as React.CSSProperties}
+                className="[--font-size:15px]"
               />
             </div>
           </div>

@@ -78,7 +78,7 @@ export function OnboardingWizard() {
                 placeholder="VD: Nhà trọ Số 5"
                 value={propertyName}
                 onChange={setPropertyName}
-                style={{ '--font-size': '15px' } as React.CSSProperties}
+                className="[--font-size:15px]"
               />
             </div>
             <div className="rounded-xl bg-gray-50 px-3">
@@ -87,7 +87,7 @@ export function OnboardingWizard() {
                 placeholder="VD: 123 Nguyễn Văn A, Q.1, TP.HCM"
                 value={address}
                 onChange={setAddress}
-                style={{ '--font-size': '15px' } as React.CSSProperties}
+                className="[--font-size:15px]"
               />
             </div>
           </div>
@@ -124,7 +124,7 @@ export function OnboardingWizard() {
                 placeholder="VD: Phòng 101"
                 value={roomName}
                 onChange={setRoomName}
-                style={{ '--font-size': '15px' } as React.CSSProperties}
+                className="[--font-size:15px]"
               />
             </div>
             <div className="rounded-xl bg-gray-50 px-3">
@@ -134,7 +134,7 @@ export function OnboardingWizard() {
                 placeholder="VD: 3000000"
                 value={rentPrice}
                 onChange={setRentPrice}
-                style={{ '--font-size': '15px' } as React.CSSProperties}
+                className="[--font-size:15px]"
               />
             </div>
             <p className="text-xs text-gray-400 pl-1">Giá cơ bản chưa bao gồm điện nước và dịch vụ khác.</p>

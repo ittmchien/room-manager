@@ -63,8 +63,7 @@ export default function PricingPage() {
         {plans.map((plan) => (
           <Card
             key={plan.name}
-            style={{ '--border-radius': '16px' } as React.CSSProperties}
-            className={`${plan.color} border-[1.5px]`}
+            className={`${plan.color} border-[1.5px] [--border-radius:16px]`}
           >
             <div className="space-y-3">
               <div className="flex items-start justify-between">

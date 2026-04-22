@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query, UseGuards } from '@nestjs/common';
+import { BadRequestException, Controller, Get, Param, Query, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '../auth/auth.guard';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { AuthUser } from '@room-manager/shared';
@@ -16,6 +16,7 @@ export class ReportsController {
     @Query('year') year?: string,
   ) {
     const y = year ? parseInt(year) : new Date().getFullYear();
+    if (isNaN(y) || y < 2000 || y > 2100) throw new BadRequestException('Năm không hợp lệ');
     return this.reportsService.getMonthlySummary(user.id, propertyId, y);
   }
 

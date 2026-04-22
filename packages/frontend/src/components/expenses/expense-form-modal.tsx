@@ -36,20 +36,21 @@ export function ExpenseFormModal({ propertyId, trigger }: Props) {
     setAmount(''); setDate(new Date().toISOString().split('T')[0]); setNote('');
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     if (!amount || !date) return;
-    try {
-      await createExpense.mutateAsync({
-        propertyId,
-        category: category[0] ?? 'other',
-        type: type[0] as 'INCOME' | 'EXPENSE',
-        amount: parseInt(amount),
-        date,
-        note: note || undefined,
-      });
-      reset();
-      setOpen(false);
-    } catch {}
+    createExpense.mutate({
+      propertyId,
+      category: category[0] ?? 'other',
+      type: type[0] as 'INCOME' | 'EXPENSE',
+      amount: Number(amount),
+      date,
+      note: note || undefined,
+    }, {
+      onSuccess: () => {
+        reset();
+        setOpen(false);
+      },
+    });
   };
 
   return (

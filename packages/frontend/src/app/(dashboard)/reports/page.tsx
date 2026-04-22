@@ -81,7 +81,7 @@ export default function ReportsPage() {
                 <p className="text-xs text-gray-400">Đang thuê</p>
               </div>
               <div className="rounded-2xl bg-white p-3 shadow-sm text-center">
-                <p className="text-2xl font-bold text-blue-600">{snapshot.totalCollectedThisMonth.toLocaleString('vi-VN').slice(0, -3)}k</p>
+                <p className="text-2xl font-bold text-blue-600">{formatPrice(snapshot.totalCollectedThisMonth)}</p>
                 <p className="text-xs text-gray-400">Thu tháng này</p>
               </div>
               <div className="rounded-2xl bg-white p-3 shadow-sm text-center">

@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { Popup, Button, Input, Selector } from 'antd-mobile';
 import { useCreateContract } from '@/hooks/use-contracts';
 import { useRooms } from '@/hooks/use-rooms';
+import { useTenants } from '@/hooks/use-tenants';
 
 interface Props {
   propertyId: string;
@@ -26,18 +27,17 @@ export function ContractFormModal({ propertyId, trigger }: Props) {
   const [terms, setTerms] = useState('');
 
   const { data: rooms } = useRooms(propertyId);
+  const { data: tenants } = useTenants(roomId);
 
   const roomOptions = useMemo(
     () => (rooms ?? []).map((r) => ({ label: r.name, value: r.id })),
     [rooms],
   );
 
-  // Derive tenant options from the selected room's embedded tenants array
-  const tenantOptions = useMemo(() => {
-    if (!roomId || !rooms) return [];
-    const room = rooms.find((r) => r.id === roomId);
-    return (room?.tenants ?? []).map((t) => ({ label: t.name, value: t.id }));
-  }, [roomId, rooms]);
+  const tenantOptions = useMemo(
+    () => (tenants ?? []).map((t) => ({ label: t.name, value: t.id })),
+    [tenants],
+  );
 
   const createContract = useCreateContract();
 
@@ -56,23 +56,22 @@ export function ContractFormModal({ propertyId, trigger }: Props) {
     setTenantId(''); // reset tenant when room changes
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     if (!roomId || !tenantId || !startDate) return;
-    try {
-      await createContract.mutateAsync({
-        roomId,
-        tenantId,
-        startDate,
-        endDate: endDate || undefined,
-        depositAmount: depositAmount ? parseInt(depositAmount) : 0,
-        depositStatus: depositStatus[0] as 'PENDING' | 'PAID',
-        terms: terms || undefined,
-      });
-      reset();
-      setOpen(false);
-    } catch {
-      // error displayed below
-    }
+    createContract.mutate({
+      roomId,
+      tenantId,
+      startDate,
+      endDate: endDate || undefined,
+      depositAmount: depositAmount ? Number(depositAmount) : 0,
+      depositStatus: depositStatus[0] as 'PENDING' | 'PAID',
+      terms: terms || undefined,
+    }, {
+      onSuccess: () => {
+        reset();
+        setOpen(false);
+      },
+    });
   };
 
   return (

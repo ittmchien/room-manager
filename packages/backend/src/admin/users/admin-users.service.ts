@@ -33,6 +33,7 @@ export class AdminUsersService {
         select: {
           id: true,
           email: true,
+          phone: true,
           name: true,
           role: true,
           tags: true,
@@ -46,7 +47,7 @@ export class AdminUsersService {
       this.prisma.user.count({ where }),
     ]);
 
-    return { items, total, page, limit, totalPages: Math.ceil(total / limit) };
+    return { data: items, total, page, limit, totalPages: Math.ceil(total / limit) };
   }
 
   async findOne(id: string) {

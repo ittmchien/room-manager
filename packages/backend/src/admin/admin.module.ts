@@ -9,6 +9,10 @@ import { AdminBillingController } from './billing/admin-billing.controller';
 import { AdminBillingService } from './billing/admin-billing.service';
 import { AdminConfigController } from './config/admin-config.controller';
 import { ConfigService } from './config/config.service';
+import { AdminCampaignsController } from './campaigns/admin-campaigns.controller';
+import { AdminCampaignsService } from './campaigns/admin-campaigns.service';
+import { AdminPricingController } from './pricing/admin-pricing.controller';
+import { AdminPricingService } from './pricing/admin-pricing.service';
 
 @Module({
   imports: [forwardRef(() => AuthModule)],
@@ -17,6 +21,8 @@ import { ConfigService } from './config/config.service';
     AdminTagsController,
     AdminBillingController,
     AdminConfigController,
+    AdminCampaignsController,
+    AdminPricingController,
   ],
   providers: [
     RolesGuard,
@@ -24,6 +30,8 @@ import { ConfigService } from './config/config.service';
     AdminTagsService,
     AdminBillingService,
     ConfigService,
+    AdminCampaignsService,
+    AdminPricingService,
   ],
   exports: [ConfigService],
 })

@@ -22,9 +22,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   if (!user) return null;
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
+    <Layout style={{ height: '100dvh', overflow: 'hidden' }}>
       <AdminSidebar />
-      <Layout>
+      <Layout style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
         <Header
           style={{
             background: '#fff',
@@ -34,6 +34,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             justifyContent: 'flex-end',
             borderBottom: '1px solid #f0f0f0',
             gap: 12,
+            flexShrink: 0,
           }}
         >
           <span style={{ color: '#666' }}>{user.name || user.email}</span>
@@ -41,7 +42,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             Đăng xuất
           </Button>
         </Header>
-        <Content style={{ margin: 24, minHeight: 280 }}>{children}</Content>
+        <Content style={{ margin: 24, overflow: 'auto' }}>{children}</Content>
       </Layout>
     </Layout>
   );

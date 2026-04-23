@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 enum UserRole {
@@ -25,11 +26,12 @@ model User {
   createdAt       DateTime @default(now()) @map("created_at")
   updatedAt       DateTime @updatedAt @map("updated_at")
 
-  properties        Property[]
-  userFeatures      UserFeature[]
-  purchaseHistory   PurchaseHistory[]
-  subscriptions     Subscription[]
-  pushSubscriptions PushSubscription[]
+  properties          Property[]
+  userFeatures        UserFeature[]
+  purchaseHistory     PurchaseHistory[]
+  subscriptions       Subscription[]
+  pushSubscriptions   PushSubscription[]
+  campaignRedemptions CampaignRedemption[]
 
   @@map("users")
 }
@@ -395,6 +397,43 @@ model PricingTier {
   isActive         Boolean         @default(true) @map("is_active")
 
   @@map("pricing_tiers")
+}
+
+enum CampaignType {
+  DISCOUNT
+  FREE_TRIAL
+  EXTEND_SUBSCRIPTION
+}
+
+model Campaign {
+  id             String       @id @default(cuid())
+  name           String
+  description    String?
+  type           CampaignType
+  rules          Json
+  reward         Json
+  startDate      DateTime     @map("start_date")
+  endDate        DateTime     @map("end_date")
+  isActive       Boolean      @default(true) @map("is_active")
+  maxRedemptions Int?         @map("max_redemptions")
+  createdAt      DateTime     @default(now()) @map("created_at")
+
+  redemptions CampaignRedemption[]
+
+  @@map("campaigns")
+}
+
+model CampaignRedemption {
+  id         String   @id @default(cuid())
+  campaignId String   @map("campaign_id")
+  userId     String   @map("user_id")
+  redeemedAt DateTime @default(now()) @map("redeemed_at")
+
+  campaign Campaign @relation(fields: [campaignId], references: [id])
+  user     User     @relation(fields: [userId], references: [id])
+
+  @@unique([campaignId, userId])
+  @@map("campaign_redemptions")
 }
 
 model PushSubscription {

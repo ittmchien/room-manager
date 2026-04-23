@@ -10,6 +10,8 @@ import {
   SettingOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
+  GiftOutlined,
+  DollarOutlined,
 } from '@ant-design/icons';
 import { usePathname, useRouter } from 'next/navigation';
 
@@ -20,6 +22,8 @@ const menuItems = [
   { key: '/admin/users', icon: <UserOutlined />, label: 'Users' },
   { key: '/admin/tags', icon: <TagsOutlined />, label: 'Tags' },
   { key: '/admin/billing', icon: <CreditCardOutlined />, label: 'Billing' },
+  { key: '/admin/campaigns', icon: <GiftOutlined />, label: 'Campaigns' },
+  { key: '/admin/pricing', icon: <DollarOutlined />, label: 'Pricing' },
   { key: '/admin/settings', icon: <SettingOutlined />, label: 'System Config' },
 ];
 

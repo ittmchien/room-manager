@@ -23,7 +23,10 @@ export default function AdminSettingsPage() {
   const fetchConfigs = useCallback(async () => {
     setLoading(true);
     try {
-      const data = await apiFetch<SystemConfig[]>('/admin/config');
+      const raw = await apiFetch<Record<string, SystemConfig[]> | SystemConfig[]>('/admin/config');
+      const data: SystemConfig[] = Array.isArray(raw)
+        ? raw
+        : Object.values(raw).flat();
       setConfigs(data);
       const initial: Record<string, string> = {};
       data.forEach((c) => { initial[c.key] = c.value; });

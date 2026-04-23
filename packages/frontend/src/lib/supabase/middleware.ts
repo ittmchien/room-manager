@@ -25,14 +25,14 @@ export async function updateSession(request: NextRequest) {
 
   const pathname = request.nextUrl.pathname;
   const isAuthPage = pathname.startsWith('/login') || pathname.startsWith('/register');
-  const isAdminLogin = pathname === '/admin-login';
+  const isAdminLogin = pathname === '/admin/login';
   const isAdminPage = pathname.startsWith('/admin');
 
   // Admin routes
   if (isAdminPage && !isAdminLogin) {
     if (!user) {
       const url = request.nextUrl.clone();
-      url.pathname = '/admin-login';
+      url.pathname = '/admin/login';
       return NextResponse.redirect(url);
     }
     return response;

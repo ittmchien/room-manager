@@ -16,18 +16,18 @@ export function useAdminAuth() {
     apiFetch<AuthUser>('/auth/me')
       .then((u) => {
         if (u.role !== 'SUPER_ADMIN' && u.role !== 'ADMIN') {
-          router.replace('/admin-login');
+          router.replace('/admin/login');
         } else {
           setUser(u);
         }
       })
-      .catch(() => router.replace('/admin-login'))
+      .catch(() => router.replace('/admin/login'))
       .finally(() => setLoading(false));
   }, [router]);
 
   const signOut = async () => {
     await supabase.auth.signOut();
-    router.push('/admin-login');
+    router.push('/admin/login');
   };
 
   return { user, loading, signOut };

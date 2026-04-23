@@ -1,11 +1,11 @@
-import { NestFactory } from '@nestjs/core';
-import { ExpressAdapter } from '@nestjs/platform-express';
-import { ValidationPipe } from '@nestjs/common';
-import express from 'express';
-import { AppModule } from '../src/app.module';
+const { NestFactory } = require('@nestjs/core');
+const { ExpressAdapter } = require('@nestjs/platform-express');
+const { ValidationPipe } = require('@nestjs/common');
+const express = require('express');
+const { AppModule } = require('../dist/app.module');
 
 const expressApp = express();
-let cachedApp: ReturnType<typeof express> | null = null;
+let cachedApp = null;
 
 async function bootstrap() {
   if (cachedApp) return cachedApp;
@@ -30,7 +30,7 @@ async function bootstrap() {
   return cachedApp;
 }
 
-export default async function handler(req: express.Request, res: express.Response) {
+module.exports = async function handler(req, res) {
   const server = await bootstrap();
   server(req, res);
-}
+};

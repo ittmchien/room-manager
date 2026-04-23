@@ -2,15 +2,16 @@
   "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
   "buildCommand": "cd ../.. && pnpm build:shared && cd packages/backend && npx prisma generate && npx nest build",
   "functions": {
-    "api/index.ts": {
+    "api/index.js": {
       "memory": 1024,
-      "maxDuration": 30
+      "maxDuration": 30,
+      "includeFiles": "dist/**"
     }
   },
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/api/index.ts"
+      "dest": "/api/index.js"
     }
   ]
 }

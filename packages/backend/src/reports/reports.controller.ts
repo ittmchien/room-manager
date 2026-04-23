@@ -4,7 +4,7 @@ import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { AuthUser } from '@room-manager/shared';
 import { ReportsService } from './reports.service';
 
-@Controller('properties/:propertyId/reports')
+@Controller('api/v1/properties/:propertyId/reports')
 @UseGuards(AuthGuard)
 export class ReportsController {
   constructor(private reportsService: ReportsService) {}

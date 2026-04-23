@@ -5,7 +5,7 @@ import { AuthUser } from '@room-manager/shared';
 import { PaymentsService } from './payments.service';
 import { CreatePaymentDto } from './dto/create-payment.dto';
 
-@Controller('invoices/:invoiceId/payments')
+@Controller('api/v1/invoices/:invoiceId/payments')
 @UseGuards(AuthGuard)
 export class PaymentsController {
   constructor(private paymentsService: PaymentsService) {}

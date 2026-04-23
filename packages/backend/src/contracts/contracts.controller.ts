@@ -6,7 +6,7 @@ import { ContractsService } from './contracts.service';
 import { CreateContractDto } from './dto/create-contract.dto';
 import { UpdateContractDto } from './dto/update-contract.dto';
 
-@Controller('properties/:propertyId/contracts')
+@Controller('api/v1/properties/:propertyId/contracts')
 @UseGuards(AuthGuard)
 export class ContractsByPropertyController {
   constructor(private contractsService: ContractsService) {}
@@ -17,7 +17,7 @@ export class ContractsByPropertyController {
   }
 }
 
-@Controller('contracts')
+@Controller('api/v1/contracts')
 @UseGuards(AuthGuard)
 export class ContractsController {
   constructor(private contractsService: ContractsService) {}

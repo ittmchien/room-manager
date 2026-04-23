@@ -6,7 +6,7 @@ import { TenantsService } from './tenants.service';
 import { CreateTenantDto } from './dto/create-tenant.dto';
 import { UpdateTenantDto } from './dto/update-tenant.dto';
 
-@Controller('rooms/:roomId/tenants')
+@Controller('api/v1/rooms/:roomId/tenants')
 @UseGuards(AuthGuard)
 export class TenantsByRoomController {
   constructor(private tenantsService: TenantsService) {}
@@ -26,7 +26,7 @@ export class TenantsByRoomController {
   }
 }
 
-@Controller('tenants')
+@Controller('api/v1/tenants')
 @UseGuards(AuthGuard)
 export class TenantsController {
   constructor(private tenantsService: TenantsService) {}

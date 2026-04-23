@@ -3,7 +3,7 @@ import { AuthGuard } from './auth.guard';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { AuthUser } from '@room-manager/shared';
 
-@Controller('auth')
+@Controller('api/v1/auth')
 export class AuthController {
   @Get('me')
   @UseGuards(AuthGuard)

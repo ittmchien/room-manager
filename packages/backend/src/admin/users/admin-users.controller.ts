@@ -8,7 +8,7 @@ import { AdminUsersService } from './admin-users.service';
 import { ListUsersDto } from './dto/list-users.dto';
 import { UpdateUserDto, AssignTagsDto } from './dto/update-user.dto';
 
-@Controller('admin/users')
+@Controller('api/v1/admin/users')
 @UseGuards(AuthGuard, RolesGuard)
 @Roles('SUPER_ADMIN', 'ADMIN')
 export class AdminUsersController {

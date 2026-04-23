@@ -5,7 +5,7 @@ import { AuthUser } from '@room-manager/shared';
 import { UtilityConfigsService } from './utility-configs.service';
 import { UpsertUtilityConfigDto } from './dto/upsert-utility-config.dto';
 
-@Controller('properties/:propertyId/utility-configs')
+@Controller('api/v1/properties/:propertyId/utility-configs')
 @UseGuards(AuthGuard)
 export class UtilityConfigsController {
   constructor(private utilityConfigsService: UtilityConfigsService) {}

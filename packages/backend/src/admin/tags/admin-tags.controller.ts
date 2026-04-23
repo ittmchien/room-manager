@@ -6,7 +6,7 @@ import { AdminTagsService } from './admin-tags.service';
 import { CreateTagDto, UpdateTagDto } from './dto/create-tag.dto';
 import { BulkAssignTagDto } from './dto/bulk-assign-tag.dto';
 
-@Controller('admin/tags')
+@Controller({ path: 'admin/tags', version: '1' })
 @UseGuards(AuthGuard, RolesGuard)
 @Roles('SUPER_ADMIN', 'ADMIN')
 export class AdminTagsController {

@@ -5,7 +5,7 @@ import { AuthUser } from '@room-manager/shared';
 import { InvoicesService } from './invoices.service';
 import { GenerateInvoicesDto } from './dto/generate-invoices.dto';
 
-@Controller('invoices')
+@Controller({ path: 'invoices', version: '1' })
 @UseGuards(AuthGuard)
 export class InvoicesController {
   constructor(private invoicesService: InvoicesService) {}
@@ -21,7 +21,7 @@ export class InvoicesController {
   }
 }
 
-@Controller('properties/:propertyId/invoices')
+@Controller({ path: 'properties/:propertyId/invoices', version: '1' })
 @UseGuards(AuthGuard)
 export class PropertyInvoicesController {
   constructor(private invoicesService: InvoicesService) {}

@@ -6,7 +6,7 @@ import { TenantsService } from './tenants.service';
 import { CreateTenantDto } from './dto/create-tenant.dto';
 import { UpdateTenantDto } from './dto/update-tenant.dto';
 
-@Controller('rooms/:roomId/tenants')
+@Controller({ path: 'rooms/:roomId/tenants', version: '1' })
 @UseGuards(AuthGuard)
 export class TenantsByRoomController {
   constructor(private tenantsService: TenantsService) {}
@@ -26,7 +26,7 @@ export class TenantsByRoomController {
   }
 }
 
-@Controller('tenants')
+@Controller({ path: 'tenants', version: '1' })
 @UseGuards(AuthGuard)
 export class TenantsController {
   constructor(private tenantsService: TenantsService) {}

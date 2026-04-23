@@ -3,7 +3,7 @@ import { AuthGuard } from '../auth/auth.guard';
 import { UploadService } from './upload.service';
 import { GetPresignedUrlDto } from './dto/get-presigned-url.dto';
 
-@Controller('upload')
+@Controller({ path: 'upload', version: '1' })
 @UseGuards(AuthGuard)
 export class UploadController {
   constructor(private uploadService: UploadService) {}

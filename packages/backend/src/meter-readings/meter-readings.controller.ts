@@ -5,7 +5,7 @@ import { AuthUser } from '@room-manager/shared';
 import { MeterReadingsService } from './meter-readings.service';
 import { CreateMeterReadingDto } from './dto/create-meter-reading.dto';
 
-@Controller('rooms/:roomId/meter-readings')
+@Controller({ path: 'rooms/:roomId/meter-readings', version: '1' })
 @UseGuards(AuthGuard)
 export class MeterReadingsController {
   constructor(private meterReadingsService: MeterReadingsService) {}

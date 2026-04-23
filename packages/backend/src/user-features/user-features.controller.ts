@@ -4,7 +4,7 @@ import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { AuthUser } from '@room-manager/shared';
 import { UserFeaturesService } from './user-features.service';
 
-@Controller('me/features')
+@Controller({ path: 'me/features', version: '1' })
 @UseGuards(AuthGuard)
 export class UserFeaturesController {
   constructor(private userFeaturesService: UserFeaturesService) {}

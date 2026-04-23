@@ -7,7 +7,7 @@ import { AuthUser } from '@room-manager/shared';
 import { ConfigService } from './config.service';
 import { UpdateConfigDto } from './dto/update-config.dto';
 
-@Controller('admin/config')
+@Controller({ path: 'admin/config', version: '1' })
 @UseGuards(AuthGuard, RolesGuard)
 @Roles('SUPER_ADMIN')
 export class AdminConfigController {

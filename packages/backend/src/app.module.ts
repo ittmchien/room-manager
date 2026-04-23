@@ -19,6 +19,8 @@ import { ContractsModule } from './contracts/contracts.module';
 import { ExpensesModule } from './expenses/expenses.module';
 import { ReportsModule } from './reports/reports.module';
 import { UserFeaturesModule } from './user-features/user-features.module';
+import { AdminModule } from './admin/admin.module';
+import { AppConfigModule } from './admin/config/config.module';
 
 @Module({
   imports: [
@@ -42,6 +44,8 @@ import { UserFeaturesModule } from './user-features/user-features.module';
     ExpensesModule,
     ReportsModule,
     UserFeaturesModule,
+    AppConfigModule,
+    AdminModule,
   ],
 })
 export class AppModule {}

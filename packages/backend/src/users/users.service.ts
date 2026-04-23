@@ -32,6 +32,7 @@ export class UsersService {
       email: user.email,
       phone: user.phone,
       name: user.name,
+      role: user.role,
     };
   }
 

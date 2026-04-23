@@ -27,7 +27,7 @@ import { AppConfigModule } from './admin/config/config.module';
   controllers: [HealthController],
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    ScheduleModule.forRoot(),
+    ...(process.env.VERCEL ? [] : [ScheduleModule.forRoot()]),
     PrismaModule,
     AuthModule,
     UsersModule,

@@ -16,7 +16,7 @@ function ContractBody({ propertyId }: { propertyId: string }) {
     return (
       <div className="space-y-3">
         {[1, 2, 3].map((i) => (
-          <div key={i} className="rounded-2xl bg-surface-container-lowest p-4 shadow-sm">
+          <div key={i} className="rounded-2xl bg-white p-4 shadow-sm">
             <Skeleton.Title animated className="w-3/5" />
             <Skeleton.Paragraph lineCount={2} animated />
           </div>
@@ -44,7 +44,7 @@ export default function ContractsPage() {
     <FeatureGate locked={!canContracts} description="Quản lý hợp đồng và tiền cọc cần mua tính năng Hợp đồng.">
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h1 className="text-xl font-bold text-on-surface">Hợp đồng</h1>
+          <h1 className="text-xl font-bold text-gray-900">Hợp đồng</h1>
           {propertyId && (
             <ContractFormModal
               propertyId={propertyId}

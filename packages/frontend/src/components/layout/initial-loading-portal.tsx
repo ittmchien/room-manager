@@ -19,10 +19,10 @@ export function InitialLoadingPortal() {
   if (loaded || typeof document === 'undefined') return null;
 
   return createPortal(
-    <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-surface-container-lowest">
+    <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white">
       <div className="flex flex-col items-center gap-4">
-        <div className="h-10 w-10 animate-spin rounded-full border-4 border-primary-fixed border-t-primary" />
-        <p className="text-sm text-on-surface-variant">Đang tải...</p>
+        <div className="h-10 w-10 animate-spin rounded-full border-4 border-blue-100 border-t-blue-600" />
+        <p className="text-sm text-gray-400">Đang tải...</p>
       </div>
     </div>,
     document.body,

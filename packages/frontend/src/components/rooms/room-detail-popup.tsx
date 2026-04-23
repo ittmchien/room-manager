@@ -1,27 +1,20 @@
 'use client';
 
-import { Button, Popup, Skeleton } from 'antd-mobile';
+import { Button, Card, Popup, Skeleton, Tag } from 'antd-mobile';
 import { Plus, X } from 'lucide-react';
 import { useRoom, useUpdateRoom } from '@/hooks/use-rooms';
 import { useTenants } from '@/hooks/use-tenants';
 import { TenantList } from '@/components/tenants/tenant-list';
 import { TenantFormModal } from '@/components/tenants/tenant-form-modal';
-import { RoomStatusBadge } from '@/components/rooms/room-status-badge';
 
 function formatPrice(price: number) {
-  return new Intl.NumberFormat('vi-VN').format(price);
+  return new Intl.NumberFormat('vi-VN').format(price) + 'đ';
 }
 
-const STATUS_LABELS = {
-  VACANT: 'Trống',
-  OCCUPIED: 'Đang thuê',
-  MAINTENANCE: 'Sửa chữa',
-} as const;
-
-const STATUS_ACTIVE_CLASSES: Record<string, string> = {
-  VACANT: 'bg-surface-variant text-on-surface-variant',
-  OCCUPIED: 'bg-secondary-fixed text-on-secondary-fixed',
-  MAINTENANCE: 'bg-tertiary-fixed text-on-tertiary-fixed',
+const STATUS_MAP = {
+  VACANT: { label: 'Trống', color: 'primary' as const },
+  OCCUPIED: { label: 'Đang thuê', color: 'success' as const },
+  MAINTENANCE: { label: 'Sửa chữa', color: 'warning' as const },
 };
 
 interface Props {
@@ -34,28 +27,32 @@ function RoomDetailContent({ roomId, onClose }: { roomId: string; onClose: () =>
   const { data: tenants, isPending: loadingTenants } = useTenants(roomId);
   const updateRoom = useUpdateRoom();
 
+  const statusCfg = room
+    ? (STATUS_MAP[room.status as keyof typeof STATUS_MAP] ?? STATUS_MAP.VACANT)
+    : null;
+
   return (
-    <div className="flex flex-col h-full bg-surface-container-lowest">
+    <div className="flex flex-col h-full">
       {/* Drag handle */}
       <div className="flex justify-center pt-2 pb-1">
-        <div className="h-1 w-10 rounded-full bg-outline-variant/30" />
+        <div className="h-1 w-10 rounded-full bg-gray-200" />
       </div>
 
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-2 border-b border-outline-variant/15">
+      <div className="flex items-center justify-between px-4 py-2 border-b border-gray-100">
         <div className="flex items-center gap-2">
           {isPending ? (
             <Skeleton.Title animated className="w-24" />
           ) : (
             <>
-              <span className="font-headline font-semibold text-on-surface text-base">{room?.name}</span>
-              {room && <RoomStatusBadge status={room.status as 'VACANT' | 'OCCUPIED' | 'MAINTENANCE'} />}
+              <span className="text-base font-bold text-gray-900">{room?.name}</span>
+              {statusCfg && <Tag color={statusCfg.color}>{statusCfg.label}</Tag>}
             </>
           )}
         </div>
         <button
           onClick={onClose}
-          className="flex h-7 w-7 items-center justify-center rounded-full bg-surface-container-low text-on-surface-variant"
+          className="flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 text-gray-500"
         >
           <X className="h-4 w-4" />
         </button>
@@ -64,59 +61,49 @@ function RoomDetailContent({ roomId, onClose }: { roomId: string; onClose: () =>
       {/* Scrollable body */}
       <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3">
         {/* Rent card */}
-        <div className="bg-surface-container-lowest rounded-xl p-4 shadow-ambient-sm">
-          <p className="font-label text-sm text-on-surface-variant uppercase tracking-wider">GIÁ THUÊ</p>
+        <Card>
+          <p className="text-xs font-semibold uppercase tracking-wider text-gray-400">GIÁ THUÊ</p>
           {isPending ? (
             <Skeleton.Paragraph lineCount={2} animated />
           ) : (
             <>
-              <p className="mt-1 font-headline font-bold text-on-surface text-2xl">
-                {formatPrice(room!.rentPrice)}
-                <span className="font-label text-sm text-on-surface-variant ml-0.5">đ</span>
-              </p>
-              <p className="font-label text-sm text-on-surface-variant">
+              <p className="mt-1 text-2xl font-bold text-gray-900">{formatPrice(room!.rentPrice)}</p>
+              <p className="text-sm text-gray-400">
                 {room!.rentCalcType === 'FIXED' ? 'Giá cố định/tháng' : 'Theo đầu người'}
               </p>
             </>
           )}
 
           <div className="mt-3 space-y-1.5">
-            <p className="font-label text-sm text-on-surface-variant">Chuyển trạng thái</p>
-            <div className="flex gap-2 flex-wrap">
-              {(['VACANT', 'OCCUPIED', 'MAINTENANCE'] as const).map((s) => {
-                const isActive = room?.status === s;
-                return (
-                  <button
-                    key={s}
-                    disabled={isPending || isActive}
-                    onClick={() => updateRoom.mutate({ id: roomId, data: { status: s } })}
-                    className={[
-                      'px-3 py-1 rounded-full font-label text-sm transition-colors',
-                      isActive
-                        ? STATUS_ACTIVE_CLASSES[s]
-                        : 'bg-surface-container-low text-on-surface-variant',
-                      isPending || isActive ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer',
-                    ].join(' ')}
-                  >
-                    {STATUS_LABELS[s]}
-                  </button>
-                );
-              })}
+            <p className="text-xs text-gray-400">Chuyển trạng thái</p>
+            <div className="flex gap-2">
+              {(['VACANT', 'OCCUPIED', 'MAINTENANCE'] as const).map((s) => (
+                <Button
+                  key={s}
+                  size="small"
+                  color={room?.status === s ? 'primary' : 'default'}
+                  fill={room?.status === s ? 'solid' : 'outline'}
+                  disabled={isPending || room?.status === s}
+                  onClick={() => updateRoom.mutate({ id: roomId, data: { status: s } })}
+                >
+                  {s === 'VACANT' ? 'Trống' : s === 'OCCUPIED' ? 'Đang thuê' : 'Sửa chữa'}
+                </Button>
+              ))}
             </div>
           </div>
-        </div>
+        </Card>
 
         {/* Tenants */}
         <div>
           <div className="flex items-center justify-between mb-2">
-            <h2 className="font-headline font-semibold text-on-surface">Người thuê</h2>
+            <h2 className="font-semibold text-gray-900">Người thuê</h2>
             <TenantFormModal
               roomId={roomId}
               trigger={
-                <button className="flex items-center gap-1 px-3 py-1.5 bg-surface-container-low text-primary rounded-lg font-label text-sm">
-                  <Plus className="h-3 w-3" />
+                <Button size="mini" color="primary" fill="outline">
+                  <Plus className="mr-1 h-3 w-3 inline" />
                   Thêm
-                </button>
+                </Button>
               }
             />
           </div>

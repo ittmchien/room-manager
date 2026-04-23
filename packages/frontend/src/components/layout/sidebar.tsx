@@ -50,9 +50,9 @@ export function Sidebar() {
 
   return (
     <>
-      <aside className="hidden md:flex md:w-60 md:flex-col md:border-r md:bg-surface-container-lowest">
+      <aside className="hidden md:flex md:w-60 md:flex-col md:border-r md:bg-white">
         <div className="flex items-center gap-2 border-b px-5 py-4">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-lg text-on-primary">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-600 text-lg text-white">
             🏠
           </div>
           <div>
@@ -70,8 +70,8 @@ export function Sidebar() {
                 className={cn(
                   'flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors text-left',
                   isActive
-                    ? 'border-l-2 border-primary bg-primary-fixed font-semibold text-primary'
-                    : 'text-on-surface-variant hover:bg-surface-container-low',
+                    ? 'border-l-2 border-blue-600 bg-blue-50 font-semibold text-blue-600'
+                    : 'text-gray-600 hover:bg-gray-50',
                 )}
               >
                 <item.icon className="h-4 w-4" />
@@ -91,8 +91,8 @@ export function Sidebar() {
                 className={cn(
                   'flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors text-left',
                   isActive
-                    ? 'border-l-2 border-primary bg-primary-fixed font-semibold text-primary'
-                    : 'text-on-surface-variant hover:bg-surface-container-low',
+                    ? 'border-l-2 border-blue-600 bg-blue-50 font-semibold text-blue-600'
+                    : 'text-gray-600 hover:bg-gray-50',
                   item.locked && 'opacity-60',
                 )}
               >

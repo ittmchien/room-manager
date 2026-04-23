@@ -29,7 +29,7 @@ export function TenantList({ tenants, roomId }: { tenants: Tenant[]; roomId: str
 
   if (active.length === 0 && movedOut.length === 0) {
     return (
-      <div className="py-6 text-center text-sm text-on-surface-variant">Chưa có người thuê</div>
+      <div className="py-6 text-center text-sm text-gray-400">Chưa có người thuê</div>
     );
   }
 
@@ -41,12 +41,12 @@ export function TenantList({ tenants, roomId }: { tenants: Tenant[]; roomId: str
             <List.Item
               key={tenant.id}
               prefix={
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-fixed">
-                  <UserRound className="h-5 w-5 text-primary" />
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100">
+                  <UserRound className="h-5 w-5 text-blue-600" />
                 </div>
               }
               description={
-                <span className="text-xs text-on-surface-variant">
+                <span className="text-xs text-gray-400">
                   {tenant.phone && `${tenant.phone} · `}Vào {formatDate(tenant.moveInDate)}
                 </span>
               }
@@ -63,7 +63,7 @@ export function TenantList({ tenants, roomId }: { tenants: Tenant[]; roomId: str
               }
               style={{ '--padding-left': '0', '--padding-right': '0' } as React.CSSProperties}
             >
-              <span className="font-semibold text-on-surface">{tenant.name}</span>
+              <span className="font-semibold text-gray-900">{tenant.name}</span>
             </List.Item>
           ))}
         </List>
@@ -71,25 +71,25 @@ export function TenantList({ tenants, roomId }: { tenants: Tenant[]; roomId: str
 
       {movedOut.length > 0 && (
         <Collapse className="mt-2">
-          <Collapse.Panel key="moved-out" title={<span className="text-sm text-on-surface-variant">{movedOut.length} người đã trả phòng</span>}>
+          <Collapse.Panel key="moved-out" title={<span className="text-sm text-gray-400">{movedOut.length} người đã trả phòng</span>}>
             <List className="no-border">
               {movedOut.map((tenant) => (
                 <List.Item
                   key={tenant.id}
                   prefix={
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-surface-container">
-                      <UserRound className="h-4 w-4 text-on-surface-variant" />
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100">
+                      <UserRound className="h-4 w-4 text-gray-400" />
                     </div>
                   }
                   description={
-                    <span className="text-xs text-on-surface-variant">
+                    <span className="text-xs text-gray-400">
                       {formatDate(tenant.moveInDate)} → {tenant.moveOutDate ? formatDate(tenant.moveOutDate) : '?'}
                     </span>
                   }
                   extra={<Tag color="default">Đã trả</Tag>}
                   style={{ '--padding-left': '0', '--padding-right': '0' } as React.CSSProperties}
                 >
-                  <span className="text-sm text-on-surface-variant">{tenant.name}</span>
+                  <span className="text-sm text-gray-500">{tenant.name}</span>
                 </List.Item>
               ))}
             </List>

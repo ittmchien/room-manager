@@ -33,20 +33,20 @@ function AccountSection() {
 
   return (
     <Card className="overflow-hidden">
-      <div className="border-b border-outline-variant/15 pb-2 mb-3">
-        <h2 className="text-sm font-semibold text-on-surface">Tài khoản</h2>
+      <div className="border-b border-gray-50 pb-2 mb-3">
+        <h2 className="text-sm font-semibold text-gray-700">Tài khoản</h2>
       </div>
-      <div className="divide-y divide-outline-variant/15">
+      <div className="divide-y divide-gray-50">
         {email && (
           <div className="flex items-center justify-between py-3">
-            <span className="text-sm text-on-surface-variant">Email</span>
-            <span className="text-sm font-medium text-on-surface">{email}</span>
+            <span className="text-sm text-gray-500">Email</span>
+            <span className="text-sm font-medium text-gray-800">{email}</span>
           </div>
         )}
         <div className="flex items-center justify-between py-3">
-          <span className="text-sm text-on-surface">Mật khẩu</span>
+          <span className="text-sm text-gray-700">Mật khẩu</span>
           <div className="flex items-center gap-3">
-            <span className="text-outline tracking-widest text-base">••••••••</span>
+            <span className="text-gray-300 tracking-widest text-base">••••••••</span>
             <Button color="primary" fill="outline" onClick={() => setPwOpen(true)}>
               Thay đổi
             </Button>
@@ -65,13 +65,13 @@ function AccountSection() {
         error={error}
       >
         <div className="space-y-2">
-          <label className="text-sm text-on-surface-variant">Mật khẩu mới</label>
+          <label className="text-sm text-gray-600">Mật khẩu mới</label>
           <Input
             placeholder="Tối thiểu 6 ký tự"
             type="password"
             value={newPassword}
             onChange={setNewPassword}
-            className="rounded-xl border border-outline-variant px-3 py-2"
+            className="rounded-xl border border-gray-200 px-3 py-2"
           />
         </div>
       </AppPopup>
@@ -94,21 +94,21 @@ export default function SettingsPage() {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-xl font-bold text-on-surface">Cài đặt</h1>
+      <h1 className="text-xl font-bold text-gray-900">Cài đặt</h1>
 
       {!propertyId ? (
         <Card className="text-center">
-          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-fixed">
-            <Building2 className="h-7 w-7 text-primary-container" />
+          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50">
+            <Building2 className="h-7 w-7 text-blue-400" />
           </div>
-          <p className="mt-4 font-medium text-on-surface">Chưa có khu trọ</p>
+          <p className="mt-4 font-medium text-gray-700">Chưa có khu trọ</p>
         </Card>
       ) : (
         <>
           <Card bodyClassName="space-y-4">
-            <div className="border-b border-outline-variant/15 pb-1">
-              <h2 className="text-sm font-semibold text-on-surface">Giá điện nước</h2>
-              <p className="text-xs text-on-surface-variant mt-0.5">Áp dụng khi tính hóa đơn hàng tháng</p>
+            <div className="border-b border-gray-50 pb-1">
+              <h2 className="text-sm font-semibold text-gray-700">Giá điện nước</h2>
+              <p className="text-xs text-gray-400 mt-0.5">Áp dụng khi tính hóa đơn hàng tháng</p>
             </div>
             <UtilityConfigForm
               key={electricConfig?.id ?? 'electric'}
@@ -120,7 +120,7 @@ export default function SettingsPage() {
               unit="kWh"
               loading={loadingConfigs}
             />
-            <div className="border-t border-outline-variant/15 pt-1">
+            <div className="border-t border-gray-100 pt-1">
               <UtilityConfigForm
                 key={waterConfig?.id ?? 'water'}
                 ref={waterRef}
@@ -147,9 +147,9 @@ export default function SettingsPage() {
           </Card>
 
           <Card bodyClassName="space-y-4">
-            <div className="border-b border-outline-variant/15 pb-1">
-              <h2 className="text-sm font-semibold text-on-surface">Phí dịch vụ</h2>
-              <p className="text-xs text-on-surface-variant mt-0.5">Phí cố định tính thêm vào hóa đơn</p>
+            <div className="border-b border-gray-50 pb-1">
+              <h2 className="text-sm font-semibold text-gray-700">Phí dịch vụ</h2>
+              <p className="text-xs text-gray-400 mt-0.5">Phí cố định tính thêm vào hóa đơn</p>
             </div>
             <ServiceFeeList propertyId={propertyId} fees={serviceFees ?? []} />
           </Card>

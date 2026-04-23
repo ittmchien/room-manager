@@ -73,20 +73,20 @@ export function TenantFormModal({ roomId, trigger }: TenantFormModalProps) {
       scrollable
     >
       <div className="space-y-4">
-        <div className="rounded-xl bg-surface-container-low px-3">
-          <p className="pt-2.5 text-xs text-on-surface-variant">Họ và tên *</p>
+        <div className="rounded-xl bg-gray-50 px-3">
+          <p className="pt-2.5 text-xs text-gray-400">Họ và tên *</p>
           <Input placeholder="Nguyễn Văn A" value={name} onChange={setName} style={{ '--font-size': '15px' } as React.CSSProperties} />
         </div>
-        <div className="rounded-xl bg-surface-container-low px-3">
-          <p className="pt-2.5 text-xs text-on-surface-variant">Số điện thoại</p>
+        <div className="rounded-xl bg-gray-50 px-3">
+          <p className="pt-2.5 text-xs text-gray-400">Số điện thoại</p>
           <Input type="tel" placeholder="0901234567" value={phone} onChange={setPhone} style={{ '--font-size': '15px' } as React.CSSProperties} />
         </div>
-        <div className="rounded-xl bg-surface-container-low px-3">
-          <p className="pt-2.5 text-xs text-on-surface-variant">Số CCCD (tuỳ chọn)</p>
+        <div className="rounded-xl bg-gray-50 px-3">
+          <p className="pt-2.5 text-xs text-gray-400">Số CCCD (tuỳ chọn)</p>
           <Input placeholder="001234567890" value={idCard} onChange={setIdCard} style={{ '--font-size': '15px' } as React.CSSProperties} />
         </div>
         <div>
-          <p className="mb-2 text-xs text-on-surface-variant">Ảnh CCCD (tuỳ chọn)</p>
+          <p className="mb-2 text-xs text-gray-400">Ảnh CCCD (tuỳ chọn)</p>
           {idCardImageUrl ? (
             <div className="relative">
               <Image src={idCardImageUrl} alt="CCCD" width={320} height={180} className="w-full rounded-xl object-cover" />
@@ -96,16 +96,16 @@ export function TenantFormModal({ roomId, trigger }: TenantFormModalProps) {
               </Button>
             </div>
           ) : (
-            <label className="flex cursor-pointer flex-col items-center gap-2 rounded-xl border-2 border-dashed border-surface-variant py-4 text-on-surface-variant hover:border-primary/50">
+            <label className="flex cursor-pointer flex-col items-center gap-2 rounded-xl border-2 border-dashed border-gray-200 py-4 text-gray-400 hover:border-blue-300">
               <ImagePlus className="h-6 w-6" />
               <span className="text-xs font-medium">{isUploading ? 'Đang tải...' : 'Chọn ảnh'}</span>
               <input type="file" accept="image/*" className="hidden" onChange={handleImageChange} disabled={isUploading} />
             </label>
           )}
-          {uploadError && <p className="mt-1 text-xs text-error">{uploadError}</p>}
+          {uploadError && <p className="mt-1 text-xs text-red-500">{uploadError}</p>}
         </div>
-        <div className="rounded-xl bg-surface-container-low px-3">
-          <p className="pt-2.5 text-xs text-on-surface-variant">Ngày vào *</p>
+        <div className="rounded-xl bg-gray-50 px-3">
+          <p className="pt-2.5 text-xs text-gray-400">Ngày vào *</p>
           <input type="date" value={moveInDate} onChange={(e) => setMoveInDate(e.target.value)} className="w-full bg-transparent py-2.5 text-[15px] outline-none" />
         </div>
       </div>

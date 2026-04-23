@@ -58,7 +58,7 @@ export function AppPopup({
               fill="none"
               size="small"
               onClick={onClose}
-              className="text-on-surface-variant!"
+              className="text-gray-400!"
             >
               Đóng
             </Button>
@@ -66,7 +66,7 @@ export function AppPopup({
 
           {children}
 
-          {error && <p className="mt-3 text-sm text-error">{error}</p>}
+          {error && <p className="mt-3 text-sm text-red-500">{error}</p>}
 
           {onSubmit && (
             <Button

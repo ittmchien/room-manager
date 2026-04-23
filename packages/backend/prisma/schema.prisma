@@ -7,6 +7,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  USER
+}
+
 model User {
   id              String   @id @default(cuid())
   supabaseUserId  String   @unique @map("supabase_user_id")
@@ -14,6 +20,8 @@ model User {
   phone           String?
   name            String
   avatar          String?
+  role            UserRole @default(USER)
+  tags            String[] @default([])
   createdAt       DateTime @default(now()) @map("created_at")
   updatedAt       DateTime @updatedAt @map("updated_at")
 
@@ -24,6 +32,16 @@ model User {
   pushSubscriptions PushSubscription[]
 
   @@map("users")
+}
+
+model Tag {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  color       String?
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("tags")
 }
 
 model Property {
@@ -343,6 +361,26 @@ enum PricingTierType {
   SINGLE
   SLOT
   BUNDLE
+}
+
+enum ConfigType {
+  STRING
+  NUMBER
+  BOOLEAN
+  JSON
+}
+
+model SystemConfig {
+  id          String     @id @default(cuid())
+  key         String     @unique
+  value       String
+  type        ConfigType @default(STRING)
+  group       String
+  description String
+  updatedBy   String?    @map("updated_by")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+
+  @@map("system_configs")
 }
 
 model PricingTier {

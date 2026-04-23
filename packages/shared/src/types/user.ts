@@ -5,6 +5,8 @@ export interface UserProfile {
   phone: string | null;
   name: string;
   avatar: string | null;
+  role: string;
+  tags: string[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -15,4 +17,5 @@ export interface AuthUser {
   email: string | null;
   phone: string | null;
   name: string;
+  role: string;
 }

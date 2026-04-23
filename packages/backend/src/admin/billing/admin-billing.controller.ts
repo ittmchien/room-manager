@@ -6,7 +6,7 @@ import { AdminBillingService } from './admin-billing.service';
 import { GrantFeaturesDto } from './dto/grant-features.dto';
 import { RevokeFeatureDto } from './dto/revoke-feature.dto';
 
-@Controller('api/v1/admin')
+@Controller('admin')
 @UseGuards(AuthGuard, RolesGuard)
 @Roles('SUPER_ADMIN', 'ADMIN')
 export class AdminBillingController {

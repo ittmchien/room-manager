@@ -15,7 +15,7 @@ import { PropertiesService } from './properties.service';
 import { CreatePropertyDto } from './dto/create-property.dto';
 import { UpdatePropertyDto } from './dto/update-property.dto';
 
-@Controller('api/v1/properties')
+@Controller('properties')
 @UseGuards(AuthGuard)
 export class PropertiesController {
   constructor(private propertiesService: PropertiesService) {}

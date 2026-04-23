@@ -5,7 +5,7 @@ import { AuthUser } from '@room-manager/shared';
 import { InvoicesService } from './invoices.service';
 import { GenerateInvoicesDto } from './dto/generate-invoices.dto';
 
-@Controller('api/v1/invoices')
+@Controller('invoices')
 @UseGuards(AuthGuard)
 export class InvoicesController {
   constructor(private invoicesService: InvoicesService) {}
@@ -21,7 +21,7 @@ export class InvoicesController {
   }
 }
 
-@Controller('api/v1/properties/:propertyId/invoices')
+@Controller('properties/:propertyId/invoices')
 @UseGuards(AuthGuard)
 export class PropertyInvoicesController {
   constructor(private invoicesService: InvoicesService) {}

@@ -6,7 +6,7 @@ import { ServiceFeesService } from './service-fees.service';
 import { CreateServiceFeeDto } from './dto/create-service-fee.dto';
 import { UpdateServiceFeeDto } from './dto/update-service-fee.dto';
 
-@Controller('api/v1/properties/:propertyId/service-fees')
+@Controller('properties/:propertyId/service-fees')
 @UseGuards(AuthGuard)
 export class ServiceFeesController {
   constructor(private serviceFeesService: ServiceFeesService) {}
@@ -26,7 +26,7 @@ export class ServiceFeesController {
   }
 }
 
-@Controller('api/v1/service-fees')
+@Controller('service-fees')
 @UseGuards(AuthGuard)
 export class ServiceFeeByIdController {
   constructor(private serviceFeesService: ServiceFeesService) {}

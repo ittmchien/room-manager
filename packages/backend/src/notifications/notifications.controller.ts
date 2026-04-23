@@ -5,7 +5,7 @@ import { AuthUser } from '@room-manager/shared';
 import { NotificationsService } from './notifications.service';
 import { SubscribeDto } from './dto/subscribe.dto';
 
-@Controller('api/v1/notifications')
+@Controller('notifications')
 @UseGuards(AuthGuard)
 export class NotificationsController {
   constructor(private notificationsService: NotificationsService) {}

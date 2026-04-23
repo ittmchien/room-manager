@@ -5,7 +5,7 @@ import { AuthUser } from '@room-manager/shared';
 import { ExpensesService } from './expenses.service';
 import { CreateExpenseDto } from './dto/create-expense.dto';
 
-@Controller('api/v1/properties/:propertyId/expenses')
+@Controller('properties/:propertyId/expenses')
 @UseGuards(AuthGuard)
 export class ExpensesByPropertyController {
   constructor(private expensesService: ExpensesService) {}
@@ -20,7 +20,7 @@ export class ExpensesByPropertyController {
   }
 }
 
-@Controller('api/v1/expenses')
+@Controller('expenses')
 @UseGuards(AuthGuard)
 export class ExpensesController {
   constructor(private expensesService: ExpensesService) {}

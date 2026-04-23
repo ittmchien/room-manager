@@ -9,11 +9,13 @@ async function bootstrap() {
   // Dynamic require — dist/ only exists after buildCommand runs
   const { NestFactory } = require('@nestjs/core');
   const { ExpressAdapter } = require('@nestjs/platform-express');
-  const { ValidationPipe } = require('@nestjs/common');
+  const { ValidationPipe, VersioningType } = require('@nestjs/common');
   const { AppModule } = require('../dist/app.module');
 
   const app = await NestFactory.create(AppModule, new ExpressAdapter(expressApp));
 
+  app.setGlobalPrefix('api');
+  app.enableVersioning({ type: VersioningType.URI, defaultVersion: '1' });
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
 
   const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:3000')

@@ -6,7 +6,7 @@ import { RoomsService } from './rooms.service';
 import { CreateRoomDto } from './dto/create-room.dto';
 import { UpdateRoomDto } from './dto/update-room.dto';
 
-@Controller('api/v1/properties/:propertyId/rooms')
+@Controller('properties/:propertyId/rooms')
 @UseGuards(AuthGuard)
 export class RoomsController {
   constructor(private roomsService: RoomsService) {}
@@ -26,7 +26,7 @@ export class RoomsController {
   }
 }
 
-@Controller('api/v1/rooms')
+@Controller('rooms')
 @UseGuards(AuthGuard)
 export class RoomByIdController {
   constructor(private roomsService: RoomsService) {}

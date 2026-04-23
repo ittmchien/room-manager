@@ -59,11 +59,11 @@ function ExpenseBody({ propertyId, month }: { propertyId: string; month: string 
   return (
     <>
       <div className="grid grid-cols-2 gap-3">
-        <Card className="!bg-red-50" style={{ '--border-radius': '16px' } as React.CSSProperties}>
+        <Card className="!bg-red-50">
           <p className="text-xs text-red-400">Chi phí</p>
           <p className="mt-1 text-lg font-bold text-red-600">{totalExpense.toLocaleString('vi-VN')}đ</p>
         </Card>
-        <Card className="!bg-green-50" style={{ '--border-radius': '16px' } as React.CSSProperties}>
+        <Card className="!bg-green-50">
           <p className="text-xs text-green-500">Thu khác</p>
           <p className="mt-1 text-lg font-bold text-green-600">{totalIncome.toLocaleString('vi-VN')}đ</p>
         </Card>

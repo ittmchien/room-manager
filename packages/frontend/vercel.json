@@ -1,5 +1,4 @@
 {
-  "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
-  "buildCommand": "cd ../.. && pnpm build:shared && pnpm build:fe",
+  "installCommand": "cd ../.. && pnpm install --frozen-lockfile && pnpm build:shared",
   "framework": "nextjs"
 }

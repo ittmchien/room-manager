@@ -25,7 +25,6 @@ function BarChart({ data }: { data: { label: string; income: number; expense: nu
     <svg
       viewBox={`0 0 ${data.length * 10} ${CHART_HEIGHT + 20}`}
       className="w-full"
-      preserveAspectRatio="none"
       role="img"
       aria-label="Biểu đồ thu chi theo tháng"
     >

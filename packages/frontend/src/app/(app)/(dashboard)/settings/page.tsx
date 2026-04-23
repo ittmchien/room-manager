@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { Button, Card, Input } from 'antd-mobile';
+import { Button, Card, Dialog, Input } from 'antd-mobile';
+import { Building2 } from 'lucide-react';
 import { useProperty } from '@/contexts/property-context';
 import { useUtilityConfigs } from '@/hooks/use-utility-configs';
 import { useServiceFees } from '@/hooks/use-service-fees';
@@ -97,8 +98,10 @@ export default function SettingsPage() {
 
       {!propertyId ? (
         <Card className="text-center">
-          <p className="text-4xl">🏘️</p>
-          <p className="mt-3 font-medium">Chưa có khu trọ</p>
+          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50">
+            <Building2 className="h-7 w-7 text-blue-400" />
+          </div>
+          <p className="mt-4 font-medium text-gray-700">Chưa có khu trọ</p>
         </Card>
       ) : (
         <>
@@ -155,7 +158,19 @@ export default function SettingsPage() {
 
       <AccountSection />
 
-      <Button block color="danger" fill="solid" onClick={signOut}>
+      <Button
+        block
+        color="danger"
+        fill="solid"
+        onClick={async () => {
+          const confirmed = await Dialog.confirm({
+            content: 'Bạn có chắc muốn đăng xuất?',
+            confirmText: 'Đăng xuất',
+            cancelText: 'Huỷ',
+          });
+          if (confirmed) signOut();
+        }}
+      >
         Đăng xuất
       </Button>
     </div>

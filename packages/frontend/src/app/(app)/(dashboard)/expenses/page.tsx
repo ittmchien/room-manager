@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Plus, Trash2 } from 'lucide-react';
+import { Plus, Trash2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button, Card, ErrorBlock, List, Skeleton, Dialog } from 'antd-mobile';
 import { useExpenses, useDeleteExpense } from '@/hooks/use-expenses';
 import { useProperty } from '@/contexts/property-context';
@@ -111,9 +111,12 @@ export default function ExpensesPage() {
                 const d = new Date(y, m - 2);
                 setMonth(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`);
               }}
-              className="px-1 text-gray-400 text-base leading-none"
-            >‹</button>
-            <span className="text-sm text-gray-400">
+              className="flex h-7 w-7 items-center justify-center rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors"
+              aria-label="Tháng trước"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+            <span className="min-w-[80px] text-center text-sm font-medium text-gray-600">
               Tháng {month.split('-')[1]}/{month.split('-')[0]}
             </span>
             <button
@@ -122,8 +125,11 @@ export default function ExpensesPage() {
                 const d = new Date(y, m);
                 setMonth(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`);
               }}
-              className="px-1 text-gray-400 text-base leading-none"
-            >›</button>
+              className="flex h-7 w-7 items-center justify-center rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors"
+              aria-label="Tháng sau"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </button>
           </div>
         </div>
         {propertyId && (

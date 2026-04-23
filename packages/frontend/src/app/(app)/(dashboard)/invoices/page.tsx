@@ -10,7 +10,7 @@ import {
   List,
   Loading,
 } from "antd-mobile";
-import { Plus } from "lucide-react";
+import { Plus, Building2 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -68,9 +68,11 @@ export default function InvoicesPage() {
       </div>
 
       {!propertyId ? (
-        <div className="rounded-xl bg-white p-8 text-center shadow-sm">
-          <p className="text-4xl">🏘️</p>
-          <p className="mt-3 font-medium">Chưa có khu trọ</p>
+        <div className="rounded-2xl bg-white p-8 text-center shadow-sm">
+          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50">
+            <Building2 className="h-7 w-7 text-blue-400" />
+          </div>
+          <p className="mt-4 font-medium text-gray-700">Chưa có khu trọ</p>
         </div>
       ) : isPending ? (
         <div className="flex justify-center py-16">

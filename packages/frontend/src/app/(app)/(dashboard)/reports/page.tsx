@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Card, ErrorBlock, Skeleton } from 'antd-mobile';
 import { useMonthlyReport, usePropertySnapshot } from '@/hooks/use-reports';
 import { useProperty } from '@/contexts/property-context';
@@ -45,7 +46,7 @@ function MonthlySection({ propertyId, year }: { propertyId: string; year: number
 
   if (isPending) {
     return (
-      <Card style={{ '--border-radius': '16px' } as React.CSSProperties}>
+      <Card>
         <Skeleton.Paragraph lineCount={4} animated />
       </Card>
     );
@@ -70,7 +71,7 @@ function MonthlySection({ propertyId, year }: { propertyId: string; year: number
 
   return (
     <>
-      <Card style={{ '--border-radius': '16px' } as React.CSSProperties}>
+      <Card>
         <div className="mb-3 flex items-center gap-4">
           <div className="flex items-center gap-1.5">
             <div className="h-2.5 w-2.5 rounded-full bg-blue-400" />
@@ -84,7 +85,7 @@ function MonthlySection({ propertyId, year }: { propertyId: string; year: number
         <BarChart data={chartData} />
       </Card>
 
-      <Card style={{ '--border-radius': '16px' } as React.CSSProperties}>
+      <Card>
         <div className="space-y-2">
           <div className="flex items-center justify-between py-2 border-b border-gray-50">
             <span className="text-sm text-gray-600">Tổng thu</span>
@@ -103,7 +104,7 @@ function MonthlySection({ propertyId, year }: { propertyId: string; year: number
         </div>
       </Card>
 
-      <Card className="!p-0 overflow-hidden" style={{ '--border-radius': '16px' } as React.CSSProperties}>
+      <Card className="!p-0 overflow-hidden">
         <div className="grid grid-cols-4 border-b border-gray-100 px-4 py-2 text-xs font-semibold text-gray-400">
           <span>Tháng</span>
           <span className="text-right">Thu</span>
@@ -137,10 +138,22 @@ export default function ReportsPage() {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-bold text-gray-900">Báo cáo</h1>
-        <div className="flex items-center gap-2">
-          <button onClick={() => setYear((y) => y - 1)} className="px-2 py-1 text-gray-400 text-lg">‹</button>
-          <span className="text-sm font-semibold text-gray-700">{year}</span>
-          <button onClick={() => setYear((y) => y + 1)} className="px-2 py-1 text-gray-400 text-lg">›</button>
+        <div className="flex items-center gap-1">
+          <button
+            onClick={() => setYear((y) => y - 1)}
+            className="flex h-7 w-7 items-center justify-center rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors"
+            aria-label="Năm trước"
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </button>
+          <span className="min-w-[48px] text-center text-sm font-semibold text-gray-700">{year}</span>
+          <button
+            onClick={() => setYear((y) => y + 1)}
+            className="flex h-7 w-7 items-center justify-center rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors"
+            aria-label="Năm sau"
+          >
+            <ChevronRight className="h-4 w-4" />
+          </button>
         </div>
       </div>
 
@@ -150,15 +163,15 @@ export default function ReportsPage() {
         <>
           {snapshot && (
             <div className="grid grid-cols-3 gap-2">
-              <Card className="text-center" style={{ '--border-radius': '16px' } as React.CSSProperties}>
+              <Card className="text-center">
                 <p className="text-2xl font-bold text-gray-900">{snapshot.occupiedRooms}</p>
                 <p className="text-xs text-gray-400">Đang thuê</p>
               </Card>
-              <Card className="text-center" style={{ '--border-radius': '16px' } as React.CSSProperties}>
+              <Card className="text-center">
                 <p className="text-2xl font-bold text-blue-600">{formatPrice(snapshot.totalCollectedThisMonth)}</p>
                 <p className="text-xs text-gray-400">Thu tháng này</p>
               </Card>
-              <Card className="text-center" style={{ '--border-radius': '16px' } as React.CSSProperties}>
+              <Card className="text-center">
                 <p className="text-2xl font-bold text-amber-500">{snapshot.pendingCount}</p>
                 <p className="text-xs text-gray-400">Chưa trả</p>
               </Card>

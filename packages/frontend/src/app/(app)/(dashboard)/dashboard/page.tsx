@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 import { Button, Card, List } from "antd-mobile";
 import {
   BarChart3,
+  Building2,
   DoorOpen,
   FileText,
   Home,
@@ -61,9 +62,11 @@ export default function DashboardPage() {
 
   if (!propertyId) {
     return (
-      <Card bodyClassName="p-6 text-center">
-        <p className="text-4xl">🏘️</p>
-        <p className="mt-3 font-semibold text-gray-700">Chưa có khu trọ</p>
+      <Card bodyClassName="p-8 text-center">
+        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50">
+          <Building2 className="h-7 w-7 text-blue-400" />
+        </div>
+        <p className="mt-4 font-semibold text-gray-700">Chưa có khu trọ</p>
         <p className="mt-1 text-sm text-gray-400">
           Hoàn thành onboarding để bắt đầu.
         </p>
@@ -165,8 +168,8 @@ export default function DashboardPage() {
             ))}
           </div>
         ) : pendingInvoices.length === 0 ? (
-          <div className="py-4 text-center text-sm text-gray-400">
-            🎉 Tất cả hóa đơn đã được thanh toán
+          <div className="py-4 text-center text-sm font-medium text-emerald-600">
+            Tất cả hóa đơn đã được thanh toán
           </div>
         ) : (
           <List className="-mx-3" style={{ '--border-top': 'none', '--border-bottom': 'none', '--border-inner': 'none' } as React.CSSProperties}>

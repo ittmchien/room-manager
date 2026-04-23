@@ -3,6 +3,7 @@
 import { use } from 'react';
 import { useRouter } from 'next/navigation';
 import { Card, Button, Skeleton, Tag } from 'antd-mobile';
+import { ArrowLeft } from 'lucide-react';
 import { useInvoice } from '@/hooks/use-invoices';
 import { InvoiceStatusBadge } from '@/components/invoices/invoice-status-badge';
 import { PaymentFormModal } from '@/components/invoices/payment-form-modal';
@@ -48,7 +49,7 @@ export default function InvoiceDetailPage({ params }: { params: Promise<{ id: st
       {/* Header */}
       <div className="flex items-center gap-3 border-b border-gray-50 px-4 py-3">
         <button onClick={() => router.back()} className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 text-gray-600">
-          ←
+          <ArrowLeft className="h-4 w-4" />
         </button>
         <div className="flex-1">
           <h1 className="text-lg font-bold text-gray-900">{invoice.room?.name}</h1>

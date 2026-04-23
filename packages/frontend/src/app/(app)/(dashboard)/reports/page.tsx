@@ -19,25 +19,52 @@ function formatPrice(amount: number) {
 
 function BarChart({ data }: { data: { label: string; income: number; expense: number }[] }) {
   const maxVal = Math.max(...data.map((d) => Math.max(d.income, d.expense)), 1);
+  const CHART_HEIGHT = 120;
 
   return (
-    <div className="flex items-end gap-1 h-32">
-      {data.map((d) => (
-        <div key={d.label} className="flex-1 flex flex-col items-center gap-0.5">
-          <div className="flex items-end gap-0.5 w-full">
-            <div
-              className="flex-1 rounded-t bg-blue-400 min-h-[2px] transition-all"
-              style={{ height: `${(d.income / maxVal) * 112}px` }}
+    <svg
+      viewBox={`0 0 ${data.length * 10} ${CHART_HEIGHT + 20}`}
+      className="w-full"
+      preserveAspectRatio="none"
+      role="img"
+      aria-label="Biểu đồ thu chi theo tháng"
+    >
+      {data.map((d, i) => {
+        const incomeH = Math.max((d.income / maxVal) * CHART_HEIGHT, 1);
+        const expenseH = Math.max((d.expense / maxVal) * CHART_HEIGHT, 1);
+        const groupX = i * 10 + 1;
+
+        return (
+          <g key={d.label}>
+            <rect
+              x={groupX}
+              y={CHART_HEIGHT - incomeH}
+              width={4}
+              height={incomeH}
+              rx={1}
+              className="fill-blue-500"
             />
-            <div
-              className="flex-1 rounded-t bg-red-300 min-h-[2px] transition-all"
-              style={{ height: `${(d.expense / maxVal) * 112}px` }}
+            <rect
+              x={groupX + 5}
+              y={CHART_HEIGHT - expenseH}
+              width={4}
+              height={expenseH}
+              rx={1}
+              className="fill-rose-400"
             />
-          </div>
-          <span className="text-[9px] text-gray-400">{d.label}</span>
-        </div>
-      ))}
-    </div>
+            <text
+              x={groupX + 4}
+              y={CHART_HEIGHT + 14}
+              textAnchor="middle"
+              className="fill-gray-400"
+              fontSize={3.5}
+            >
+              {d.label}
+            </text>
+          </g>
+        );
+      })}
+    </svg>
   );
 }
 
@@ -74,11 +101,11 @@ function MonthlySection({ propertyId, year }: { propertyId: string; year: number
       <Card>
         <div className="mb-3 flex items-center gap-4">
           <div className="flex items-center gap-1.5">
-            <div className="h-2.5 w-2.5 rounded-full bg-blue-400" />
+            <div className="h-2.5 w-2.5 rounded-full bg-blue-500" />
             <span className="text-xs text-gray-500">Thu</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <div className="h-2.5 w-2.5 rounded-full bg-red-300" />
+            <div className="h-2.5 w-2.5 rounded-full bg-rose-400" />
             <span className="text-xs text-gray-500">Chi</span>
           </div>
         </div>
@@ -115,7 +142,7 @@ function MonthlySection({ propertyId, year }: { propertyId: string; year: number
           <div key={m.month} className="grid grid-cols-4 border-b border-gray-50 px-4 py-2.5 text-sm last:border-0">
             <span className="text-gray-600">{m.month.slice(5)}</span>
             <span className="text-right text-blue-600">{formatPrice(m.totalCollected)}</span>
-            <span className="text-right text-red-400">{formatPrice(m.totalExpenses)}</span>
+            <span className="text-right text-rose-400">{formatPrice(m.totalExpenses)}</span>
             <span className={cn('text-right font-medium', m.profit >= 0 ? 'text-green-600' : 'text-red-500')}>
               {m.profit >= 0 ? '+' : ''}{formatPrice(m.profit)}
             </span>

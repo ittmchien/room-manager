@@ -1,7 +1,8 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { Button, Card } from 'antd-mobile';
+import { Card } from 'antd-mobile';
+import { Button } from '@/components/ui/button';
 import { Crown, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 

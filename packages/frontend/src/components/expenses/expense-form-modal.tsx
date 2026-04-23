@@ -1,9 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { Input, Selector } from 'antd-mobile';
 import { useCreateExpense } from '@/hooks/use-expenses';
 import { AppPopup } from '@/components/ui/app-popup';
+import { FormInput, FormDateInput } from '@/components/ui/form-field';
+import { SelectorField } from '@/components/ui/selector-field';
 
 interface Props {
   propertyId: string;
@@ -68,26 +69,11 @@ export function ExpenseFormModal({ propertyId, trigger }: Props) {
       error={createExpense.error ? (createExpense.error as Error).message : null}
     >
       <div className="space-y-4">
-        <div>
-          <p className="mb-2 text-xs text-gray-400">Loại</p>
-          <Selector options={TYPE_OPTIONS} value={type} onChange={setType} style={{ '--border-radius': '10px', '--checked-color': '#2563EB' } as React.CSSProperties} />
-        </div>
-        <div>
-          <p className="mb-2 text-xs text-gray-400">Danh mục</p>
-          <Selector options={CATEGORY_OPTIONS} value={category} onChange={setCategory} style={{ '--border-radius': '10px', '--checked-color': '#2563EB' } as React.CSSProperties} />
-        </div>
-        <div className="rounded-xl bg-gray-50 px-3">
-          <p className="pt-2.5 text-xs text-gray-400">Số tiền (VNĐ) *</p>
-          <Input type="number" placeholder="0" value={amount} onChange={setAmount} style={{ '--font-size': '15px' } as React.CSSProperties} />
-        </div>
-        <div className="rounded-xl bg-gray-50 px-3">
-          <p className="pt-2.5 text-xs text-gray-400">Ngày</p>
-          <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="w-full bg-transparent py-2.5 text-[15px] outline-none" />
-        </div>
-        <div className="rounded-xl bg-gray-50 px-3">
-          <p className="pt-2.5 text-xs text-gray-400">Ghi chú (tuỳ chọn)</p>
-          <Input placeholder="Mô tả..." value={note} onChange={setNote} style={{ '--font-size': '15px' } as React.CSSProperties} />
-        </div>
+        <SelectorField label="Loại" options={TYPE_OPTIONS} value={type} onChange={setType} />
+        <SelectorField label="Danh mục" options={CATEGORY_OPTIONS} value={category} onChange={setCategory} />
+        <FormInput label="Số tiền (VNĐ) *" type="number" placeholder="0" value={amount} onChange={setAmount} />
+        <FormDateInput label="Ngày" value={date} onChange={setDate} />
+        <FormInput label="Ghi chú (tuỳ chọn)" placeholder="Mô tả..." value={note} onChange={setNote} />
       </div>
     </AppPopup>
   );

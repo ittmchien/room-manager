@@ -87,7 +87,7 @@ h1, h2, h3, h4, h5, h6, .font-headline {
 
 /* Stitch "No-Line" Rule — override antd-mobile defaults */
 .adm-card {
-  --border-radius: 12px;
+  --border-radius: 16px;
   border: none !important;
 }
 

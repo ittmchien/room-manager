@@ -1,9 +1,10 @@
 'use client';
 
 import { forwardRef, useCallback, useImperativeHandle, useState } from 'react';
-import { Input, Toast, Selector, Skeleton } from 'antd-mobile';
+import { Input, Toast, Skeleton } from 'antd-mobile';
 import { UtilityConfig, TierConfig, useUpsertUtilityConfig } from '@/hooks/use-utility-configs';
 import { Plus, Trash2 } from 'lucide-react';
+import { SelectorField } from '@/components/ui/selector-field';
 
 const ELECTRIC_OPTIONS = [
   { label: 'Theo số', value: 'FIXED' },
@@ -113,21 +114,21 @@ export const UtilityConfigForm = forwardRef<UtilityConfigFormHandle, Props>(
       <div className="space-y-3">
         <p className="text-sm font-semibold text-gray-700">{label}</p>
 
-        <Selector
+        <SelectorField
+          label=""
           options={options}
           value={[calcType]}
           onChange={(v) => { if (v.length > 0) setCalcType(v[0]); }}
-          style={{ '--border-radius': '10px', '--checked-color': '#eff6ff', '--checked-border-color': '#2563eb' } as React.CSSProperties}
         />
 
         {calcType === 'FIXED' && (
           loading ? (
-            <div className="rounded-xl bg-gray-50 px-3 py-3">
+            <div className="rounded-2xl bg-gray-50 px-3 py-3">
               <Skeleton.Paragraph lineCount={1} animated />
             </div>
           ) : (
             <div className="flex items-center gap-2">
-              <div className="flex-1 rounded-xl bg-gray-50 px-3 py-1.5">
+              <div className="flex-1 rounded-2xl bg-gray-50 px-3 py-1.5">
                 <Input
                   type="number"
                   min={0}
@@ -144,12 +145,12 @@ export const UtilityConfigForm = forwardRef<UtilityConfigFormHandle, Props>(
 
         {calcType === 'PER_PERSON' && (
           loading ? (
-            <div className="rounded-xl bg-gray-50 px-3 py-3">
+            <div className="rounded-2xl bg-gray-50 px-3 py-3">
               <Skeleton.Paragraph lineCount={1} animated />
             </div>
           ) : (
             <div className="flex items-center gap-2">
-              <div className="flex-1 rounded-xl bg-gray-50 px-3 py-1.5">
+              <div className="flex-1 rounded-2xl bg-gray-50 px-3 py-1.5">
                 <Input
                   type="number"
                   min={0}
@@ -166,12 +167,12 @@ export const UtilityConfigForm = forwardRef<UtilityConfigFormHandle, Props>(
 
         {calcType === 'FIXED_PER_ROOM' && (
           loading ? (
-            <div className="rounded-xl bg-gray-50 px-3 py-3">
+            <div className="rounded-2xl bg-gray-50 px-3 py-3">
               <Skeleton.Paragraph lineCount={1} animated />
             </div>
           ) : (
             <div className="flex items-center gap-2">
-              <div className="flex-1 rounded-xl bg-gray-50 px-3 py-1.5">
+              <div className="flex-1 rounded-2xl bg-gray-50 px-3 py-1.5">
                 <Input
                   type="number"
                   min={0}
@@ -197,7 +198,7 @@ export const UtilityConfigForm = forwardRef<UtilityConfigFormHandle, Props>(
             {tiers.map((tier, i) => (
               <div key={i} className="grid grid-cols-[1.5rem_1fr_3.5rem_1.5rem] gap-2 items-center">
                 <span className="text-center text-xs text-gray-400">{i + 1}</span>
-                <div className="rounded-xl bg-gray-50 px-3 py-1.5">
+                <div className="rounded-2xl bg-gray-50 px-3 py-1.5">
                   <Input
                     type="number"
                     min={0}
@@ -208,7 +209,7 @@ export const UtilityConfigForm = forwardRef<UtilityConfigFormHandle, Props>(
                   />
                 </div>
                 {i < tiers.length - 1 ? (
-                  <div className="rounded-xl bg-gray-50 px-2 py-1.5">
+                  <div className="rounded-2xl bg-gray-50 px-2 py-1.5">
                     <Input
                       type="number"
                       min={0}

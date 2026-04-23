@@ -50,7 +50,7 @@ function MeterSection({
   return (
     <div className="space-y-2">
       <p className="text-sm font-semibold text-gray-700">{label}</p>
-      <div className="rounded-xl bg-gray-50 px-4 py-3 space-y-2">
+      <div className="rounded-2xl bg-gray-50 px-4 py-3 space-y-2">
         <div className="flex justify-between text-sm text-gray-500">
           <span>Chỉ số cũ</span>
           <span className="font-medium text-gray-900">
@@ -195,7 +195,7 @@ export function GenerateInvoiceModal({ visible, onClose, propertyId }: Props) {
             <p className="mb-1.5 text-xs text-gray-400">Phòng</p>
             <Picker columns={roomColumns} value={[selectedRoomId]} onConfirm={(val) => handleRoomChange(val[0] as string)}>
               {(items, actions) => (
-                <button onClick={actions.open} className="w-full rounded-xl bg-gray-50 px-4 py-3 text-left flex items-center justify-between">
+                <button onClick={actions.open} className="w-full rounded-2xl bg-gray-50 px-4 py-3 text-left flex items-center justify-between">
                   <span className="text-[15px] text-gray-900">{selectedRoom?.name ?? "Chọn phòng"}</span>
                   <span className="text-gray-400 text-sm">▾</span>
                 </button>
@@ -206,7 +206,7 @@ export function GenerateInvoiceModal({ visible, onClose, propertyId }: Props) {
             <p className="mb-1.5 text-xs text-gray-400">Kỳ tháng</p>
             <DatePicker precision="month" value={selectedDate} onConfirm={(val) => setSelectedDate(val)} min={new Date(2020, 0)} max={new Date()} title="Chọn tháng">
               {(_, actions) => (
-                <button onClick={actions.open} className="w-full rounded-xl bg-gray-50 px-4 py-3 text-left flex items-center justify-between">
+                <button onClick={actions.open} className="w-full rounded-2xl bg-gray-50 px-4 py-3 text-left flex items-center justify-between">
                   <span className="text-[15px] text-gray-900">Tháng {selectedDate.getMonth() + 1}/{selectedDate.getFullYear()}</span>
                   <span className="text-gray-400 text-sm">▾</span>
                 </button>

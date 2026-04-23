@@ -3,8 +3,9 @@
 import { useCreateContract } from "@/hooks/use-contracts";
 import { useRooms } from "@/hooks/use-rooms";
 import { useTenants } from "@/hooks/use-tenants";
-import { Input, Selector } from "antd-mobile";
 import { AppPopup } from "@/components/ui/app-popup";
+import { FormInput, FormDateInput } from "@/components/ui/form-field";
+import { SelectorField } from "@/components/ui/selector-field";
 import { useMemo, useState } from "react";
 
 interface Props {
@@ -56,7 +57,7 @@ export function ContractFormModal({ propertyId, trigger }: Props) {
 
   const handleRoomChange = (v: string[]) => {
     setRoomId(v[0] ?? "");
-    setTenantId(""); // reset tenant when room changes
+    setTenantId("");
   };
 
   const handleSubmit = () => {
@@ -95,10 +96,7 @@ export function ContractFormModal({ propertyId, trigger }: Props) {
       scrollable
     >
       <div className="space-y-4">
-        <div>
-          <p className="mb-2 text-xs text-gray-400">Phòng *</p>
-          <Selector options={roomOptions} value={[roomId]} onChange={handleRoomChange} style={{ '--border-radius': '10px', '--checked-color': '#2563EB' } as React.CSSProperties} />
-        </div>
+        <SelectorField label="Phòng *" options={roomOptions} value={[roomId]} onChange={handleRoomChange} />
         <div>
           <p className="mb-2 text-xs text-gray-400">Người thuê *</p>
           {tenantOptions.length === 0 ? (
@@ -106,29 +104,14 @@ export function ContractFormModal({ propertyId, trigger }: Props) {
               {roomId ? "Phòng này chưa có người thuê" : "Chọn phòng trước"}
             </p>
           ) : (
-            <Selector options={tenantOptions} value={[tenantId]} onChange={(v) => setTenantId(v[0] ?? "")} style={{ '--border-radius': '10px', '--checked-color': '#2563EB' } as React.CSSProperties} />
+            <SelectorField label="" options={tenantOptions} value={[tenantId]} onChange={(v) => setTenantId(v[0] ?? "")} />
           )}
         </div>
-        <div className="rounded-xl bg-gray-50 px-3">
-          <p className="pt-2.5 text-xs text-gray-400">Ngày bắt đầu *</p>
-          <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} className="w-full bg-transparent py-2.5 text-[15px] outline-none" />
-        </div>
-        <div className="rounded-xl bg-gray-50 px-3">
-          <p className="pt-2.5 text-xs text-gray-400">Ngày kết thúc</p>
-          <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} className="w-full bg-transparent py-2.5 text-[15px] outline-none" />
-        </div>
-        <div className="rounded-xl bg-gray-50 px-3">
-          <p className="pt-2.5 text-xs text-gray-400">Tiền cọc (VNĐ)</p>
-          <Input type="number" placeholder="0" value={depositAmount} onChange={setDepositAmount} style={{ '--font-size': '15px' } as React.CSSProperties} />
-        </div>
-        <div>
-          <p className="mb-2 text-xs text-gray-400">Trạng thái cọc</p>
-          <Selector options={DEPOSIT_OPTIONS} value={depositStatus} onChange={setDepositStatus} style={{ '--border-radius': '10px', '--checked-color': '#2563EB' } as React.CSSProperties} />
-        </div>
-        <div className="rounded-xl bg-gray-50 px-3">
-          <p className="pt-2.5 text-xs text-gray-400">Điều khoản (tuỳ chọn)</p>
-          <Input placeholder="Ghi chú điều khoản..." value={terms} onChange={setTerms} style={{ '--font-size': '15px' } as React.CSSProperties} />
-        </div>
+        <FormDateInput label="Ngày bắt đầu *" value={startDate} onChange={setStartDate} />
+        <FormDateInput label="Ngày kết thúc" value={endDate} onChange={setEndDate} />
+        <FormInput label="Tiền cọc (VNĐ)" type="number" placeholder="0" value={depositAmount} onChange={setDepositAmount} />
+        <SelectorField label="Trạng thái cọc" options={DEPOSIT_OPTIONS} value={depositStatus} onChange={setDepositStatus} />
+        <FormInput label="Điều khoản (tuỳ chọn)" placeholder="Ghi chú điều khoản..." value={terms} onChange={setTerms} />
       </div>
     </AppPopup>
   );

@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { Room } from '@/hooks/use-rooms';
 import { Users, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { StatusBadge } from '@/components/ui/status-badge';
 
 function formatPrice(price: number) {
   return new Intl.NumberFormat('vi-VN').format(price);
@@ -42,7 +43,7 @@ export function RoomCard({ room, onPress }: { room: Room; onPress?: (id: string)
       className="group flex w-full overflow-hidden rounded-2xl bg-white shadow-sm shadow-blue-100/40 transition-all hover:shadow-md hover:shadow-blue-100/60 active:scale-[0.98] text-left"
     >
       {/* Status bar */}
-      <div className={cn('w-1 shrink-0', cfg.bar)} />
+      <div className={cn('w-1 shrink-0 rounded-l-2xl', cfg.bar)} />
 
       <div className="flex flex-1 items-center gap-3 p-4">
         {/* Info */}
@@ -80,10 +81,7 @@ export function RoomCard({ room, onPress }: { room: Room; onPress?: (id: string)
 
         {/* Status + chevron */}
         <div className="flex shrink-0 flex-col items-end gap-2">
-          <span className={cn('inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold', cfg.badge)}>
-            <span className={cn('h-1.5 w-1.5 rounded-full', cfg.dot)} />
-            {cfg.label}
-          </span>
+          <StatusBadge label={cfg.label} className={cfg.badge} dot={cfg.dot} />
           <ChevronRight className="h-4 w-4 text-gray-400 transition-transform group-hover:translate-x-0.5" />
         </div>
       </div>

@@ -2,7 +2,7 @@
 
 import { AlertTriangle } from 'lucide-react';
 import { Contract } from '@/hooks/use-contracts';
-import { cn } from '@/lib/utils';
+import { StatusBadge } from '@/components/ui/status-badge';
 
 const DEPOSIT_STATUS_MAP: Record<Contract['depositStatus'], { label: string; className: string }> = {
   PENDING:  { label: 'Chưa cọc',  className: 'bg-amber-50 text-amber-700' },
@@ -41,9 +41,7 @@ export function ContractCard({ contract }: Props) {
           </p>
         </div>
         <div className="flex flex-col items-end gap-1 flex-shrink-0">
-          <span className={cn('rounded-full px-2.5 py-1 text-xs font-semibold', deposit.className)}>
-            {deposit.label}
-          </span>
+          <StatusBadge label={deposit.label} className={deposit.className} />
           {contract.depositAmount > 0 && (
             <p className="text-xs text-gray-500">
               Cọc: {contract.depositAmount.toLocaleString('vi-VN')}đ

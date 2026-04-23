@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { Bell, ChevronDown, Check, Plus } from 'lucide-react';
-import { Popup, Button, Input } from 'antd-mobile';
+import { Popup, Input } from 'antd-mobile';
+import { Button } from '@/components/ui/button';
 import { useProperties, useCreateProperty } from '@/hooks/use-properties';
 import { useProperty } from '@/contexts/property-context';
 import { useSubscription } from '@/hooks/use-subscription';
@@ -113,7 +114,7 @@ export function TopBar() {
 
           <button
             onClick={handleAddProperty}
-            className="mt-3 flex w-full items-center gap-2 rounded-xl border border-dashed border-gray-200 px-4 py-3 text-sm font-medium text-gray-500 hover:border-blue-300 hover:text-blue-600 transition-colors"
+            className="mt-3 flex w-full items-center gap-2 rounded-2xl border border-dashed border-gray-200 px-4 py-3 text-sm font-medium text-gray-500 hover:border-blue-300 hover:text-blue-600 transition-colors"
           >
             <Plus className="h-4 w-4" />
             Thêm chi nhánh
@@ -133,11 +134,11 @@ export function TopBar() {
         error={createProperty.error ? String(createProperty.error) : null}
       >
         <div className="space-y-3">
-          <div className="rounded-xl bg-gray-50 px-3">
+          <div className="rounded-2xl bg-gray-50 px-3">
             <p className="pt-2.5 text-xs text-gray-400">Tên khu trọ / nhà trọ</p>
             <Input placeholder="VD: Nhà trọ Số 5" value={newName} onChange={setNewName} />
           </div>
-          <div className="rounded-xl bg-gray-50 px-3">
+          <div className="rounded-2xl bg-gray-50 px-3">
             <p className="pt-2.5 text-xs text-gray-400">Địa chỉ (tuỳ chọn)</p>
             <Input placeholder="VD: 123 Nguyễn Văn A, Q.1" value={newAddress} onChange={setNewAddress} />
           </div>

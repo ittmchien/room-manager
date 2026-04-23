@@ -1,7 +1,8 @@
 'use client';
 
 import { Plus } from 'lucide-react';
-import { Button, ErrorBlock, Skeleton } from 'antd-mobile';
+import { ErrorBlock, Skeleton } from 'antd-mobile';
+import { Button } from '@/components/ui/button';
 import { useContracts } from '@/hooks/use-contracts';
 import { useProperty } from '@/contexts/property-context';
 import { ContractCard } from '@/components/contracts/contract-card';

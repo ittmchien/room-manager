@@ -1,7 +1,8 @@
 "use client";
 
 import type { PopupProps } from "antd-mobile";
-import { Button, Popup } from "antd-mobile";
+import { Popup } from "antd-mobile";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 interface AppPopupProps extends Omit<
@@ -72,7 +73,7 @@ export function AppPopup({
             <Button
               block
               color="primary"
-              className="mt-5 rounded-xl!"
+              className="mt-5"
               loading={submitLoading}
               disabled={submitDisabled}
               onClick={onSubmit}

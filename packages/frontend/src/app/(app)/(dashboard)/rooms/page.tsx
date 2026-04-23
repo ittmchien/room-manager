@@ -5,7 +5,8 @@ import { RoomFormModal } from "@/components/rooms/room-form-modal";
 import { RoomDetailPopup } from "@/components/rooms/room-detail-popup";
 import { useProperty } from "@/contexts/property-context";
 import { useRooms } from "@/hooks/use-rooms";
-import { Button, ErrorBlock, Loading, Tabs } from "antd-mobile";
+import { ErrorBlock, Loading, Tabs } from "antd-mobile";
+import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 

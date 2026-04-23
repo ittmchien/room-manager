@@ -2,7 +2,8 @@
 
 import { use } from 'react';
 import { useRouter } from 'next/navigation';
-import { Card, Button, Skeleton, Tag } from 'antd-mobile';
+import { Card, Skeleton, Tag } from 'antd-mobile';
+import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import { useInvoice } from '@/hooks/use-invoices';
 import { InvoiceStatusBadge } from '@/components/invoices/invoice-status-badge';

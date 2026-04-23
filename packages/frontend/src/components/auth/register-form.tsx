@@ -3,8 +3,11 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Eye, EyeOff } from 'lucide-react';
-import { Button, Checkbox, Input } from 'antd-mobile';
+import { Checkbox, Input } from 'antd-mobile';
+import { Button } from '@/components/ui/button';
 import { useAuth } from '@/hooks/use-auth';
+import { FormField } from '@/components/ui/form-field';
+import { ErrorAlert } from '@/components/ui/error-alert';
 
 export function RegisterForm() {
   const { loading, error, signUp } = useAuth();
@@ -33,18 +36,15 @@ export function RegisterForm() {
       </div>
 
       <div className="flex w-full flex-col gap-3">
-        <div className="rounded-xl bg-gray-50 px-3">
-          <p className="pt-2.5 text-xs text-gray-400">Họ và tên</p>
+        <FormField label="Họ và tên">
           <Input placeholder="Nguyễn Văn A" value={name} onChange={setName} style={{ '--font-size': '15px' } as React.CSSProperties} />
-        </div>
+        </FormField>
 
-        <div className="rounded-xl bg-gray-50 px-3">
-          <p className="pt-2.5 text-xs text-gray-400">Email</p>
+        <FormField label="Email">
           <Input type="email" placeholder="your@email.com" value={email} onChange={setEmail} style={{ '--font-size': '15px' } as React.CSSProperties} />
-        </div>
+        </FormField>
 
-        <div className="rounded-xl bg-gray-50 px-3">
-          <p className="pt-2.5 text-xs text-gray-400">Mật khẩu</p>
+        <FormField label="Mật khẩu">
           <div className="flex items-center">
             <div className="flex-1">
               <Input
@@ -63,7 +63,7 @@ export function RegisterForm() {
               {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
             </Button>
           </div>
-        </div>
+        </FormField>
 
         <Checkbox
           checked={agreed}
@@ -78,9 +78,7 @@ export function RegisterForm() {
           </span>
         </Checkbox>
 
-        {error && (
-          <p className="rounded-lg bg-red-50 px-3 py-2 text-center text-sm text-red-600">{error}</p>
-        )}
+        {error && <ErrorAlert message={error} />}
 
         <Button
           block

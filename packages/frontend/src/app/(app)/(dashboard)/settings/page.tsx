@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { Button, Card, Dialog, Input } from 'antd-mobile';
+import { Card, Dialog, Input } from 'antd-mobile';
+import { Button } from '@/components/ui/button';
 import { Building2 } from 'lucide-react';
 import { useProperty } from '@/contexts/property-context';
 import { useUtilityConfigs } from '@/hooks/use-utility-configs';
@@ -71,7 +72,7 @@ function AccountSection() {
             type="password"
             value={newPassword}
             onChange={setNewPassword}
-            className="rounded-xl border border-gray-200 px-3 py-2"
+            className="rounded-2xl border border-gray-200 px-3 py-2"
           />
         </div>
       </AppPopup>

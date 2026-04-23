@@ -4,12 +4,12 @@ import { GenerateInvoiceModal } from "@/components/invoices/generate-invoice-mod
 import { useProperty } from "@/contexts/property-context";
 import { useInvoices } from "@/hooks/use-invoices";
 import {
-  Button,
   ErrorBlock,
   InfiniteScroll,
   List,
   Loading,
 } from "antd-mobile";
+import { Button } from "@/components/ui/button";
 import { Plus, Building2 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";

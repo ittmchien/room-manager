@@ -1,9 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { Input, Selector } from 'antd-mobile';
 import { useCreatePayment } from '@/hooks/use-payments';
 import { AppPopup } from '@/components/ui/app-popup';
+import { FormInput } from '@/components/ui/form-field';
+import { SelectorField } from '@/components/ui/selector-field';
 
 interface Props {
   invoiceId: string;
@@ -49,18 +50,9 @@ export function PaymentFormModal({ invoiceId, remaining, trigger }: Props) {
       error={createPayment.error ? (createPayment.error as Error).message : null}
     >
       <div className="space-y-4">
-        <div className="rounded-xl bg-gray-50 px-3">
-          <p className="pt-2.5 text-xs text-gray-400">Số tiền (VND)</p>
-          <Input type="number" value={amount} onChange={setAmount} style={{ '--font-size': '15px' } as React.CSSProperties} />
-        </div>
-        <div>
-          <p className="mb-2 text-xs text-gray-400">Hình thức</p>
-          <Selector options={METHOD_OPTIONS} value={method} onChange={setMethod} style={{ '--border-radius': '10px', '--checked-color': '#2563EB' } as React.CSSProperties} />
-        </div>
-        <div className="rounded-xl bg-gray-50 px-3">
-          <p className="pt-2.5 text-xs text-gray-400">Ghi chú (tuỳ chọn)</p>
-          <Input placeholder="Ghi chú..." value={note} onChange={setNote} style={{ '--font-size': '15px' } as React.CSSProperties} />
-        </div>
+        <FormInput label="Số tiền (VND)" type="number" value={amount} onChange={setAmount} />
+        <SelectorField label="Hình thức" options={METHOD_OPTIONS} value={method} onChange={setMethod} />
+        <FormInput label="Ghi chú (tuỳ chọn)" placeholder="Ghi chú..." value={note} onChange={setNote} />
       </div>
     </AppPopup>
   );

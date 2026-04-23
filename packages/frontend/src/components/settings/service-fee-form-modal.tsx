@@ -1,9 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { Input, Selector } from 'antd-mobile';
 import { useCreateServiceFee } from '@/hooks/use-service-fees';
 import { AppPopup } from '@/components/ui/app-popup';
+import { FormInput } from '@/components/ui/form-field';
+import { SelectorField } from '@/components/ui/selector-field';
 
 interface Props {
   propertyId: string;
@@ -50,18 +51,9 @@ export function ServiceFeeFormModal({ propertyId, trigger }: Props) {
       error={create.error ? (create.error as Error).message : null}
     >
       <div className="space-y-4">
-        <div className="rounded-xl bg-gray-50 px-3">
-          <p className="pt-2.5 text-xs text-gray-400">Tên phí *</p>
-          <Input placeholder="Phí vệ sinh..." value={name} onChange={setName} style={{ '--font-size': '15px' } as React.CSSProperties} />
-        </div>
-        <div>
-          <p className="mb-2 text-xs text-gray-400">Cách tính</p>
-          <Selector options={CALC_OPTIONS} value={calcType} onChange={setCalcType} style={{ '--border-radius': '10px', '--checked-color': '#2563EB' } as React.CSSProperties} />
-        </div>
-        <div className="rounded-xl bg-gray-50 px-3">
-          <p className="pt-2.5 text-xs text-gray-400">Đơn giá (VND) *</p>
-          <Input type="number" placeholder="50.000" value={unitPrice} onChange={setUnitPrice} style={{ '--font-size': '15px' } as React.CSSProperties} />
-        </div>
+        <FormInput label="Tên phí *" placeholder="Phí vệ sinh..." value={name} onChange={setName} />
+        <SelectorField label="Cách tính" options={CALC_OPTIONS} value={calcType} onChange={setCalcType} />
+        <FormInput label="Đơn giá (VND) *" type="number" placeholder="50.000" value={unitPrice} onChange={setUnitPrice} />
       </div>
     </AppPopup>
   );

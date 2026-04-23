@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { Plus, Trash2, ChevronLeft, ChevronRight } from 'lucide-react';
-import { Button, Card, ErrorBlock, List, Skeleton, Dialog } from 'antd-mobile';
+import { Card, ErrorBlock, List, Skeleton, Dialog } from 'antd-mobile';
+import { Button } from '@/components/ui/button';
 import { useExpenses, useDeleteExpense } from '@/hooks/use-expenses';
 import { useProperty } from '@/contexts/property-context';
 import { ExpenseFormModal } from '@/components/expenses/expense-form-modal';

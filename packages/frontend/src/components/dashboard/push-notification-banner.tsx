@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Button, NoticeBar } from 'antd-mobile';
+import { NoticeBar } from 'antd-mobile';
+import { Button } from '@/components/ui/button';
 import { Bell } from 'lucide-react';
 import { apiFetch } from '@/lib/api';
 

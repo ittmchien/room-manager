@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { List, Button, Dialog, Tag, Collapse } from 'antd-mobile';
+import { List, Dialog, Tag, Collapse } from 'antd-mobile';
+import { Button } from '@/components/ui/button';
 import { UserRound } from 'lucide-react';
 import { Tenant, useCheckoutTenant } from '@/hooks/use-tenants';
 

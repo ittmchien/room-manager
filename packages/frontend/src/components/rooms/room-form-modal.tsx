@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { Input } from 'antd-mobile';
 import { useCreateRoom } from '@/hooks/use-rooms';
 import { AppPopup } from '@/components/ui/app-popup';
+import { FormInput } from '@/components/ui/form-field';
 
 interface RoomFormModalProps {
   propertyId: string;
@@ -46,18 +46,9 @@ export function RoomFormModal({ propertyId, trigger }: RoomFormModalProps) {
       error={createRoom.error ? (createRoom.error as Error).message : null}
     >
       <div className="space-y-4">
-        <div className="rounded-xl bg-gray-50 px-3">
-          <p className="pt-2.5 text-xs text-gray-400">Tên / Số phòng *</p>
-          <Input placeholder="VD: Phòng 101" value={name} onChange={setName} style={{ '--font-size': '15px' } as React.CSSProperties} />
-        </div>
-        <div className="rounded-xl bg-gray-50 px-3">
-          <p className="pt-2.5 text-xs text-gray-400">Tầng (tuỳ chọn)</p>
-          <Input type="number" placeholder="1" value={floor} onChange={setFloor} style={{ '--font-size': '15px' } as React.CSSProperties} />
-        </div>
-        <div className="rounded-xl bg-gray-50 px-3">
-          <p className="pt-2.5 text-xs text-gray-400">Giá thuê/tháng (VNĐ) *</p>
-          <Input type="number" placeholder="2.000.000" value={rentPrice} onChange={setRentPrice} style={{ '--font-size': '15px' } as React.CSSProperties} />
-        </div>
+        <FormInput label="Tên / Số phòng *" placeholder="VD: Phòng 101" value={name} onChange={setName} />
+        <FormInput label="Tầng (tuỳ chọn)" type="number" placeholder="1" value={floor} onChange={setFloor} />
+        <FormInput label="Giá thuê/tháng (VNĐ) *" type="number" placeholder="2.000.000" value={rentPrice} onChange={setRentPrice} />
       </div>
     </AppPopup>
   );

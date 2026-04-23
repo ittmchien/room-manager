@@ -9,7 +9,8 @@ import { useProperty } from "@/contexts/property-context";
 import { Invoice, useInvoices } from "@/hooks/use-invoices";
 import { useRooms } from "@/hooks/use-rooms";
 import { cn } from "@/lib/utils";
-import { Button, Card, List } from "antd-mobile";
+import { Card, List } from "antd-mobile";
+import { Button } from "@/components/ui/button";
 import {
   BarChart3,
   Building2,
@@ -164,7 +165,7 @@ export default function DashboardPage() {
         {isLoading ? (
           <div className="space-y-2">
             {[1, 2].map((i) => (
-              <div key={i} className="h-14 animate-pulse rounded-xl bg-gray-50" />
+              <div key={i} className="h-14 animate-pulse rounded-2xl bg-gray-50" />
             ))}
           </div>
         ) : pendingInvoices.length === 0 ? (
@@ -224,7 +225,7 @@ export default function DashboardPage() {
           >
             <div
               className={cn(
-                "flex h-9 w-9 items-center justify-center rounded-xl",
+                "flex h-9 w-9 items-center justify-center rounded-2xl",
                 item.bg,
               )}
             >

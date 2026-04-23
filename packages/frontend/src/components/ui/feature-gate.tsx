@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Lock } from 'lucide-react';
-import { Button } from 'antd-mobile';
+import { Button } from '@/components/ui/button';
 import { PremiumModal } from '@/components/premium/premium-modal';
 
 interface FeatureGateProps {
@@ -26,7 +26,7 @@ export function FeatureGate({ children, locked, description = 'Tính năng này 
           <p className="font-semibold text-gray-700">Tính năng trả phí</p>
           <p className="mt-1 text-sm text-gray-400">{description}</p>
         </div>
-        <Button color="primary" className="!rounded-xl !px-6" onClick={() => setPremiumOpen(true)}>
+        <Button color="primary" className="!px-6" onClick={() => setPremiumOpen(true)}>
           Xem gói bổ sung
         </Button>
       </div>

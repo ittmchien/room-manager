@@ -121,7 +121,7 @@ function MonthlySection({ propertyId, year }: { propertyId: string; year: number
             <span className="text-sm text-gray-600">Tổng chi</span>
             <span className="font-semibold text-red-500">{yearTotal.expenses.toLocaleString('vi-VN')}đ</span>
           </div>
-          <div className="flex items-center justify-between py-2 rounded-xl bg-blue-50 px-3">
+          <div className="flex items-center justify-between py-2 rounded-2xl bg-blue-50 px-3">
             <span className="text-sm font-semibold text-blue-700">Lợi nhuận</span>
             <span className={cn('font-bold', yearTotal.profit >= 0 ? 'text-blue-700' : 'text-red-500')}>
               {yearTotal.profit >= 0 ? '+' : ''}{yearTotal.profit.toLocaleString('vi-VN')}đ

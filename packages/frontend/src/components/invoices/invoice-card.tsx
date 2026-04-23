@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { Invoice } from '@/hooks/use-invoices';
 import { ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { StatusBadge } from '@/components/ui/status-badge';
 
 const statusConfig = {
   PAID: { label: 'Đã thu', badge: 'bg-emerald-50 text-emerald-700', bar: 'bg-emerald-500' },
@@ -22,14 +23,12 @@ export function InvoiceCard({ invoice }: { invoice: Invoice }) {
       onClick={() => router.push(`/invoices/${invoice.id}`)}
       className="group flex w-full overflow-hidden rounded-2xl bg-white shadow-sm shadow-blue-100/40 transition-all hover:shadow-md active:scale-[0.99] text-left"
     >
-      <div className={cn('w-1 shrink-0', cfg.bar)} />
+      <div className={cn('w-1 shrink-0 rounded-l-2xl', cfg.bar)} />
       <div className="flex flex-1 items-center gap-3 p-4">
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
             <p className="font-bold text-gray-900 truncate">{invoice.room?.name ?? '—'}</p>
-            <span className={cn('shrink-0 rounded-full px-2 py-0.5 text-[11px] font-semibold', cfg.badge)}>
-              {cfg.label}
-            </span>
+            <StatusBadge label={cfg.label} className={cfg.badge} />
           </div>
           <p className="mt-0.5 text-xs text-gray-400">
             Tháng {month}/{year}

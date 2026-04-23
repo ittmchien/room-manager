@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Button, Input } from 'antd-mobile';
+import { Input } from 'antd-mobile';
+import { Button } from '@/components/ui/button';
 import { useAuth } from '@/hooks/use-auth';
 
 /**
@@ -26,7 +27,7 @@ export function PhoneLoginForm() {
   if (!otpSent) {
     return (
       <div className="flex w-full flex-col gap-3">
-        <div className="rounded-xl bg-gray-50 px-3">
+        <div className="rounded-2xl bg-gray-50 px-3">
           <p className="pt-2.5 text-xs text-gray-400">Số điện thoại</p>
           <Input
             type="tel"
@@ -48,7 +49,7 @@ export function PhoneLoginForm() {
           Gửi mã OTP
         </Button>
         {error && (
-          <p className="rounded-lg bg-red-50 px-3 py-2 text-center text-sm text-red-600">{error}</p>
+          <p className="rounded-2xl bg-red-50 px-3 py-2 text-center text-sm text-red-600">{error}</p>
         )}
       </div>
     );
@@ -56,7 +57,7 @@ export function PhoneLoginForm() {
 
   return (
     <div className="flex w-full flex-col gap-3">
-      <div className="rounded-xl bg-gray-50 px-3">
+      <div className="rounded-2xl bg-gray-50 px-3">
         <p className="pt-2.5 text-xs text-gray-400">Mã OTP</p>
         <Input
           type="text"
@@ -88,7 +89,7 @@ export function PhoneLoginForm() {
         Đổi số điện thoại
       </Button>
       {error && (
-        <p className="rounded-lg bg-red-50 px-3 py-2 text-center text-sm text-red-600">{error}</p>
+        <p className="rounded-2xl bg-red-50 px-3 py-2 text-center text-sm text-red-600">{error}</p>
       )}
     </div>
   );

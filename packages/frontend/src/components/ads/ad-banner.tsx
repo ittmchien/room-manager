@@ -13,7 +13,7 @@ export function AdBanner({ position }: Props) {
   if (hasRemoveAds) return null;
 
   return (
-    <div className={cn('w-full rounded-xl bg-gray-100 flex items-center justify-center text-gray-400 text-xs', position === 'top' ? 'h-12' : 'h-16')}>
+    <div className={cn('w-full rounded-2xl bg-gray-100 flex items-center justify-center text-gray-400 text-xs', position === 'top' ? 'h-12' : 'h-16')}>
       <span>Quảng cáo</span>
     </div>
   );

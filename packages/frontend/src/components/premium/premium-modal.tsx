@@ -1,7 +1,8 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { Dialog, Button } from 'antd-mobile';
+import { Dialog } from 'antd-mobile';
+import { Button } from '@/components/ui/button';
 import { Crown } from 'lucide-react';
 
 interface Props {

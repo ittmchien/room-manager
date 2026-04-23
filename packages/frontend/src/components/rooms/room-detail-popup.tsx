@@ -1,6 +1,7 @@
 'use client';
 
-import { Button, Card, Popup, Skeleton, Tag } from 'antd-mobile';
+import { Card, Popup, Skeleton, Tag } from 'antd-mobile';
+import { Button } from '@/components/ui/button';
 import { Plus, X } from 'lucide-react';
 import { useRoom, useUpdateRoom } from '@/hooks/use-rooms';
 import { useTenants } from '@/hooks/use-tenants';

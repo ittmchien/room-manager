@@ -2,7 +2,8 @@
 
 import { ServiceFee, useDeleteServiceFee } from "@/hooks/use-service-fees";
 import { PlusOutlined } from "@ant-design/icons";
-import { Button, Dialog, List, Space } from "antd-mobile";
+import { Dialog, List, Space } from "antd-mobile";
+import { Button } from "@/components/ui/button";
 
 import { Trash2 } from "lucide-react";
 import { useState } from "react";

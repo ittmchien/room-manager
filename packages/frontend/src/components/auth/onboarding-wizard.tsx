@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Button, Input } from 'antd-mobile';
+import { Input } from 'antd-mobile';
+import { Button } from '@/components/ui/button';
 import { apiFetch } from '@/lib/api';
 import { cn } from '@/lib/utils';
 
@@ -73,7 +74,7 @@ export function OnboardingWizard() {
           </div>
 
           <div className="w-full space-y-3">
-            <div className="rounded-xl bg-gray-50 px-3">
+            <div className="rounded-2xl bg-gray-50 px-3">
               <p className="pt-2.5 text-xs text-gray-400">Tên khu trọ / nhà trọ</p>
               <Input
                 placeholder="VD: Nhà trọ Số 5"
@@ -82,7 +83,7 @@ export function OnboardingWizard() {
                 style={{ '--font-size': '15px' } as React.CSSProperties}
               />
             </div>
-            <div className="rounded-xl bg-gray-50 px-3">
+            <div className="rounded-2xl bg-gray-50 px-3">
               <p className="pt-2.5 text-xs text-gray-400">Địa chỉ đầy đủ</p>
               <Input
                 placeholder="VD: 123 Nguyễn Văn A, Q.1, TP.HCM"
@@ -119,7 +120,7 @@ export function OnboardingWizard() {
           </div>
 
           <div className="w-full space-y-3">
-            <div className="rounded-xl bg-gray-50 px-3">
+            <div className="rounded-2xl bg-gray-50 px-3">
               <p className="pt-2.5 text-xs text-gray-400">Tên / số phòng</p>
               <Input
                 placeholder="VD: Phòng 101"
@@ -128,7 +129,7 @@ export function OnboardingWizard() {
                 style={{ '--font-size': '15px' } as React.CSSProperties}
               />
             </div>
-            <div className="rounded-xl bg-gray-50 px-3">
+            <div className="rounded-2xl bg-gray-50 px-3">
               <p className="pt-2.5 text-xs text-gray-400">Giá thuê hàng tháng (VNĐ)</p>
               <Input
                 type="number"

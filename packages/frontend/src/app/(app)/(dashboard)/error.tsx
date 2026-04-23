@@ -1,6 +1,7 @@
 'use client';
 
-import { ErrorBlock, Button } from 'antd-mobile';
+import { ErrorBlock } from 'antd-mobile';
+import { Button } from '@/components/ui/button';
 
 export default function DashboardError({
   reset,

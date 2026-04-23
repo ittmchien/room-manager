@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createBrowserClient } from '@/lib/supabase/client';
+import { queryClient } from '@/lib/query-client';
 
 export function useAuth() {
   const [loading, setLoading] = useState(false);
@@ -82,6 +83,7 @@ export function useAuth() {
 
   const signOut = async () => {
     await supabase.auth.signOut();
+    queryClient.clear();
     router.push('/login');
   };
 

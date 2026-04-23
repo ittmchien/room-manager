@@ -9,6 +9,8 @@ import { Trash2 } from "lucide-react";
 import { useState } from "react";
 import { ServiceFeeFormModal } from "./service-fee-form-modal";
 
+const ListItem = List.Item;
+
 const CALC_LABEL: Record<string, string> = {
   FIXED_PER_ROOM: "Cố định/phòng",
   PER_PERSON: "Theo người",
@@ -40,7 +42,7 @@ export function ServiceFeeList({ propertyId, fees }: Props) {
       {fees.length > 0 && (
         <List className="no-border">
           {fees.map((fee) => (
-            <List.Item
+            <ListItem
               key={fee.id}
               description={`${CALC_LABEL[fee.calcType]} · ${fee.unitPrice.toLocaleString("vi-VN")}đ`}
               extra={
@@ -55,7 +57,7 @@ export function ServiceFeeList({ propertyId, fees }: Props) {
               }
             >
               {fee.name}
-            </List.Item>
+            </ListItem>
           ))}
         </List>
       )}

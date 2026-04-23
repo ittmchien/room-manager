@@ -14,6 +14,9 @@ import type { ColumnsType } from 'antd/es/table';
 import dayjs from 'dayjs';
 
 const { Title } = Typography;
+const FormItem = Form.Item;
+const DescriptionsItem = Descriptions.Item;
+const InputSearch = Input.Search;
 
 interface UserDetail {
   id: string;
@@ -142,15 +145,15 @@ export default function AdminUserDetailPage({ params }: { params: Promise<{ id: 
 
       <Card title="Thông tin cơ bản" style={{ marginBottom: 16 }}>
         <Descriptions column={2}>
-          <Descriptions.Item label="ID">{user.id}</Descriptions.Item>
-          <Descriptions.Item label="Email">{user.email ?? '-'}</Descriptions.Item>
-          <Descriptions.Item label="Phone">{user.phone ?? '-'}</Descriptions.Item>
-          <Descriptions.Item label="Ngày tạo">
+          <DescriptionsItem label="ID">{user.id}</DescriptionsItem>
+          <DescriptionsItem label="Email">{user.email ?? '-'}</DescriptionsItem>
+          <DescriptionsItem label="Phone">{user.phone ?? '-'}</DescriptionsItem>
+          <DescriptionsItem label="Ngày tạo">
             {new Date(user.createdAt).toLocaleDateString('vi-VN')}
-          </Descriptions.Item>
-          <Descriptions.Item label="Properties">
+          </DescriptionsItem>
+          <DescriptionsItem label="Properties">
             {user.properties.length}
-          </Descriptions.Item>
+          </DescriptionsItem>
         </Descriptions>
 
         <Divider />
@@ -188,7 +191,7 @@ export default function AdminUserDetailPage({ params }: { params: Promise<{ id: 
                   {t}
                 </Tag>
               ))}
-              <Input.Search
+              <InputSearch
                 placeholder="Thêm tag..."
                 enterButton={<PlusOutlined />}
                 value={tagInput}
@@ -203,17 +206,17 @@ export default function AdminUserDetailPage({ params }: { params: Promise<{ id: 
 
       <Card title="Features được cấp" style={{ marginBottom: 16 }}>
         <Form layout="inline" onFinish={grantFeature} style={{ marginBottom: 16 }}>
-          <Form.Item name="featureKey" rules={[{ required: true }]}>
+          <FormItem name="featureKey" rules={[{ required: true }]}>
             <Select placeholder="Chọn feature" options={featureOptions} style={{ width: 200 }} />
-          </Form.Item>
-          <Form.Item name="expiresAt">
+          </FormItem>
+          <FormItem name="expiresAt">
             <DatePicker placeholder="Hết hạn (tùy chọn)" />
-          </Form.Item>
-          <Form.Item>
+          </FormItem>
+          <FormItem>
             <Button type="primary" htmlType="submit" icon={<PlusOutlined />}>
               Cấp feature
             </Button>
-          </Form.Item>
+          </FormItem>
         </Form>
         <Table
           rowKey="featureKey"

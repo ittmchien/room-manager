@@ -9,6 +9,8 @@ import { FeatureGate } from '@/components/ui/feature-gate';
 import { useSubscription } from '@/hooks/use-subscription';
 import { cn } from '@/lib/utils';
 
+const SkeletonParagraph = Skeleton.Paragraph;
+
 const MONTH_LABELS = ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10', 'T11', 'T12'];
 
 function formatPrice(amount: number) {
@@ -73,7 +75,7 @@ function MonthlySection({ propertyId, year }: { propertyId: string; year: number
   if (isPending) {
     return (
       <Card>
-        <Skeleton.Paragraph lineCount={4} animated />
+        <SkeletonParagraph lineCount={4} animated />
       </Card>
     );
   }

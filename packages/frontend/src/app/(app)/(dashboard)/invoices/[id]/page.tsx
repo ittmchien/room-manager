@@ -10,6 +10,9 @@ import { InvoiceStatusBadge } from '@/components/invoices/invoice-status-badge';
 import { PaymentFormModal } from '@/components/invoices/payment-form-modal';
 import { cn } from '@/lib/utils';
 
+const SkeletonTitle = Skeleton.Title;
+const SkeletonParagraph = Skeleton.Paragraph;
+
 const METHOD_LABEL: Record<string, string> = {
   CASH: 'Tiền mặt',
   TRANSFER: 'Chuyển khoản',
@@ -33,8 +36,8 @@ export default function InvoiceDetailPage({ params }: { params: Promise<{ id: st
   if (isLoading) {
     return (
       <div className="space-y-4 p-4">
-        <Skeleton.Title animated />
-        <Skeleton.Paragraph lineCount={5} animated />
+        <SkeletonTitle animated />
+        <SkeletonParagraph lineCount={5} animated />
       </div>
     );
   }

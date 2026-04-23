@@ -26,6 +26,7 @@ import dayjs from 'dayjs';
 const { Title } = Typography;
 const { TextArea } = Input;
 const { RangePicker } = DatePicker;
+const FormItem = Form.Item;
 
 type CampaignType = 'DISCOUNT' | 'FREE_TRIAL' | 'EXTEND_SUBSCRIPTION';
 
@@ -261,13 +262,13 @@ export default function AdminCampaignsPage() {
         cancelText="Hủy"
       >
         <Form form={form} layout="vertical" style={{ marginTop: 16 }}>
-          <Form.Item name="name" label="Tên campaign" rules={[{ required: true }]}>
+          <FormItem name="name" label="Tên campaign" rules={[{ required: true }]}>
             <Input />
-          </Form.Item>
-          <Form.Item name="description" label="Mô tả">
+          </FormItem>
+          <FormItem name="description" label="Mô tả">
             <TextArea rows={2} />
-          </Form.Item>
-          <Form.Item name="type" label="Loại" rules={[{ required: true }]}>
+          </FormItem>
+          <FormItem name="type" label="Loại" rules={[{ required: true }]}>
             <Select
               options={[
                 { value: 'DISCOUNT', label: 'Giảm giá (%)' },
@@ -275,50 +276,50 @@ export default function AdminCampaignsPage() {
                 { value: 'EXTEND_SUBSCRIPTION', label: 'Gia hạn gói' },
               ]}
             />
-          </Form.Item>
+          </FormItem>
 
-          <Form.Item shouldUpdate={(prev, cur) => prev.type !== cur.type} noStyle>
+          <FormItem shouldUpdate={(prev, cur) => prev.type !== cur.type} noStyle>
             {({ getFieldValue }) => {
               const type = getFieldValue('type');
               return (
                 <>
                   {type === 'DISCOUNT' && (
-                    <Form.Item name="discountPercent" label="% Giảm giá" rules={[{ required: true }]}>
+                    <FormItem name="discountPercent" label="% Giảm giá" rules={[{ required: true }]}>
                       <InputNumber min={1} max={100} addonAfter="%" style={{ width: '100%' }} />
-                    </Form.Item>
+                    </FormItem>
                   )}
                   {type === 'FREE_TRIAL' && (
                     <>
-                      <Form.Item name="featureKey" label="Feature Key" rules={[{ required: true }]}>
+                      <FormItem name="featureKey" label="Feature Key" rules={[{ required: true }]}>
                         <Input placeholder="e.g. premium_report" />
-                      </Form.Item>
-                      <Form.Item name="trialDays" label="Số ngày thử" rules={[{ required: true }]}>
+                      </FormItem>
+                      <FormItem name="trialDays" label="Số ngày thử" rules={[{ required: true }]}>
                         <InputNumber min={1} style={{ width: '100%' }} />
-                      </Form.Item>
+                      </FormItem>
                     </>
                   )}
                   {type === 'EXTEND_SUBSCRIPTION' && (
-                    <Form.Item name="days" label="Số ngày gia hạn" rules={[{ required: true }]}>
+                    <FormItem name="days" label="Số ngày gia hạn" rules={[{ required: true }]}>
                       <InputNumber min={1} style={{ width: '100%' }} />
-                    </Form.Item>
+                    </FormItem>
                   )}
                 </>
               );
             }}
-          </Form.Item>
+          </FormItem>
 
-          <Form.Item name="dateRange" label="Thời gian hiệu lực" rules={[{ required: true }]}>
+          <FormItem name="dateRange" label="Thời gian hiệu lực" rules={[{ required: true }]}>
             <RangePicker style={{ width: '100%' }} format="DD/MM/YYYY" />
-          </Form.Item>
-          <Form.Item name="targetTags" label="Tags điều kiện (cách nhau dấu phẩy)">
+          </FormItem>
+          <FormItem name="targetTags" label="Tags điều kiện (cách nhau dấu phẩy)">
             <Input placeholder="e.g. vip, beta" />
-          </Form.Item>
-          <Form.Item name="maxRedemptions" label="Giới hạn lượt dùng (để trống = không giới hạn)">
+          </FormItem>
+          <FormItem name="maxRedemptions" label="Giới hạn lượt dùng (để trống = không giới hạn)">
             <InputNumber min={1} style={{ width: '100%' }} />
-          </Form.Item>
-          <Form.Item name="isActive" label="Kích hoạt" valuePropName="checked">
+          </FormItem>
+          <FormItem name="isActive" label="Kích hoạt" valuePropName="checked">
             <Switch />
-          </Form.Item>
+          </FormItem>
         </Form>
       </Modal>
     </div>

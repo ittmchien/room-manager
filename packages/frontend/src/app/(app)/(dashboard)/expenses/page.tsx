@@ -11,6 +11,10 @@ import { cn } from '@/lib/utils';
 import { FeatureGate } from '@/components/ui/feature-gate';
 import { useSubscription } from '@/hooks/use-subscription';
 
+const ListItem = List.Item;
+const SkeletonTitle = Skeleton.Title;
+const SkeletonParagraph = Skeleton.Paragraph;
+
 const CATEGORY_LABEL: Record<string, string> = {
   repair: 'Sửa chữa',
   maintenance: 'Bảo trì',
@@ -42,8 +46,8 @@ function ExpenseBody({ propertyId, month }: { propertyId: string; month: string 
       <div className="space-y-3">
         {[1, 2, 3].map((i) => (
           <div key={i} className="rounded-2xl bg-white p-4 shadow-sm">
-            <Skeleton.Title animated className="w-1/2" />
-            <Skeleton.Paragraph lineCount={1} animated />
+            <SkeletonTitle animated className="w-1/2" />
+            <SkeletonParagraph lineCount={1} animated />
           </div>
         ))}
       </div>
@@ -72,7 +76,7 @@ function ExpenseBody({ propertyId, month }: { propertyId: string; month: string 
 
       <List className="no-border">
         {expenses.map((e) => (
-          <List.Item
+          <ListItem
             key={e.id}
             description={`${CATEGORY_LABEL[e.category] ?? e.category} · ${new Date(e.date).toLocaleDateString('vi-VN')}${e.room ? ` · ${e.room.name}` : ''}`}
             extra={
@@ -87,7 +91,7 @@ function ExpenseBody({ propertyId, month }: { propertyId: string; month: string 
             }
           >
             {e.note ?? '—'}
-          </List.Item>
+          </ListItem>
         ))}
       </List>
     </>

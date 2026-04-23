@@ -8,6 +8,9 @@ import { useTenants } from '@/hooks/use-tenants';
 import { TenantList } from '@/components/tenants/tenant-list';
 import { TenantFormModal } from '@/components/tenants/tenant-form-modal';
 
+const SkeletonTitle = Skeleton.Title;
+const SkeletonParagraph = Skeleton.Paragraph;
+
 function formatPrice(price: number) {
   return new Intl.NumberFormat('vi-VN').format(price) + 'đ';
 }
@@ -43,7 +46,7 @@ function RoomDetailContent({ roomId, onClose }: { roomId: string; onClose: () =>
       <div className="flex items-center justify-between px-4 py-2 border-b border-gray-100">
         <div className="flex items-center gap-2">
           {isPending ? (
-            <Skeleton.Title animated className="w-24" />
+            <SkeletonTitle animated className="w-24" />
           ) : (
             <>
               <span className="text-base font-bold text-gray-900">{room?.name}</span>
@@ -65,7 +68,7 @@ function RoomDetailContent({ roomId, onClose }: { roomId: string; onClose: () =>
         <Card>
           <p className="text-xs font-semibold uppercase tracking-wider text-gray-400">GIÁ THUÊ</p>
           {isPending ? (
-            <Skeleton.Paragraph lineCount={2} animated />
+            <SkeletonParagraph lineCount={2} animated />
           ) : (
             <>
               <p className="mt-1 text-2xl font-bold text-gray-900">{formatPrice(room!.rentPrice)}</p>
@@ -109,7 +112,7 @@ function RoomDetailContent({ roomId, onClose }: { roomId: string; onClose: () =>
             />
           </div>
           {loadingTenants ? (
-            <Skeleton.Paragraph lineCount={3} animated />
+            <SkeletonParagraph lineCount={3} animated />
           ) : (
             <TenantList tenants={tenants ?? []} roomId={roomId} />
           )}

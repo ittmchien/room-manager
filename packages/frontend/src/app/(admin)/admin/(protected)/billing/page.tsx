@@ -9,6 +9,7 @@ import type { ColumnsType } from 'antd/es/table';
 import type { TabsProps } from 'antd';
 
 const { Title } = Typography;
+const FormItem = Form.Item;
 
 interface Subscription {
   id: string;
@@ -145,20 +146,20 @@ function FeaturesTab() {
     <>
       <Card title="Cấp feature thủ công" style={{ marginBottom: 16 }}>
         <Form form={form} layout="inline" onFinish={grant}>
-          <Form.Item name="userId" rules={[{ required: true, message: 'Nhập User ID' }]}>
+          <FormItem name="userId" rules={[{ required: true, message: 'Nhập User ID' }]}>
             <Input placeholder="User ID" style={{ width: 280 }} />
-          </Form.Item>
-          <Form.Item name="featureKey" rules={[{ required: true }]}>
+          </FormItem>
+          <FormItem name="featureKey" rules={[{ required: true }]}>
             <Select placeholder="Feature" options={featureOptions} style={{ width: 200 }} />
-          </Form.Item>
-          <Form.Item name="expiresAt">
+          </FormItem>
+          <FormItem name="expiresAt">
             <DatePicker placeholder="Hết hạn (tùy chọn)" />
-          </Form.Item>
-          <Form.Item>
+          </FormItem>
+          <FormItem>
             <Button type="primary" htmlType="submit" icon={<PlusOutlined />}>
               Cấp
             </Button>
-          </Form.Item>
+          </FormItem>
         </Form>
       </Card>
       <Table rowKey="id" dataSource={data} columns={columns} loading={loading} />

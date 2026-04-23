@@ -15,6 +15,8 @@ import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 
+const ListItem = List.Item;
+
 const PAGE_SIZE = 3;
 
 const statusConfig = {
@@ -52,12 +54,12 @@ export default function InvoicesPage() {
   const hasMore = visibleMonths < groups.length;
 
   return (
-    <div className="no-padding">
-      <div className="flex items-center justify-between px-4 mb-3">
+    <div className="no-padding flex h-full flex-col">
+      <div className="flex shrink-0 items-center justify-between px-4 mb-3">
         <h1 className="text-xl font-bold">Hóa đơn</h1>
         {propertyId && (
           <Button
-            size="small"
+            size="middle"
             color="primary"
             onClick={() => setModalOpen(true)}
           >
@@ -84,7 +86,7 @@ export default function InvoicesPage() {
           description="Chưa có hóa đơn. Bấm 'Tạo hóa đơn' để bắt đầu."
         />
       ) : (
-        <div>
+        <div className="flex-1 min-h-0 overflow-y-auto">
           {visibleGroups.map(({ period, items }) => (
             <List
               key={period}
@@ -99,7 +101,7 @@ export default function InvoicesPage() {
                 const cfg = statusConfig[invoice.status];
                 const remaining = invoice.total - invoice.paidAmount;
                 return (
-                  <List.Item
+                  <ListItem
                     key={invoice.id}
                     clickable
                     onClick={() => router.push(`/invoices/${invoice.id}`)}
@@ -134,7 +136,7 @@ export default function InvoicesPage() {
                         {cfg.label}
                       </span>
                     </div>
-                  </List.Item>
+                  </ListItem>
                 );
               })}
             </List>

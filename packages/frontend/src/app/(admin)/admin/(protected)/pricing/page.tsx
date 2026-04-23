@@ -22,6 +22,7 @@ import { apiFetch } from '@/lib/api';
 import type { ColumnsType } from 'antd/es/table';
 
 const { Title } = Typography;
+const FormItem = Form.Item;
 
 type TierType = 'SINGLE' | 'SLOT' | 'BUNDLE';
 
@@ -245,13 +246,13 @@ export default function AdminPricingPage() {
         cancelText="Hủy"
       >
         <Form form={form} layout="vertical" style={{ marginTop: 16 }}>
-          <Form.Item name="featureKey" label="Feature Key" rules={[{ required: true }]}>
+          <FormItem name="featureKey" label="Feature Key" rules={[{ required: true }]}>
             <Input placeholder="e.g. premium_report, slot_rooms" />
-          </Form.Item>
-          <Form.Item name="tierName" label="Tên gói" rules={[{ required: true }]}>
+          </FormItem>
+          <FormItem name="tierName" label="Tên gói" rules={[{ required: true }]}>
             <Input placeholder="e.g. Gói Cơ bản, Gói 5 phòng" />
-          </Form.Item>
-          <Form.Item name="tierType" label="Loại" rules={[{ required: true }]}>
+          </FormItem>
+          <FormItem name="tierType" label="Loại" rules={[{ required: true }]}>
             <Select
               options={[
                 { value: 'SINGLE', label: 'SINGLE — Mua lẻ' },
@@ -259,22 +260,22 @@ export default function AdminPricingPage() {
                 { value: 'BUNDLE', label: 'BUNDLE — Gói combo' },
               ]}
             />
-          </Form.Item>
-          <Form.Item name="price" label="Giá (VND)" rules={[{ required: true }]}>
+          </FormItem>
+          <FormItem name="price" label="Giá (VND)" rules={[{ required: true }]}>
             <InputNumber min={0} step={1000} style={{ width: '100%' }} formatter={(v) => `${v}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} />
-          </Form.Item>
-          <Form.Item name="discountPercent" label="Giảm giá (%)">
+          </FormItem>
+          <FormItem name="discountPercent" label="Giảm giá (%)">
             <InputNumber min={0} max={100} addonAfter="%" style={{ width: '100%' }} />
-          </Form.Item>
-          <Form.Item name="slotSize" label="Số slot (nếu loại SLOT)">
+          </FormItem>
+          <FormItem name="slotSize" label="Số slot (nếu loại SLOT)">
             <InputNumber min={1} style={{ width: '100%' }} />
-          </Form.Item>
-          <Form.Item name="includedFeatures" label="Tính năng đi kèm (cách nhau dấu phẩy)">
+          </FormItem>
+          <FormItem name="includedFeatures" label="Tính năng đi kèm (cách nhau dấu phẩy)">
             <Input placeholder="e.g. qr_code, export_pdf" />
-          </Form.Item>
-          <Form.Item name="isActive" label="Kích hoạt" valuePropName="checked">
+          </FormItem>
+          <FormItem name="isActive" label="Kích hoạt" valuePropName="checked">
             <Switch />
-          </Form.Item>
+          </FormItem>
         </Form>
       </Modal>
     </div>

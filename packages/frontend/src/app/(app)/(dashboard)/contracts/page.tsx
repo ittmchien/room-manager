@@ -10,6 +10,9 @@ import { ContractFormModal } from '@/components/contracts/contract-form-modal';
 import { FeatureGate } from '@/components/ui/feature-gate';
 import { useSubscription } from '@/hooks/use-subscription';
 
+const SkeletonTitle = Skeleton.Title;
+const SkeletonParagraph = Skeleton.Paragraph;
+
 function ContractBody({ propertyId }: { propertyId: string }) {
   const { data: contracts, isPending } = useContracts(propertyId);
 
@@ -18,8 +21,8 @@ function ContractBody({ propertyId }: { propertyId: string }) {
       <div className="space-y-3">
         {[1, 2, 3].map((i) => (
           <div key={i} className="rounded-2xl bg-white p-4 shadow-sm">
-            <Skeleton.Title animated className="w-3/5" />
-            <Skeleton.Paragraph lineCount={2} animated />
+            <SkeletonTitle animated className="w-3/5" />
+            <SkeletonParagraph lineCount={2} animated />
           </div>
         ))}
       </div>

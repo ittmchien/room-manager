@@ -10,6 +10,8 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 
+const Tab = Tabs.Tab;
+
 type FilterTab = "all" | "VACANT" | "OCCUPIED";
 
 export default function RoomsPage() {
@@ -22,10 +24,18 @@ export default function RoomsPage() {
   const vacantCount = rooms?.filter((r) => r.status === "VACANT").length ?? 0;
   const occupiedCount = rooms?.filter((r) => r.status === "OCCUPIED").length ?? 0;
 
+  const renderRoomList = (filteredRooms: typeof rooms) => (
+    <div className="space-y-3 pt-4 pb-4">
+      {filteredRooms?.map((room) => (
+        <RoomCard key={room.id} room={room} onPress={setSelectedRoomId} />
+      ))}
+    </div>
+  );
+
   return (
-    <div className="space-y-4">
+    <div className="flex h-full flex-col">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex shrink-0 items-center justify-between pb-2">
         <div>
           <h1 className="text-xl font-bold text-gray-900">Phòng trọ</h1>
           {rooms && (
@@ -50,48 +60,38 @@ export default function RoomsPage() {
       {!propertyId ? (
         <ErrorBlock status="empty" description="Chưa có khu trọ" />
       ) : (
-        <Tabs
-          activeKey={activeTab}
-          onChange={(key) => setActiveTab(key as FilterTab)}
-        >
-          <Tabs.Tab title={`Tất cả (${rooms?.length ?? 0})`} key="all">
-            {isPending ? (
-              <div className="flex justify-center py-16">
-                <Loading color="primary" />
-              </div>
-            ) : rooms?.length === 0 ? (
-              <ErrorBlock status="empty" description="Chưa có phòng nào" className="mt-16" />
-            ) : (
-              <div className="space-y-3 pt-4">
-                {rooms?.map((room) => (
-                  <RoomCard key={room.id} room={room} onPress={setSelectedRoomId} />
-                ))}
-              </div>
-            )}
-          </Tabs.Tab>
-          <Tabs.Tab title={`Trống (${vacantCount})`} key="VACANT">
-            {vacantCount === 0 ? (
-              <ErrorBlock status="empty" description="Không có phòng trống" className="mt-16" />
-            ) : (
-              <div className="space-y-3 pt-4">
-                {rooms?.filter((r) => r.status === "VACANT").map((room) => (
-                  <RoomCard key={room.id} room={room} onPress={setSelectedRoomId} />
-                ))}
-              </div>
-            )}
-          </Tabs.Tab>
-          <Tabs.Tab title={`Đang thuê (${occupiedCount})`} key="OCCUPIED">
-            {occupiedCount === 0 ? (
-              <ErrorBlock status="empty" description="Không có phòng đang thuê" className="mt-16" />
-            ) : (
-              <div className="space-y-3 pt-4">
-                {rooms?.filter((r) => r.status === "OCCUPIED").map((room) => (
-                  <RoomCard key={room.id} room={room} onPress={setSelectedRoomId} />
-                ))}
-              </div>
-            )}
-          </Tabs.Tab>
-        </Tabs>
+        <div className="min-h-0 flex-1 flex flex-col [&_.adm-tabs]:flex [&_.adm-tabs]:flex-1 [&_.adm-tabs]:flex-col [&_.adm-tabs]:min-h-0 [&_.adm-tabs-content]:flex-1 [&_.adm-tabs-content]:min-h-0 [&_.adm-tabs-content]:overflow-y-auto">
+          <Tabs
+            activeKey={activeTab}
+            onChange={(key) => setActiveTab(key as FilterTab)}
+          >
+            <Tab title={`Tất cả (${rooms?.length ?? 0})`} key="all">
+              {isPending ? (
+                <div className="flex justify-center py-16">
+                  <Loading color="primary" />
+                </div>
+              ) : rooms?.length === 0 ? (
+                <ErrorBlock status="empty" description="Chưa có phòng nào" className="mt-16" />
+              ) : (
+                renderRoomList(rooms)
+              )}
+            </Tab>
+            <Tab title={`Trống (${vacantCount})`} key="VACANT">
+              {vacantCount === 0 ? (
+                <ErrorBlock status="empty" description="Không có phòng trống" className="mt-16" />
+              ) : (
+                renderRoomList(rooms?.filter((r) => r.status === "VACANT"))
+              )}
+            </Tab>
+            <Tab title={`Đang thuê (${occupiedCount})`} key="OCCUPIED">
+              {occupiedCount === 0 ? (
+                <ErrorBlock status="empty" description="Không có phòng đang thuê" className="mt-16" />
+              ) : (
+                renderRoomList(rooms?.filter((r) => r.status === "OCCUPIED"))
+              )}
+            </Tab>
+          </Tabs>
+        </div>
       )}
 
       <RoomDetailPopup

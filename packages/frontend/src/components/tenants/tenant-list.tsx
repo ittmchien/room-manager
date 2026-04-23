@@ -6,6 +6,9 @@ import { Button } from '@/components/ui/button';
 import { UserRound } from 'lucide-react';
 import { Tenant, useCheckoutTenant } from '@/hooks/use-tenants';
 
+const ListItem = List.Item;
+const CollapsePanel = Collapse.Panel;
+
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString('vi-VN');
 }
@@ -39,7 +42,7 @@ export function TenantList({ tenants, roomId }: { tenants: Tenant[]; roomId: str
       {active.length > 0 && (
         <List className="no-border">
           {active.map((tenant) => (
-            <List.Item
+            <ListItem
               key={tenant.id}
               prefix={
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100">
@@ -65,17 +68,17 @@ export function TenantList({ tenants, roomId }: { tenants: Tenant[]; roomId: str
               style={{ '--padding-left': '0', '--padding-right': '0' } as React.CSSProperties}
             >
               <span className="font-semibold text-gray-900">{tenant.name}</span>
-            </List.Item>
+            </ListItem>
           ))}
         </List>
       )}
 
       {movedOut.length > 0 && (
         <Collapse className="mt-2">
-          <Collapse.Panel key="moved-out" title={<span className="text-sm text-gray-400">{movedOut.length} người đã trả phòng</span>}>
+          <CollapsePanel key="moved-out" title={<span className="text-sm text-gray-400">{movedOut.length} người đã trả phòng</span>}>
             <List className="no-border">
               {movedOut.map((tenant) => (
-                <List.Item
+                <ListItem
                   key={tenant.id}
                   prefix={
                     <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100">
@@ -91,10 +94,10 @@ export function TenantList({ tenants, roomId }: { tenants: Tenant[]; roomId: str
                   style={{ '--padding-left': '0', '--padding-right': '0' } as React.CSSProperties}
                 >
                   <span className="text-sm text-gray-500">{tenant.name}</span>
-                </List.Item>
+                </ListItem>
               ))}
             </List>
-          </Collapse.Panel>
+          </CollapsePanel>
         </Collapse>
       )}
     </div>

@@ -28,7 +28,7 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
           </div>
         </div>
       )}
-      <main className="flex-1 overflow-y-auto py-2 px-2 xxs:px-3 xs:px-4 [&_.no-padding]:-mx-2 xxs:[&_.no-padding]:-mx-3 xs:[&_.no-padding]:-mx-4">
+      <main className="flex-1 min-h-0 overflow-y-auto py-2 px-2 xxs:px-3 xs:px-4 [&_.no-padding]:-mx-2 xxs:[&_.no-padding]:-mx-3 xs:[&_.no-padding]:-mx-4">
         {children}
       </main>
     </>

@@ -5,6 +5,7 @@ import { Card, Form, Input, Button, Typography, Space, Spin, message, Descriptio
 import { apiFetch } from '@/lib/api';
 
 const { Title, Text } = Typography;
+const FormItem = Form.Item;
 
 interface SystemConfig {
   key: string;
@@ -59,15 +60,15 @@ export default function AdminSettingsPage() {
   const renderInput = (config: SystemConfig) => {
     if (config.type === 'BOOLEAN') {
       return (
-        <Form.Item name={config.key} valuePropName="checked" getValueFromEvent={(checked: boolean) => String(checked)}>
+        <FormItem name={config.key} valuePropName="checked" getValueFromEvent={(checked: boolean) => String(checked)}>
           <Switch />
-        </Form.Item>
+        </FormItem>
       );
     }
     return (
-      <Form.Item name={config.key} rules={[{ required: true }]}>
+      <FormItem name={config.key} rules={[{ required: true }]}>
         <Input style={{ maxWidth: 300 }} />
-      </Form.Item>
+      </FormItem>
     );
   };
 

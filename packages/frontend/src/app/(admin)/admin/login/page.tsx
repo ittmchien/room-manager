@@ -9,6 +9,8 @@ import { apiFetch } from '@/lib/api';
 import type { AuthUser } from '@room-manager/shared';
 
 const { Title } = Typography;
+const FormItem = Form.Item;
+const InputPassword = Input.Password;
 
 export default function AdminLoginPage() {
   const [loading, setLoading] = useState(false);
@@ -59,7 +61,7 @@ export default function AdminLoginPage() {
       )}
 
       <Form layout="vertical" onFinish={onFinish} autoComplete="off">
-        <Form.Item
+        <FormItem
           name="email"
           label="Email"
           rules={[
@@ -68,21 +70,21 @@ export default function AdminLoginPage() {
           ]}
         >
           <Input prefix={<MailOutlined />} placeholder="admin@example.com" size="large" />
-        </Form.Item>
+        </FormItem>
 
-        <Form.Item
+        <FormItem
           name="password"
           label="Mật khẩu"
           rules={[{ required: true, message: 'Nhập mật khẩu' }]}
         >
-          <Input.Password prefix={<LockOutlined />} placeholder="••••••••" size="large" />
-        </Form.Item>
+          <InputPassword prefix={<LockOutlined />} placeholder="••••••••" size="large" />
+        </FormItem>
 
-        <Form.Item style={{ marginBottom: 0 }}>
+        <FormItem style={{ marginBottom: 0 }}>
           <Button type="primary" htmlType="submit" loading={loading} block size="large">
             Đăng nhập
           </Button>
-        </Form.Item>
+        </FormItem>
       </Form>
     </Card>
   );

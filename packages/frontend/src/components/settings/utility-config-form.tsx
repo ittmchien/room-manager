@@ -6,6 +6,8 @@ import { UtilityConfig, TierConfig, useUpsertUtilityConfig } from '@/hooks/use-u
 import { Plus, Trash2 } from 'lucide-react';
 import { SelectorField } from '@/components/ui/selector-field';
 
+const SkeletonParagraph = Skeleton.Paragraph;
+
 const ELECTRIC_OPTIONS = [
   { label: 'Theo số', value: 'FIXED' },
   { label: 'Bậc thang', value: 'TIERED' },
@@ -124,7 +126,7 @@ export const UtilityConfigForm = forwardRef<UtilityConfigFormHandle, Props>(
         {calcType === 'FIXED' && (
           loading ? (
             <div className="rounded-2xl bg-gray-50 px-3 py-3">
-              <Skeleton.Paragraph lineCount={1} animated />
+              <SkeletonParagraph lineCount={1} animated />
             </div>
           ) : (
             <div className="flex items-center gap-2">
@@ -146,7 +148,7 @@ export const UtilityConfigForm = forwardRef<UtilityConfigFormHandle, Props>(
         {calcType === 'PER_PERSON' && (
           loading ? (
             <div className="rounded-2xl bg-gray-50 px-3 py-3">
-              <Skeleton.Paragraph lineCount={1} animated />
+              <SkeletonParagraph lineCount={1} animated />
             </div>
           ) : (
             <div className="flex items-center gap-2">
@@ -168,7 +170,7 @@ export const UtilityConfigForm = forwardRef<UtilityConfigFormHandle, Props>(
         {calcType === 'FIXED_PER_ROOM' && (
           loading ? (
             <div className="rounded-2xl bg-gray-50 px-3 py-3">
-              <Skeleton.Paragraph lineCount={1} animated />
+              <SkeletonParagraph lineCount={1} animated />
             </div>
           ) : (
             <div className="flex items-center gap-2">

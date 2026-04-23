@@ -9,6 +9,7 @@ import { apiFetch } from '@/lib/api';
 import type { ColumnsType } from 'antd/es/table';
 
 const { Title } = Typography;
+const FormItem = Form.Item;
 
 interface TagItem {
   id: string;
@@ -122,21 +123,21 @@ export default function AdminTagsPage() {
         footer={null}
       >
         <Form form={form} layout="vertical" onFinish={onFinish}>
-          <Form.Item
+          <FormItem
             name="name"
             label="Tên tag"
             rules={[{ required: true, message: 'Nhập tên tag' }]}
           >
             <Input placeholder="vd: premium-user, beta-tester..." />
-          </Form.Item>
-          <Form.Item style={{ marginBottom: 0, textAlign: 'right' }}>
+          </FormItem>
+          <FormItem style={{ marginBottom: 0, textAlign: 'right' }}>
             <Space>
               <Button onClick={() => setModalOpen(false)}>Hủy</Button>
               <Button type="primary" htmlType="submit">
                 {editingTag ? 'Cập nhật' : 'Tạo'}
               </Button>
             </Space>
-          </Form.Item>
+          </FormItem>
         </Form>
       </Modal>
     </div>

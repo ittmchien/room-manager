@@ -25,6 +25,8 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
+const ListItem = List.Item;
+
 function getCurrentBillingPeriod(): string {
   const now = new Date();
   return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
@@ -77,7 +79,7 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-4">
-      <AdBanner position="top" />
+      {/* <AdBanner position="top" /> */}
       <PushNotificationBanner />
       {/* Hero */}
       <Card
@@ -177,7 +179,7 @@ export default function DashboardPage() {
             {pendingInvoices.slice(0, 5).map((inv, idx) => (
               <Fragment key={inv.id}>
                 {idx > 0 && <div className="mx-3 h-px bg-gray-100" />}
-                <List.Item
+                <ListItem
                   clickable
                   onClick={() => router.push(`/invoices/${inv.id}`)}
                   description={<span className="text-xs text-gray-400">{inv.tenant?.name ?? "—"} · {formatPrice(inv.total)}</span>}
@@ -185,7 +187,7 @@ export default function DashboardPage() {
                   arrow={false}
                 >
                   <span className="text-sm font-medium text-gray-800">{inv.room?.name ?? "—"}</span>
-                </List.Item>
+                </ListItem>
               </Fragment>
             ))}
           </List>

@@ -18,6 +18,8 @@ import {
 import { AppPopup } from "@/components/ui/app-popup";
 import { useEffect, useState } from "react";
 
+const SkeletonParagraph = Skeleton.Paragraph;
+
 interface Props {
   visible: boolean;
   onClose: () => void;
@@ -186,7 +188,7 @@ export function GenerateInvoiceModal({ visible, onClose, propertyId }: Props) {
       scrollable
     >
       {loadingRooms ? (
-        <Skeleton.Paragraph lineCount={4} animated />
+        <SkeletonParagraph lineCount={4} animated />
       ) : occupiedRooms.length === 0 ? (
         <ErrorBlock status="empty" description="Chưa có phòng đang thuê" />
       ) : (

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && node -e \"const fs=require('fs'),p='.next/server/middleware.js.nft.json';fs.existsSync(p)||fs.writeFileSync(p,JSON.stringify({version:1,files:[]}))\"",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "generate-icons": "node scripts/generate-icons.mjs"

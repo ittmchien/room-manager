@@ -1,6 +1,6 @@
 {
   "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
-  "buildCommand": "cd ../.. && pnpm build:shared && cd packages/backend && npx nest build",
+  "buildCommand": "cd ../.. && pnpm build:shared && cd packages/backend && npx prisma generate && npx nest build",
   "functions": {
     "api/index.ts": {
       "memory": 1024,

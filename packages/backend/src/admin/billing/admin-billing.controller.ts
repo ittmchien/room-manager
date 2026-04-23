@@ -6,7 +6,7 @@ import { AdminBillingService } from './admin-billing.service';
 import { GrantFeaturesDto } from './dto/grant-features.dto';
 import { RevokeFeatureDto } from './dto/revoke-feature.dto';
 
-@Controller({ path: 'admin', version: '1' })
+@Controller({ path: 'admin/billing', version: '1' })
 @UseGuards(AuthGuard, RolesGuard)
 @Roles('SUPER_ADMIN', 'ADMIN')
 export class AdminBillingController {
@@ -28,13 +28,26 @@ export class AdminBillingController {
     );
   }
 
+  @Get('features')
+  listFeatures(@Query('page') page?: string, @Query('limit') limit?: string) {
+    return this.adminBillingService.listFeatures(
+      page ? parseInt(page, 10) : 1,
+      limit ? parseInt(limit, 10) : 20,
+    );
+  }
+
   @Post('features/grant')
   grantFeatures(@Body() dto: GrantFeaturesDto) {
     return this.adminBillingService.grantFeatures(dto);
   }
 
-  @Delete('features/revoke')
+  @Post('features/revoke')
   revokeFeature(@Body() dto: RevokeFeatureDto) {
+    return this.adminBillingService.revokeFeature(dto.userId, dto.featureKey);
+  }
+
+  @Delete('features/revoke')
+  revokeFeatureDelete(@Body() dto: RevokeFeatureDto) {
     return this.adminBillingService.revokeFeature(dto.userId, dto.featureKey);
   }
 }

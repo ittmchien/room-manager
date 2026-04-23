@@ -16,7 +16,15 @@ export class AdminBillingService {
       }),
       this.prisma.subscription.count(),
     ]);
-    return { items, total, page, limit, totalPages: Math.ceil(total / limit) };
+    const data = items.map((s) => ({
+      id: s.id,
+      user: s.user,
+      plan: s.plan,
+      status: s.status,
+      expiresAt: s.currentPeriodEnd,
+      createdAt: s.currentPeriodStart,
+    }));
+    return { data, total, page, limit, totalPages: Math.ceil(total / limit) };
   }
 
   async listPurchases(page = 1, limit = 20) {
@@ -29,7 +37,27 @@ export class AdminBillingService {
       }),
       this.prisma.purchaseHistory.count(),
     ]);
-    return { items, total, page, limit, totalPages: Math.ceil(total / limit) };
+    return { data: items, total, page, limit, totalPages: Math.ceil(total / limit) };
+  }
+
+  async listFeatures(page = 1, limit = 20) {
+    const [items, total] = await Promise.all([
+      this.prisma.userFeature.findMany({
+        include: { user: { select: { id: true, email: true, name: true } } },
+        orderBy: { purchasedAt: 'desc' },
+        skip: (page - 1) * limit,
+        take: limit,
+      }),
+      this.prisma.userFeature.count(),
+    ]);
+    const data = items.map((f) => ({
+      id: f.id,
+      user: f.user,
+      featureKey: f.featureKey,
+      expiresAt: f.expiresAt,
+      createdAt: f.purchasedAt,
+    }));
+    return { data, total, page, limit, totalPages: Math.ceil(total / limit) };
   }
 
   async grantFeatures(dto: GrantFeaturesDto) {

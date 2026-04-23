@@ -1,0 +1,52 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e6] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=e7]:
+      - img [ref=e8]
+    - generic [ref=e11]:
+      - button "Open issues overlay" [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]: "0"
+          - generic [ref=e15]: "1"
+        - generic [ref=e16]: Issue
+      - button "Collapse issues badge" [ref=e17]:
+        - img [ref=e18]
+  - generic [ref=e25]:
+    - generic [ref=e26]:
+      - button
+      - button "Chi nhánh hiện tại Chien" [ref=e108] [cursor=pointer]:
+        - generic [ref=e29]: Chi nhánh hiện tại
+        - generic [ref=e31]: Chien
+      - button [ref=e33] [cursor=pointer]:
+        - img [ref=e34]
+    - main [ref=e38]:
+      - generic [ref=e39]:
+        - generic [ref=e40]:
+          - generic [ref=e41]:
+            - heading "Thu / Chi" [level=1] [ref=e42]
+            - generic [ref=e43]:
+              - button "‹" [ref=e44] [cursor=pointer]
+              - generic [ref=e45]: Tháng 04/2026
+              - button "›" [ref=e46] [cursor=pointer]
+          - button "Thêm" [ref=e110] [cursor=pointer]:
+            - generic [ref=e111]:
+              - img [ref=e112]
+              - text: Thêm
+        - generic [ref=e113]:
+          - img [ref=e115]
+          - generic [ref=e137]:
+            - generic [ref=e138]: Không tìm thấy thứ bạn cần
+            - generic [ref=e139]: Chưa có khoản thu/chi nào
+    - generic [ref=e76]:
+      - generic [ref=e77] [cursor=pointer]:
+        - img [ref=e80]
+        - generic [ref=e85]: Tổng quan
+      - generic [ref=e86] [cursor=pointer]:
+        - img [ref=e89]
+        - generic [ref=e92]: Phòng
+      - generic [ref=e93] [cursor=pointer]:
+        - img [ref=e96]
+        - generic [ref=e99]: Hóa đơn
+      - generic [ref=e100] [cursor=pointer]:
+        - img [ref=e103]
+        - generic [ref=e106]: Cài đặt
+  - alert [ref=e107]

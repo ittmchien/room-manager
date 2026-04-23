@@ -1,0 +1,61 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e6] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=e7]:
+      - img [ref=e8]
+    - generic [ref=e11]:
+      - button "Open issues overlay" [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]: "0"
+          - generic [ref=e15]: "1"
+        - generic [ref=e16]: Issue
+      - button "Collapse issues badge" [ref=e17]:
+        - img [ref=e18]
+  - generic [ref=e25]:
+    - generic [ref=e26]:
+      - button
+      - button "Chi nhánh hiện tại Chien" [ref=e81] [cursor=pointer]:
+        - generic [ref=e29]: Chi nhánh hiện tại
+        - generic [ref=e31]: Chien
+      - button [ref=e33] [cursor=pointer]:
+        - img [ref=e34]
+    - main [ref=e38]:
+      - generic [ref=e97]:
+        - generic [ref=e105]:
+          - button "←" [ref=e106] [cursor=pointer]
+          - generic [ref=e107]:
+            - heading "Phòng 101" [level=1] [ref=e108]
+            - paragraph [ref=e109]: Tháng 04/2026 · Nguyễn Văn Bình
+          - generic [ref=e110]: Đã thanh toán
+        - generic [ref=e111]:
+          - generic [ref=e113]:
+            - paragraph [ref=e114]: Chi tiết hóa đơn
+            - generic [ref=e115]:
+              - generic [ref=e116]: Tiền phòng
+              - generic [ref=e117]: 3.000.000đ
+            - generic [ref=e119]:
+              - generic [ref=e120]: Tổng cộng
+              - generic [ref=e121]: 3.000.000đ
+          - generic [ref=e123]:
+            - paragraph [ref=e124]: Lịch sử thanh toán
+            - generic [ref=e125]:
+              - generic [ref=e126]:
+                - paragraph [ref=e127]: Tiền mặt
+                - paragraph [ref=e128]: 22/4/2026
+              - paragraph [ref=e129]: +3.000.000đ
+            - generic [ref=e131]:
+              - generic [ref=e132]: Đã thanh toán
+              - generic [ref=e133]: 3.000.000đ
+    - generic [ref=e49]:
+      - generic [ref=e50] [cursor=pointer]:
+        - img [ref=e53]
+        - generic [ref=e58]: Tổng quan
+      - generic [ref=e59] [cursor=pointer]:
+        - img [ref=e62]
+        - generic [ref=e65]: Phòng
+      - generic [ref=e66] [cursor=pointer]:
+        - img [ref=e69]
+        - generic [ref=e72]: Hóa đơn
+      - generic [ref=e73] [cursor=pointer]:
+        - img [ref=e76]
+        - generic [ref=e79]: Cài đặt
+  - alert [ref=e80]

@@ -44,7 +44,6 @@ room-manager/
 │   │   │   ├── properties/
 │   │   │   ├── rooms/
 │   │   │   ├── tenants/
-│   │   │   ├── meters/
 │   │   │   ├── invoices/
 │   │   │   ├── payments/
 │   │   │   ├── contracts/
@@ -138,10 +137,6 @@ Giá cụ thể lưu trong bảng `pricing_tiers`, admin điều chỉnh đượ
 - Ngày vào/ra, trạng thái (active/moved_out)
 - Nhiều người thuê chung 1 phòng
 
-**Ghi điện/nước:**
-- Nhập chỉ số hàng tháng, tự tính delta (mới - cũ)
-- Hỗ trợ đơn giá cố định và bậc thang
-
 **Tính tiền phòng (chi tiết):**
 
 Tiền phòng:
@@ -178,7 +173,9 @@ Tổng = tiền phòng
 ```
 
 **Hóa đơn & thanh toán:**
-- Tạo hóa đơn hàng tháng (tự động hoặc thủ công)
+- Tạo hóa đơn hàng tháng (thủ công theo từng phòng hoặc tạo hàng loạt)
+- Khi tạo hóa đơn: nhập chỉ số điện/nước mới trực tiếp trong form; chỉ số cũ auto-fill từ hóa đơn tháng trước (readonly); delta và tiền tự tính realtime
+- Không có trang ghi điện/nước riêng — mọi thứ tích hợp vào luồng tạo hóa đơn
 - Trạng thái: chờ thanh toán (pending), trả một phần (partial), đã trả (paid)
 - Ghi nhận thanh toán: số tiền, ngày, phương thức (tiền mặt/chuyển khoản/khác)
 
@@ -359,3 +356,98 @@ Cloudflare R2 (upload ảnh)
 - Hàng ngày: check hóa đơn quá hạn → push nhắc nợ
 - Hàng ngày: check hợp đồng sắp hết hạn → thông báo
 - Hàng tháng: check subscription hết hạn
+
+## 8. Trạng thái triển khai
+
+> Cập nhật: 2026-04-22
+
+### ✅ Đã hoàn thành
+
+**Auth & Onboarding**
+- Đăng nhập Google OAuth, Phone OTP, Email/Password
+- Đăng ký tài khoản
+- Onboarding wizard tạo khu trọ lần đầu
+- Đăng xuất, đổi mật khẩu
+
+**Quản lý phòng**
+- CRUD phòng (tên, giá thuê, calc type fixed/per_person, trạng thái)
+- Danh sách phòng với filter (tất cả / trống / đang thuê)
+- Chi tiết phòng: thay đổi trạng thái, xem tenant
+
+**Quản lý người thuê**
+- Thêm/sửa người thuê (tên, SĐT, CCCD, upload ảnh CCCD)
+- Checkout người thuê
+
+**Hóa đơn**
+- Tạo hóa đơn hàng loạt theo kỳ (generate invoice modal)
+- Danh sách hóa đơn theo tháng
+- Chi tiết hóa đơn + lịch sử thanh toán
+- Ghi nhận thanh toán (số tiền, ngày, phương thức)
+
+**Hợp đồng**
+- CRUD hợp đồng (ngày bắt đầu/kết thúc, tiền cọc, trạng thái cọc)
+
+**Chi phí**
+- Ghi nhận thu/chi theo category, tháng, gắn phòng hoặc chung
+
+**Báo cáo**
+- Báo cáo thu/chi theo tháng + biểu đồ cột
+- Snapshot: phòng đang thuê, thu tháng này, chưa trả
+
+**Cài đặt**
+- Cấu hình giá điện/nước (fixed, per_person, fixed_per_room, tiered)
+- Quản lý phí dịch vụ (CRUD)
+- Thông tin tài khoản (email, đổi mật khẩu, đăng xuất)
+
+**Dashboard**
+- Thống kê phòng trống/đang thuê
+- Tổng thu tháng, danh sách hóa đơn chưa trả
+
+**Monetization / Ads**
+- Banner quảng cáo với feature flag ẩn khi premium
+- Premium modal, pricing page
+- Feature flags (use-features)
+
+**Infrastructure**
+- Upload ảnh presigned URL → Cloudflare R2
+- Push notification subscription (Web Push)
+- Exception pages (404, error)
+- Layout: TopNav/BottomNav cố định, content scroll, initial loading overlay
+
+---
+
+### ⚠️ Có hook/hạ tầng nhưng chưa có UI
+
+| Thứ | Ghi chú |
+|-----|---------|
+| `use-meter-readings.ts` | Hook ghi chỉ số điện/nước tồn tại nhưng chưa tích hợp vào form tạo hóa đơn |
+| Push notification banner | Component có nhưng chưa verify hoạt động end-to-end |
+
+---
+
+### ❌ Chưa làm
+
+**Core flow còn thiếu**
+- Form tạo hóa đơn: nhập chỉ số điện/nước mới, auto-fill chỉ số cũ từ kỳ trước, tính delta realtime (bậc thang đã cấu hình trong settings, backend tự tính)
+
+**Payment**
+- QR chuyển khoản, MoMo, VNPay tích hợp
+- Webhook xác nhận thanh toán tự động
+- Admin duyệt thanh toán thủ công
+
+**Cron jobs (backend)**
+- Tạo hóa đơn tự động hàng tháng
+- Nhắc hóa đơn quá hạn → push notification
+- Nhắc hợp đồng sắp hết hạn
+- Check subscription hết hạn
+
+**Subscription tháng**
+- SMS/Zalo thông báo hàng loạt
+- Cloud backup/restore
+- Lưu trữ ảnh mở rộng
+- Export PDF/Excel báo cáo
+
+**Admin**
+- Panel quản lý pricing tiers
+- Duyệt giao dịch thanh toán
+- Quản lý ad config

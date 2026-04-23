@@ -18,6 +18,7 @@ export function PushNotificationBanner() {
 
   useEffect(() => {
     if (typeof window === 'undefined' || !('Notification' in window)) return;
+    if (localStorage.getItem('push-banner-dismissed') === '1') { setState('done'); return; }
     if (Notification.permission === 'granted') setState('done');
     if (Notification.permission === 'denied') setState('denied');
   }, []);
@@ -57,25 +58,19 @@ export function PushNotificationBanner() {
 
   return (
     <NoticeBar
-      content={
-        <div className="flex items-center justify-between w-full">
-          <div className="flex items-center gap-2">
-            <Bell className="h-4 w-4" />
-            <span className="text-sm">Bật thông báo để nhận nhắc nhở thanh toán</span>
-          </div>
-          <Button
-            size="mini"
-            color="primary"
-            loading={state === 'loading'}
-            onClick={handleSubscribe}
-            className="ml-2 !rounded-lg flex-shrink-0"
-          >
-            Bật
-          </Button>
-        </div>
-      }
+      icon={<Bell className="h-4 w-4" />}
+      content="Bật thông báo để nhận nhắc nhở thanh toán"
       color="info"
-      closeable
+      extra={
+        <Button
+          size="mini"
+          color="primary"
+          loading={state === 'loading'}
+          onClick={handleSubscribe}
+        >
+          Bật
+        </Button>
+      }
     />
   );
 }

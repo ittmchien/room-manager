@@ -12,10 +12,10 @@ import {
   ErrorBlock,
   Input,
   Picker,
-  Popup,
   Skeleton,
   Toast,
 } from "antd-mobile";
+import { AppPopup } from "@/components/ui/app-popup";
 import { useEffect, useState } from "react";
 
 interface Props {
@@ -67,7 +67,7 @@ function MeterSection({
             value={value}
             onChange={onChange}
             min={previousValue ?? 0}
-            className="[--font-size:15px] [--placeholder-color:#9ca3af]"
+            style={{ '--font-size': '15px', '--placeholder-color': '#9ca3af' } as React.CSSProperties}
           />
           <span className="text-sm text-gray-400 shrink-0">{unit}</span>
         </div>
@@ -175,112 +175,48 @@ export function GenerateInvoiceModal({ visible, onClose, propertyId }: Props) {
   const isPending = createMeter.isPending || generate.isPending;
 
   return (
-    <Popup
+    <AppPopup
+      title="Tạo hóa đơn"
       visible={visible}
-      onMaskClick={onClose}
-      position="bottom"
-      bodyStyle={{ borderRadius: "16px 16px 0 0" }}
+      onClose={onClose}
+      onSubmit={occupiedRooms.length > 0 ? handleSubmit : undefined}
+      submitLabel="Tạo hóa đơn"
+      submitLoading={isPending}
+      submitDisabled={!selectedRoomId}
+      scrollable
     >
-      <div className="max-h-[90vh] overflow-y-auto p-4 pb-8">
-        {/* Header */}
-        <div className="mb-4 flex items-center justify-between">
-          <h3 className="text-lg font-bold">Tạo hóa đơn</h3>
-          <Button
-            fill="none"
-            size="small"
-            onClick={onClose}
-            className="!text-gray-400"
-          >
-            Đóng
-          </Button>
-        </div>
-
-        {loadingRooms ? (
-          <Skeleton.Paragraph lineCount={4} animated />
-        ) : occupiedRooms.length === 0 ? (
-          <ErrorBlock status="empty" description="Chưa có phòng đang thuê" />
-        ) : (
-          <div className="space-y-4">
-            {/* Room picker */}
-            <div>
-              <p className="mb-1.5 text-xs text-gray-400">Phòng</p>
-              <Picker
-                columns={roomColumns}
-                value={[selectedRoomId]}
-                onConfirm={(val) => handleRoomChange(val[0] as string)}
-              >
-                {(items, actions) => (
-                  <button
-                    onClick={actions.open}
-                    className="w-full rounded-xl bg-gray-50 px-4 py-3 text-left flex items-center justify-between"
-                  >
-                    <span className="text-[15px] text-gray-900">
-                      {selectedRoom?.name ?? "Chọn phòng"}
-                    </span>
-                    <span className="text-gray-400 text-sm">▾</span>
-                  </button>
-                )}
-              </Picker>
-            </div>
-
-            {/* Month picker */}
-            <div>
-              <p className="mb-1.5 text-xs text-gray-400">Kỳ tháng</p>
-              <DatePicker
-                precision="month"
-                value={selectedDate}
-                onConfirm={(val) => setSelectedDate(val)}
-                min={new Date(2020, 0)}
-                max={new Date()}
-                title="Chọn tháng"
-              >
-                {(_, actions) => (
-                  <button
-                    onClick={actions.open}
-                    className="w-full rounded-xl bg-gray-50 px-4 py-3 text-left flex items-center justify-between"
-                  >
-                    <span className="text-[15px] text-gray-900">
-                      Tháng {selectedDate.getMonth() + 1}/
-                      {selectedDate.getFullYear()}
-                    </span>
-                    <span className="text-gray-400 text-sm">▾</span>
-                  </button>
-                )}
-              </DatePicker>
-            </div>
-
-            {/* Meter readings */}
-            <MeterSection
-              label="Điện"
-              unit="kWh"
-              previousValue={previousElectric}
-              value={electricValue}
-              onChange={setElectricValue}
-            />
-
-            <MeterSection
-              label="Nước"
-              unit="m³"
-              previousValue={previousWater}
-              value={waterValue}
-              onChange={setWaterValue}
-            />
-
-            {/* Submit */}
-            <Button
-              block
-              color="primary"
-              size="large"
-              className="!rounded-xl"
-              loading={isPending}
-              disabled={!selectedRoomId}
-              onClick={handleSubmit}
-            >
-              Tạo hóa đơn
-            </Button>
+      {loadingRooms ? (
+        <Skeleton.Paragraph lineCount={4} animated />
+      ) : occupiedRooms.length === 0 ? (
+        <ErrorBlock status="empty" description="Chưa có phòng đang thuê" />
+      ) : (
+        <div className="space-y-4">
+          <div>
+            <p className="mb-1.5 text-xs text-gray-400">Phòng</p>
+            <Picker columns={roomColumns} value={[selectedRoomId]} onConfirm={(val) => handleRoomChange(val[0] as string)}>
+              {(items, actions) => (
+                <button onClick={actions.open} className="w-full rounded-xl bg-gray-50 px-4 py-3 text-left flex items-center justify-between">
+                  <span className="text-[15px] text-gray-900">{selectedRoom?.name ?? "Chọn phòng"}</span>
+                  <span className="text-gray-400 text-sm">▾</span>
+                </button>
+              )}
+            </Picker>
           </div>
-        )}
-      </div>
-    </Popup>
+          <div>
+            <p className="mb-1.5 text-xs text-gray-400">Kỳ tháng</p>
+            <DatePicker precision="month" value={selectedDate} onConfirm={(val) => setSelectedDate(val)} min={new Date(2020, 0)} max={new Date()} title="Chọn tháng">
+              {(_, actions) => (
+                <button onClick={actions.open} className="w-full rounded-xl bg-gray-50 px-4 py-3 text-left flex items-center justify-between">
+                  <span className="text-[15px] text-gray-900">Tháng {selectedDate.getMonth() + 1}/{selectedDate.getFullYear()}</span>
+                  <span className="text-gray-400 text-sm">▾</span>
+                </button>
+              )}
+            </DatePicker>
+          </div>
+          <MeterSection label="Điện" unit="kWh" previousValue={previousElectric} value={electricValue} onChange={setElectricValue} />
+          <MeterSection label="Nước" unit="m³" previousValue={previousWater} value={waterValue} onChange={setWaterValue} />
+        </div>
+      )}
+    </AppPopup>
   );
 }

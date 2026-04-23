@@ -1,0 +1,54 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e6] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=e7]:
+      - img [ref=e8]
+    - generic [ref=e11]:
+      - button "Open issues overlay" [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]: "0"
+          - generic [ref=e15]: "1"
+        - generic [ref=e16]: Issue
+      - button "Collapse issues badge" [ref=e17]:
+        - img [ref=e18]
+  - generic [ref=e25]:
+    - generic [ref=e26]:
+      - button
+      - button "Chi nhánh hiện tại Chien" [ref=e79] [cursor=pointer]:
+        - generic [ref=e29]: Chi nhánh hiện tại
+        - generic [ref=e31]: Chien
+      - button [ref=e33] [cursor=pointer]:
+        - img [ref=e34]
+    - main [ref=e38]:
+      - generic [ref=e39]:
+        - generic [ref=e40]:
+          - heading "Hóa đơn" [level=1] [ref=e41]
+          - button "Tạo hóa đơn" [ref=e80] [cursor=pointer]:
+            - generic [ref=e81]:
+              - img [ref=e82]
+              - text: Tạo hóa đơn
+        - generic [ref=e83]:
+          - generic [ref=e84]: Tháng 04/2026
+          - button "Phòng 101 Đã thu Tháng 04/2026 · Nguyễn Văn Bình 3.000.000đ" [ref=e90] [cursor=pointer]:
+            - generic [ref=e92]:
+              - generic [ref=e93]:
+                - generic [ref=e94]:
+                  - paragraph [ref=e95]: Phòng 101
+                  - generic [ref=e96]: Đã thu
+                - paragraph [ref=e97]: Tháng 04/2026 · Nguyễn Văn Bình
+                - paragraph [ref=e98]: 3.000.000đ
+              - img [ref=e99]
+        - generic [ref=e102]: Đã hiển thị tất cả
+    - generic [ref=e47]:
+      - generic [ref=e48] [cursor=pointer]:
+        - img [ref=e51]
+        - generic [ref=e56]: Tổng quan
+      - generic [ref=e57] [cursor=pointer]:
+        - img [ref=e60]
+        - generic [ref=e63]: Phòng
+      - generic [ref=e64] [cursor=pointer]:
+        - img [ref=e67]
+        - generic [ref=e70]: Hóa đơn
+      - generic [ref=e71] [cursor=pointer]:
+        - img [ref=e74]
+        - generic [ref=e77]: Cài đặt
+  - alert [ref=e78]

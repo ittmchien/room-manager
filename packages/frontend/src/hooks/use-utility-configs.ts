@@ -1,6 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { apiFetch } from '@/lib/api';
 
+export interface TierConfig {
+  fromKwh: number;
+  toKwh: number | null;
+  pricePerKwh: number;
+}
+
 export interface UtilityConfig {
   id: string;
   propertyId: string;
@@ -9,6 +15,15 @@ export interface UtilityConfig {
   unitPrice: number | null;
   perPersonPrice: number | null;
   fixedRoomPrice: number | null;
+  tiers?: TierConfig[] | null;
+}
+
+export interface UpsertUtilityConfigData {
+  calcType: string;
+  unitPrice?: number;
+  perPersonPrice?: number;
+  fixedRoomPrice?: number;
+  tiers?: TierConfig[];
 }
 
 export function useUtilityConfigs(propertyId: string) {
@@ -22,7 +37,7 @@ export function useUtilityConfigs(propertyId: string) {
 export function useUpsertUtilityConfig(propertyId: string) {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ type, data }: { type: 'ELECTRIC' | 'WATER'; data: { calcType: string; unitPrice: number } }) =>
+    mutationFn: ({ type, data }: { type: 'ELECTRIC' | 'WATER'; data: UpsertUtilityConfigData }) =>
       apiFetch(`/properties/${propertyId}/utility-configs/${type}`, {
         method: 'PUT',
         body: JSON.stringify(data),

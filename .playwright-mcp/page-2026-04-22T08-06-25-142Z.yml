@@ -1,0 +1,30 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: 🏠
+      - generic [ref=e8]:
+        - heading "Room Manager" [level=1] [ref=e9]
+        - paragraph [ref=e10]: Chào mừng trở lại
+    - button "Đăng nhập bằng Google" [ref=e11] [cursor=pointer]:
+      - generic [ref=e13]:
+        - img [ref=e14]
+        - text: Đăng nhập bằng Google
+    - generic [ref=e21]: HOẶC
+    - generic [ref=e23]:
+      - generic [ref=e24]:
+        - paragraph [ref=e25]: Email
+        - textbox "your@email.com" [ref=e27]
+      - generic [ref=e28]:
+        - paragraph [ref=e29]: Mật khẩu
+        - generic [ref=e30]:
+          - textbox "••••••••" [ref=e33]
+          - button [ref=e34] [cursor=pointer]:
+            - img [ref=e36]
+      - button "Đăng nhập" [disabled] [ref=e39]
+    - paragraph [ref=e40]:
+      - text: Chưa có tài khoản?
+      - link "Đăng ký ngay" [ref=e41] [cursor=pointer]:
+        - /url: /register
+  - button "Open Next.js Dev Tools" [ref=e47] [cursor=pointer]:
+    - img [ref=e48]
+  - alert [ref=e51]

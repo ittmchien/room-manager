@@ -23,11 +23,30 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const isAuthPage =
-    request.nextUrl.pathname.startsWith('/login') ||
-    request.nextUrl.pathname.startsWith('/register');
+  const pathname = request.nextUrl.pathname;
+  const isAuthPage = pathname.startsWith('/login') || pathname.startsWith('/register');
+  const isAdminLogin = pathname === '/admin-login';
+  const isAdminPage = pathname.startsWith('/admin');
 
-  if (!user && !isAuthPage) {
+  // Admin routes
+  if (isAdminPage && !isAdminLogin) {
+    if (!user) {
+      const url = request.nextUrl.clone();
+      url.pathname = '/admin-login';
+      return NextResponse.redirect(url);
+    }
+    return response;
+  }
+
+  // Admin login: redirect to admin if already logged in
+  if (isAdminLogin && user) {
+    const url = request.nextUrl.clone();
+    url.pathname = '/admin';
+    return NextResponse.redirect(url);
+  }
+
+  // App routes
+  if (!user && !isAuthPage && !isAdminLogin) {
     const url = request.nextUrl.clone();
     url.pathname = '/login';
     return NextResponse.redirect(url);

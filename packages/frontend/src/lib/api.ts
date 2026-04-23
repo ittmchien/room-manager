@@ -1,4 +1,5 @@
 import { createBrowserClient } from '@/lib/supabase/client';
+import { notify } from '@/lib/notify';
 
 const API_URL = `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'}/api/v1`;
 
@@ -25,7 +26,9 @@ export async function apiFetch<T>(
 
   if (!response.ok) {
     const body = await response.json().catch(() => ({}));
-    throw new Error(body.message ?? `API error: ${response.status}`);
+    const message = body.message ?? `API error: ${response.status}`;
+    notify.error('Có lỗi xảy ra', message);
+    throw new Error(message);
   }
 
   return response.json();

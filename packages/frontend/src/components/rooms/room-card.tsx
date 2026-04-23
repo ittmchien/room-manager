@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { Room } from '@/hooks/use-rooms';
 import { Users, ChevronRight } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 function formatPrice(price: number) {
   return new Intl.NumberFormat('vi-VN').format(price);
@@ -29,7 +30,7 @@ const statusConfig = {
   },
 } as const;
 
-export function RoomCard({ room }: { room: Room }) {
+export function RoomCard({ room, onPress }: { room: Room; onPress?: (id: string) => void }) {
   const router = useRouter();
   const activeTenantsCount = room._count.tenants;
   const firstTenant = room.tenants[0];
@@ -37,11 +38,11 @@ export function RoomCard({ room }: { room: Room }) {
 
   return (
     <button
-      onClick={() => router.push(`/rooms/${room.id}`)}
+      onClick={() => onPress ? onPress(room.id) : router.push(`/rooms/${room.id}`)}
       className="group flex w-full overflow-hidden rounded-2xl bg-white shadow-sm shadow-blue-100/40 transition-all hover:shadow-md hover:shadow-blue-100/60 active:scale-[0.99] text-left"
     >
       {/* Status bar */}
-      <div className={`w-1 shrink-0 ${cfg.bar}`} />
+      <div className={cn('w-1 shrink-0', cfg.bar)} />
 
       <div className="flex flex-1 items-center gap-3 p-4">
         {/* Info */}
@@ -79,8 +80,8 @@ export function RoomCard({ room }: { room: Room }) {
 
         {/* Status + chevron */}
         <div className="flex shrink-0 flex-col items-end gap-2">
-          <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ${cfg.badge}`}>
-            <span className={`h-1.5 w-1.5 rounded-full ${cfg.dot}`} />
+          <span className={cn('inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold', cfg.badge)}>
+            <span className={cn('h-1.5 w-1.5 rounded-full', cfg.dot)} />
             {cfg.label}
           </span>
           <ChevronRight className="h-4 w-4 text-gray-300 transition-transform group-hover:translate-x-0.5" />

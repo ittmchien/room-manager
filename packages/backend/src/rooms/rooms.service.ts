@@ -1,6 +1,7 @@
 import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { FEATURE_KEYS, FREE_ROOM_LIMIT } from '@room-manager/shared';
 import { PrismaService } from '../prisma/prisma.service';
+import { ConfigService } from '../admin/config/config.service';
 import { CreateRoomDto } from './dto/create-room.dto';
 import { UpdateRoomDto } from './dto/update-room.dto';
 
@@ -9,7 +10,7 @@ const ROOMS_50_LIMIT = 50;
 
 @Injectable()
 export class RoomsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService, private appConfig: ConfigService) {}
 
   private async getRoomLimit(userId: string): Promise<number> {
     const features = await this.prisma.userFeature.findMany({
@@ -33,7 +34,7 @@ export class RoomsService {
       this.getRoomLimit(userId),
     ]);
 
-    if (totalRooms >= limit) {
+    if (totalRooms >= limit && !this.appConfig.getBoolean('premium_enabled')) {
       throw new ForbiddenException(`Đã đạt giới hạn ${limit} phòng. Mua thêm slot để mở rộng.`);
     }
 

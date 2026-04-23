@@ -1,0 +1,92 @@
+- generic [ref=e1]:
+  - generic [ref=e6] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=e7]:
+      - img [ref=e8]
+    - generic [ref=e11]:
+      - button "Open issues overlay" [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]: "0"
+          - generic [ref=e15]: "1"
+        - generic [ref=e16]: Issue
+      - button "Collapse issues badge" [ref=e17]:
+        - img [ref=e18]
+  - generic [ref=e25]:
+    - generic [ref=e26]:
+      - button
+      - button "Chi nhánh hiện tại Chien" [ref=e81] [cursor=pointer]:
+        - generic [ref=e29]: Chi nhánh hiện tại
+        - generic [ref=e31]: Chien
+      - button [ref=e33] [cursor=pointer]:
+        - img [ref=e34]
+    - main [ref=e38]:
+      - generic [ref=e39]:
+        - generic [ref=e40]:
+          - generic [ref=e41]:
+            - heading "Hóa đơn" [level=1] [ref=e42]
+            - paragraph [ref=e43]: Tháng 04/2026
+          - button "Tạo hóa đơn" [active] [ref=e82] [cursor=pointer]:
+            - generic [ref=e83]:
+              - img [ref=e84]
+              - text: Tạo hóa đơn
+        - button "Phòng 101 Đã thu Tháng 04/2026 · Nguyễn Văn Bình 3.000.000đ" [ref=e86] [cursor=pointer]:
+          - generic [ref=e88]:
+            - generic [ref=e89]:
+              - generic [ref=e90]:
+                - paragraph [ref=e91]: Phòng 101
+                - generic [ref=e92]: Đã thu
+              - paragraph [ref=e93]: Tháng 04/2026 · Nguyễn Văn Bình
+              - paragraph [ref=e94]: 3.000.000đ
+            - img [ref=e95]
+    - generic [ref=e49]:
+      - generic [ref=e50] [cursor=pointer]:
+        - img [ref=e53]
+        - generic [ref=e58]: Tổng quan
+      - generic [ref=e59] [cursor=pointer]:
+        - img [ref=e62]
+        - generic [ref=e65]: Phòng
+      - generic [ref=e66] [cursor=pointer]:
+        - img [ref=e69]
+        - generic [ref=e72]: Hóa đơn
+      - generic [ref=e73] [cursor=pointer]:
+        - img [ref=e76]
+        - generic [ref=e79]: Cài đặt
+  - alert [ref=e80]
+  - generic:
+    - generic [ref=e97]:
+      - button
+    - generic [ref=e99]:
+      - generic [ref=e100]:
+        - heading "Tạo hóa đơn" [level=3] [ref=e101]
+        - button "Đóng" [ref=e102] [cursor=pointer]
+      - generic [ref=e103]:
+        - generic [ref=e104]:
+          - paragraph [ref=e105]: Phòng
+          - button "Phòng 101 ▾" [ref=e106] [cursor=pointer]:
+            - generic [ref=e107]: Phòng 101
+            - generic [ref=e108]: ▾
+        - generic [ref=e109]:
+          - paragraph [ref=e110]: Kỳ tháng
+          - button "Tháng 4/2026 ▾" [ref=e111] [cursor=pointer]:
+            - generic [ref=e112]: Tháng 4/2026
+            - generic [ref=e113]: ▾
+        - generic [ref=e114]:
+          - paragraph [ref=e115]: Điện
+          - generic [ref=e116]:
+            - generic [ref=e117]:
+              - generic [ref=e118]: Chỉ số cũ
+              - generic [ref=e119]: 120 kWh
+            - generic [ref=e120]:
+              - generic [ref=e121]: Chỉ số mới
+              - spinbutton [ref=e123]
+              - generic [ref=e124]: kWh
+        - generic [ref=e125]:
+          - paragraph [ref=e126]: Nước
+          - generic [ref=e127]:
+            - generic [ref=e128]:
+              - generic [ref=e129]: Chỉ số cũ
+              - generic [ref=e130]: 45 m³
+            - generic [ref=e131]:
+              - generic [ref=e132]: Chỉ số mới
+              - spinbutton [ref=e134]
+              - generic [ref=e135]: m³
+      - button "Tạo hóa đơn" [ref=e136] [cursor=pointer]

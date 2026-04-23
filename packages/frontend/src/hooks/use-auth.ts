@@ -15,7 +15,7 @@ export function useAuth() {
     setError(null);
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
-      options: { redirectTo: `${window.location.origin}/dashboard` },
+      options: { redirectTo: `${window.location.origin}/auth/callback?next=/dashboard` },
     });
     if (error) setError(error.message);
     setLoading(false);
@@ -85,5 +85,14 @@ export function useAuth() {
     router.push('/login');
   };
 
-  return { loading, error, signInWithGoogle, signInWithOtp, verifyOtp, signInWithEmail, signUp, signOut };
+  const changePassword = async (newPassword: string) => {
+    setLoading(true);
+    setError(null);
+    const { error } = await supabase.auth.updateUser({ password: newPassword });
+    if (error) setError(error.message);
+    setLoading(false);
+    return !error;
+  };
+
+  return { loading, error, signInWithGoogle, signInWithOtp, verifyOtp, signInWithEmail, signUp, signOut, changePassword };
 }

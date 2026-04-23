@@ -1,0 +1,53 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e6] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=e7]:
+      - img [ref=e8]
+    - generic [ref=e11]:
+      - button "Open issues overlay" [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]: "0"
+          - generic [ref=e15]: "1"
+        - generic [ref=e16]: Issue
+      - button "Collapse issues badge" [ref=e17]:
+        - img [ref=e18]
+  - generic [ref=e25]:
+    - generic [ref=e26]:
+      - button
+      - button "Chi nhánh hiện tại Chien" [ref=e81] [cursor=pointer]:
+        - generic [ref=e29]: Chi nhánh hiện tại
+        - generic [ref=e31]: Chien
+      - button [ref=e33] [cursor=pointer]:
+        - img [ref=e34]
+    - main [ref=e38]:
+      - generic [ref=e39]:
+        - generic [ref=e40]:
+          - generic [ref=e41]:
+            - heading "Hóa đơn" [level=1] [ref=e42]
+            - paragraph [ref=e43]: Tháng 04/2026
+          - button "Tạo hóa đơn" [ref=e82] [cursor=pointer]:
+            - generic [ref=e83]:
+              - img [ref=e84]
+              - text: Tạo hóa đơn
+        - button "Phòng 101 Đã thu Tháng 04/2026 · Nguyễn Văn Bình 3.000.000đ" [ref=e86] [cursor=pointer]:
+          - generic [ref=e88]:
+            - generic [ref=e89]:
+              - generic [ref=e90]:
+                - paragraph [ref=e91]: Phòng 101
+                - generic [ref=e92]: Đã thu
+              - paragraph [ref=e93]: Tháng 04/2026 · Nguyễn Văn Bình
+              - paragraph [ref=e94]: 3.000.000đ
+            - img [ref=e95]
+    - generic [ref=e49]:
+      - generic [ref=e50] [cursor=pointer]:
+        - img [ref=e53]
+        - generic [ref=e58]: Tổng quan
+      - generic [ref=e59] [cursor=pointer]:
+        - img [ref=e62]
+        - generic [ref=e65]: Phòng
+      - generic [ref=e66] [cursor=pointer]:
+        - img [ref=e69]
+        - generic [ref=e72]: Hóa đơn
+      - generic [ref=e73] [cursor=pointer]:
+        - img [ref=e76]
+        - generic [ref=e79]: Cài đặt
+  - alert [ref=e80]

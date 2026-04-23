@@ -3,6 +3,12 @@
 @import "tailwindcss";
 @import "antd-mobile/bundle/style.css";
 
+@theme {
+  --breakpoint-xxxs: 320px;
+  --breakpoint-xxs: 375px;
+  --breakpoint-xs: 425px;
+}
+
 :root {
   --font-sans: "Be Vietnam Pro", sans-serif;
   --adm-color-primary: #2563eb;
@@ -11,6 +17,25 @@
 
 body {
   font-family: var(--font-sans);
+}
+
+.adm-error-block-image {
+  place-self: center;
+  justify-self: center;
+}
+
+/* Standardize antd-mobile component defaults */
+.adm-card {
+  --border-radius: 16px;
+}
+
+.adm-input-element,
+.adm-text-area-element {
+  font-size: 15px !important;
+}
+
+.adm-tabs-tab {
+  --title-font-size: 14px;
 }
 
 /* Constrain antd-mobile portals to the max-w-md (448px) app container.

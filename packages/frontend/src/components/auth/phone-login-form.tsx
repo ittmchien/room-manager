@@ -33,7 +33,7 @@ export function PhoneLoginForm() {
             placeholder="+84 xxx xxx xxx"
             value={phone}
             onChange={setPhone}
-            className="[--font-size:15px]"
+            style={{ '--font-size': '15px' } as React.CSSProperties}
           />
         </div>
         <Button
@@ -43,7 +43,7 @@ export function PhoneLoginForm() {
           loading={loading}
           disabled={!phone}
           onClick={handleSendOtp}
-          className="!rounded-xl !text-base !font-semibold"
+          className="!text-base !font-semibold"
         >
           Gửi mã OTP
         </Button>
@@ -64,7 +64,8 @@ export function PhoneLoginForm() {
           value={otp}
           onChange={setOtp}
           maxLength={6}
-          className="tracking-[0.4em] font-bold [--font-size:24px]"
+          className="tracking-[0.4em] font-bold"
+          style={{ '--font-size': '24px' } as React.CSSProperties}
         />
       </div>
       <Button
@@ -74,7 +75,7 @@ export function PhoneLoginForm() {
         loading={loading}
         disabled={otp.length < 6}
         onClick={handleVerifyOtp}
-        className="!rounded-xl !text-base !font-semibold"
+        className="!text-base !font-semibold"
       >
         Xác nhận
       </Button>

@@ -1,0 +1,31 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e52]:
+    - generic [ref=e53]:
+      - button
+      - button "Chi nhánh hiện tại ..." [ref=e55] [cursor=pointer]:
+        - generic [ref=e56]: Chi nhánh hiện tại
+        - generic [ref=e58]: ...
+      - button [ref=e60] [cursor=pointer]:
+        - img [ref=e61]
+    - main [ref=e65]:
+      - generic [ref=e66]:
+        - paragraph [ref=e67]: 🏘️
+        - paragraph [ref=e68]: Chưa có khu trọ
+        - paragraph [ref=e69]: Hoàn thành onboarding để bắt đầu.
+    - generic [ref=e72]:
+      - generic [ref=e73] [cursor=pointer]:
+        - img [ref=e76]
+        - generic [ref=e81]: Tổng quan
+      - generic [ref=e82] [cursor=pointer]:
+        - img [ref=e85]
+        - generic [ref=e88]: Phòng
+      - generic [ref=e89] [cursor=pointer]:
+        - img [ref=e92]
+        - generic [ref=e95]: Hóa đơn
+      - generic [ref=e96] [cursor=pointer]:
+        - img [ref=e99]
+        - generic [ref=e102]: Cài đặt
+  - button "Open Next.js Dev Tools" [ref=e47] [cursor=pointer]:
+    - img [ref=e48]
+  - alert [ref=e51]
+  - paragraph [ref=e106]: Đang tải...

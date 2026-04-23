@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { apiFetch } from '@/lib/api';
 import { FEATURE_KEYS } from '@room-manager/shared';
+import { isPremiumEnabled } from '@/lib/features';
 
 export function useFeatures() {
   return useQuery<string[]>({
@@ -12,6 +13,7 @@ export function useFeatures() {
 
 export function useHasFeature(featureKey: string) {
   const { data: features } = useFeatures();
+  if (isPremiumEnabled) return true;
   return features?.includes(featureKey) ?? false;
 }
 

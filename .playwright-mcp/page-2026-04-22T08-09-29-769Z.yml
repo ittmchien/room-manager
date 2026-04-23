@@ -1,0 +1,79 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e6] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=e7]:
+      - img [ref=e8]
+    - generic [ref=e11]:
+      - button "Open issues overlay" [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]: "0"
+          - generic [ref=e15]: "1"
+        - generic [ref=e16]: Issue
+      - button "Collapse issues badge" [ref=e17]:
+        - img [ref=e18]
+  - generic [ref=e25]:
+    - generic [ref=e26]:
+      - button
+      - button "Chi nhánh hiện tại Chien" [ref=e76] [cursor=pointer]:
+        - generic [ref=e29]: Chi nhánh hiện tại
+        - generic [ref=e31]: Chien
+      - button [ref=e33] [cursor=pointer]:
+        - img [ref=e34]
+    - main [ref=e38]:
+      - generic [ref=e39]:
+        - heading "Cài đặt" [level=1] [ref=e77]
+        - generic [ref=e78]:
+          - generic [ref=e79]:
+            - heading "Giá điện nước" [level=2] [ref=e80]
+            - paragraph [ref=e81]: Áp dụng khi tính hóa đơn hàng tháng
+          - generic [ref=e83]:
+            - generic [ref=e84]:
+              - paragraph [ref=e85]: Điện
+              - listbox "Chọn nhóm" [ref=e86]:
+                - generic [ref=e87]:
+                  - option "Theo số đo" [selected] [ref=e89] [cursor=pointer]:
+                    - text: Theo số đo
+                    - img [ref=e91]
+                  - option "Theo người" [ref=e99] [cursor=pointer]
+                  - option "Cố định/phòng" [ref=e101] [cursor=pointer]
+              - generic [ref=e102]:
+                - spinbutton [ref=e105]: "4000"
+                - generic [ref=e106]: VND/kWh
+              - button "Lưu cấu hình Điện" [ref=e107] [cursor=pointer]:
+                - generic [ref=e108]: Lưu cấu hình Điện
+            - generic [ref=e110]:
+              - paragraph [ref=e111]: Nước
+              - listbox "Chọn nhóm" [ref=e112]:
+                - generic [ref=e113]:
+                  - option "Theo số đo" [selected] [ref=e115] [cursor=pointer]:
+                    - text: Theo số đo
+                    - img [ref=e117]
+                  - option "Theo người" [ref=e125] [cursor=pointer]
+                  - option "Cố định/phòng" [ref=e127] [cursor=pointer]
+              - generic [ref=e128]:
+                - spinbutton [ref=e131]: "15000"
+                - generic [ref=e132]: VND/m³
+              - button "Lưu cấu hình Nước" [ref=e133] [cursor=pointer]:
+                - generic [ref=e134]: Lưu cấu hình Nước
+        - generic [ref=e135]:
+          - generic [ref=e136]:
+            - heading "Phí dịch vụ" [level=2] [ref=e137]
+            - paragraph [ref=e138]: Phí cố định tính thêm vào hóa đơn
+          - button "plus Thêm phí dịch vụ" [ref=e142] [cursor=pointer]:
+            - generic [ref=e144]:
+              - img "plus" [ref=e146]:
+                - img [ref=e147]
+              - generic [ref=e150]: Thêm phí dịch vụ
+    - generic [ref=e44]:
+      - generic [ref=e45] [cursor=pointer]:
+        - img [ref=e48]
+        - generic [ref=e53]: Tổng quan
+      - generic [ref=e54] [cursor=pointer]:
+        - img [ref=e57]
+        - generic [ref=e60]: Phòng
+      - generic [ref=e61] [cursor=pointer]:
+        - img [ref=e64]
+        - generic [ref=e67]: Hóa đơn
+      - generic [ref=e68] [cursor=pointer]:
+        - img [ref=e71]
+        - generic [ref=e74]: Cài đặt
+  - alert [ref=e75]

@@ -1,0 +1,56 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e6] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=e7]:
+      - img [ref=e8]
+    - generic [ref=e11]:
+      - button "Open issues overlay" [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]: "0"
+          - generic [ref=e15]: "1"
+        - generic [ref=e16]: Issue
+      - button "Collapse issues badge" [ref=e17]:
+        - img [ref=e18]
+  - generic [ref=e25]:
+    - generic [ref=e26]:
+      - button
+      - button "Chi nhánh hiện tại Chien" [ref=e84] [cursor=pointer]:
+        - generic [ref=e29]: Chi nhánh hiện tại
+        - generic [ref=e31]: Chien
+      - button [ref=e33] [cursor=pointer]:
+        - img [ref=e34]
+    - main [ref=e38]:
+      - generic [ref=e39]:
+        - generic [ref=e40]:
+          - generic [ref=e41]:
+            - heading "Hóa đơn" [level=1] [ref=e42]
+            - generic [ref=e43]:
+              - button "‹" [ref=e44] [cursor=pointer]
+              - generic [ref=e45]: Tháng 04/2026
+              - button "›" [ref=e46] [cursor=pointer]
+          - button "Tạo hóa đơn" [ref=e85] [cursor=pointer]:
+            - generic [ref=e86]:
+              - img [ref=e87]
+              - text: Tạo hóa đơn
+        - button "Phòng 101 Đã thu Tháng 04/2026 · Nguyễn Văn Bình 3.000.000đ" [ref=e89] [cursor=pointer]:
+          - generic [ref=e91]:
+            - generic [ref=e92]:
+              - generic [ref=e93]:
+                - paragraph [ref=e94]: Phòng 101
+                - generic [ref=e95]: Đã thu
+              - paragraph [ref=e96]: Tháng 04/2026 · Nguyễn Văn Bình
+              - paragraph [ref=e97]: 3.000.000đ
+            - img [ref=e98]
+    - generic [ref=e52]:
+      - generic [ref=e53] [cursor=pointer]:
+        - img [ref=e56]
+        - generic [ref=e61]: Tổng quan
+      - generic [ref=e62] [cursor=pointer]:
+        - img [ref=e65]
+        - generic [ref=e68]: Phòng
+      - generic [ref=e69] [cursor=pointer]:
+        - img [ref=e72]
+        - generic [ref=e75]: Hóa đơn
+      - generic [ref=e76] [cursor=pointer]:
+        - img [ref=e79]
+        - generic [ref=e82]: Cài đặt
+  - alert [ref=e83]

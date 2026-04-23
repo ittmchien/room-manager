@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button, Input } from 'antd-mobile';
 import { apiFetch } from '@/lib/api';
+import { cn } from '@/lib/utils';
 
 export function OnboardingWizard() {
   const router = useRouter();
@@ -57,8 +58,8 @@ export function OnboardingWizard() {
     <div className="flex flex-col items-center gap-6">
       {/* Step dots */}
       <div className="flex items-center gap-2">
-        <div className={`h-2 w-10 rounded-full transition-all ${step >= 1 ? 'bg-blue-600' : 'bg-gray-200'}`} />
-        <div className={`h-2 w-10 rounded-full transition-all ${step >= 2 ? 'bg-blue-600' : 'bg-gray-200'}`} />
+        <div className={cn('h-2 w-10 rounded-full transition-all', step >= 1 ? 'bg-blue-600' : 'bg-gray-200')} />
+        <div className={cn('h-2 w-10 rounded-full transition-all', step >= 2 ? 'bg-blue-600' : 'bg-gray-200')} />
       </div>
 
       {step === 1 && (
@@ -78,7 +79,7 @@ export function OnboardingWizard() {
                 placeholder="VD: Nhà trọ Số 5"
                 value={propertyName}
                 onChange={setPropertyName}
-                className="[--font-size:15px]"
+                style={{ '--font-size': '15px' } as React.CSSProperties}
               />
             </div>
             <div className="rounded-xl bg-gray-50 px-3">
@@ -87,7 +88,7 @@ export function OnboardingWizard() {
                 placeholder="VD: 123 Nguyễn Văn A, Q.1, TP.HCM"
                 value={address}
                 onChange={setAddress}
-                className="[--font-size:15px]"
+                style={{ '--font-size': '15px' } as React.CSSProperties}
               />
             </div>
           </div>
@@ -99,7 +100,7 @@ export function OnboardingWizard() {
             loading={loading}
             disabled={!propertyName}
             onClick={handleCreateProperty}
-            className="!rounded-xl !text-base !font-semibold"
+            className="!text-base !font-semibold"
           >
             Tiếp tục →
           </Button>
@@ -124,7 +125,7 @@ export function OnboardingWizard() {
                 placeholder="VD: Phòng 101"
                 value={roomName}
                 onChange={setRoomName}
-                className="[--font-size:15px]"
+                style={{ '--font-size': '15px' } as React.CSSProperties}
               />
             </div>
             <div className="rounded-xl bg-gray-50 px-3">
@@ -134,7 +135,7 @@ export function OnboardingWizard() {
                 placeholder="VD: 3000000"
                 value={rentPrice}
                 onChange={setRentPrice}
-                className="[--font-size:15px]"
+                style={{ '--font-size': '15px' } as React.CSSProperties}
               />
             </div>
             <p className="text-xs text-gray-400 pl-1">Giá cơ bản chưa bao gồm điện nước và dịch vụ khác.</p>
@@ -146,7 +147,7 @@ export function OnboardingWizard() {
             size="large"
             loading={loading}
             onClick={handleCreateRoom}
-            className="!rounded-xl !text-base !font-semibold"
+            className="!text-base !font-semibold"
           >
             Hoàn tất →
           </Button>

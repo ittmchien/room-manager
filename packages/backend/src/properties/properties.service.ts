@@ -5,24 +5,23 @@ import {
 } from '@nestjs/common';
 import { FEATURE_KEYS, FREE_PROPERTY_LIMIT } from '@room-manager/shared';
 import { PrismaService } from '../prisma/prisma.service';
+import { ConfigService } from '../admin/config/config.service';
 import { CreatePropertyDto } from './dto/create-property.dto';
 import { UpdatePropertyDto } from './dto/update-property.dto';
 
 @Injectable()
 export class PropertiesService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService, private appConfig: ConfigService) {}
 
   async create(userId: string, dto: CreatePropertyDto) {
     const count = await this.prisma.property.count({ where: { ownerId: userId } });
 
-    if (count >= FREE_PROPERTY_LIMIT) {
+    if (count >= FREE_PROPERTY_LIMIT && !this.appConfig.getBoolean('premium_enabled')) {
       const hasFeature = await this.prisma.userFeature.findUnique({
         where: { userId_featureKey: { userId, featureKey: FEATURE_KEYS.MULTI_PROPERTY } },
       });
       if (!hasFeature) {
-        throw new ForbiddenException(
-          'Nâng cấp để quản lý nhiều khu trọ',
-        );
+        throw new ForbiddenException('Nâng cấp để quản lý nhiều khu trọ');
       }
     }
 

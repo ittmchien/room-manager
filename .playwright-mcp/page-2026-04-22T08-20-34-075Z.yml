@@ -1,0 +1,89 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e6] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=e7]:
+      - img [ref=e8]
+    - generic [ref=e11]:
+      - button "Open issues overlay" [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]: "0"
+          - generic [ref=e15]: "1"
+        - generic [ref=e16]: Issue
+      - button "Collapse issues badge" [ref=e17]:
+        - img [ref=e18]
+  - generic [ref=e25]:
+    - generic [ref=e26]:
+      - button
+      - button "Chi nhánh hiện tại Chien" [ref=e86] [cursor=pointer]:
+        - generic [ref=e29]: Chi nhánh hiện tại
+        - generic [ref=e31]: Chien
+      - button [ref=e33] [cursor=pointer]:
+        - img [ref=e34]
+    - main [ref=e38]:
+      - generic [ref=e39]:
+        - heading "Cài đặt" [level=1] [ref=e40]
+        - generic [ref=e87]:
+          - generic [ref=e88]:
+            - heading "Giá điện nước" [level=2] [ref=e89]
+            - paragraph [ref=e90]: Áp dụng khi tính hóa đơn hàng tháng
+          - generic [ref=e92]:
+            - generic [ref=e93]:
+              - paragraph [ref=e94]: Điện
+              - listbox "Chọn nhóm" [ref=e95]:
+                - generic [ref=e96]:
+                  - option "Theo số đo" [selected] [ref=e98] [cursor=pointer]:
+                    - text: Theo số đo
+                    - img [ref=e100]
+                  - option "Theo người" [ref=e108] [cursor=pointer]
+                  - option "Cố định/phòng" [ref=e110] [cursor=pointer]
+              - generic [ref=e111]:
+                - spinbutton [ref=e114]: "4000"
+                - generic [ref=e115]: VND/kWh
+              - button "Lưu Điện" [ref=e117] [cursor=pointer]:
+                - generic [ref=e118]: Lưu Điện
+            - generic [ref=e120]:
+              - paragraph [ref=e121]: Nước
+              - listbox "Chọn nhóm" [ref=e122]:
+                - generic [ref=e123]:
+                  - option "Theo số đo" [selected] [ref=e125] [cursor=pointer]:
+                    - text: Theo số đo
+                    - img [ref=e127]
+                  - option "Theo người" [ref=e135] [cursor=pointer]
+                  - option "Cố định/phòng" [ref=e137] [cursor=pointer]
+              - generic [ref=e138]:
+                - spinbutton [ref=e141]: "15000"
+                - generic [ref=e142]: VND/m³
+              - button "Lưu Nước" [ref=e144] [cursor=pointer]:
+                - generic [ref=e145]: Lưu Nước
+        - generic [ref=e146]:
+          - generic [ref=e147]:
+            - heading "Phí dịch vụ" [level=2] [ref=e148]
+            - paragraph [ref=e149]: Phí cố định tính thêm vào hóa đơn
+          - button "plus Thêm phí dịch vụ" [ref=e153] [cursor=pointer]:
+            - generic [ref=e155]:
+              - img "plus" [ref=e157]:
+                - img [ref=e158]
+              - generic [ref=e161]: Thêm phí dịch vụ
+        - generic [ref=e44]:
+          - heading "Tài khoản" [level=2] [ref=e46]
+          - generic [ref=e47]:
+            - generic [ref=e162]:
+              - generic [ref=e163]: Email
+              - generic [ref=e164]: ittmchien@gmail.com
+            - generic [ref=e48]:
+              - generic [ref=e49]: Đổi mật khẩu
+              - button "Đổi" [ref=e50] [cursor=pointer]
+        - button "Đăng xuất" [ref=e51] [cursor=pointer]
+    - generic [ref=e54]:
+      - generic [ref=e55] [cursor=pointer]:
+        - img [ref=e58]
+        - generic [ref=e63]: Tổng quan
+      - generic [ref=e64] [cursor=pointer]:
+        - img [ref=e67]
+        - generic [ref=e70]: Phòng
+      - generic [ref=e71] [cursor=pointer]:
+        - img [ref=e74]
+        - generic [ref=e77]: Hóa đơn
+      - generic [ref=e78] [cursor=pointer]:
+        - img [ref=e81]
+        - generic [ref=e84]: Cài đặt
+  - alert [ref=e85]

@@ -1,0 +1,63 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e6] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=e7]:
+      - img [ref=e8]
+    - generic [ref=e11]:
+      - button "Open issues overlay" [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]: "0"
+          - generic [ref=e15]: "1"
+        - generic [ref=e16]: Issue
+      - button "Collapse issues badge" [ref=e17]:
+        - img [ref=e18]
+  - generic [ref=e25]:
+    - generic [ref=e26]:
+      - button
+      - button "Chi nhánh hiện tại Chien" [ref=e104] [cursor=pointer]:
+        - generic [ref=e29]: Chi nhánh hiện tại
+        - generic [ref=e31]: Chien
+      - button [ref=e33] [cursor=pointer]:
+        - img [ref=e34]
+    - main [ref=e38]:
+      - generic [ref=e159]:
+        - generic [ref=e160]:
+          - button "←" [ref=e161] [cursor=pointer]
+          - generic [ref=e162]:
+            - heading "Phòng 101" [level=1] [ref=e163]
+            - generic [ref=e164]: Đang thuê
+        - generic [ref=e165]:
+          - generic [ref=e167]:
+            - paragraph [ref=e168]: GIÁ THUÊ
+            - paragraph [ref=e169]: 3.000.000đ
+            - paragraph [ref=e170]: Giá cố định/tháng
+            - generic [ref=e171]:
+              - button "Trống" [ref=e172] [cursor=pointer]
+              - button "Đang thuê" [ref=e173] [cursor=pointer]
+              - button "Sửa chữa" [ref=e174] [cursor=pointer]
+          - generic [ref=e175]:
+            - generic [ref=e176]:
+              - heading "Người thuê" [level=2] [ref=e177]
+              - button "Thêm" [ref=e179] [cursor=pointer]:
+                - generic [ref=e180]:
+                  - img [ref=e181]
+                  - text: Thêm
+            - generic [ref=e191]:
+              - img [ref=e194]
+              - generic [ref=e197]:
+                - text: Nguyễn Văn Bình
+                - generic [ref=e199]: 0901234567 · Vào 22/4/2026
+              - button "Trả phòng" [ref=e201] [cursor=pointer]
+    - generic [ref=e72]:
+      - generic [ref=e73] [cursor=pointer]:
+        - img [ref=e76]
+        - generic [ref=e81]: Tổng quan
+      - generic [ref=e82] [cursor=pointer]:
+        - img [ref=e85]
+        - generic [ref=e88]: Phòng
+      - generic [ref=e89] [cursor=pointer]:
+        - img [ref=e92]
+        - generic [ref=e95]: Hóa đơn
+      - generic [ref=e96] [cursor=pointer]:
+        - img [ref=e99]
+        - generic [ref=e102]: Cài đặt
+  - alert [ref=e103]

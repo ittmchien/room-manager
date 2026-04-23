@@ -1,0 +1,82 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e6] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=e7]:
+      - img [ref=e8]
+    - generic [ref=e11]:
+      - button "Open issues overlay" [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]: "0"
+          - generic [ref=e15]: "1"
+        - generic [ref=e16]: Issue
+      - button "Collapse issues badge" [ref=e17]:
+        - img [ref=e18]
+  - generic [ref=e26]:
+    - generic [ref=e27]:
+      - button
+      - button "Chi nhánh hiện tại Chien" [ref=e78] [cursor=pointer]:
+        - generic [ref=e30]: Chi nhánh hiện tại
+        - generic [ref=e32]: Chien
+      - button [ref=e34] [cursor=pointer]:
+        - img [ref=e35]
+    - main [ref=e39]:
+      - generic [ref=e40]:
+        - generic [ref=e79]:
+          - img [ref=e81]
+          - generic [ref=e88]:
+            - generic [ref=e89]:
+              - img [ref=e90]
+              - generic [ref=e93]: Bật thông báo để nhận nhắc nhở thanh toán
+            - button "Bật" [ref=e94] [cursor=pointer]
+          - img [ref=e97]
+        - generic [ref=e102]:
+          - generic [ref=e103]:
+            - img [ref=e104]
+            - text: Tổng thu tháng 04/2026
+          - paragraph [ref=e107]: 3.000.000đ
+          - button "Hóa đơn" [ref=e109] [cursor=pointer]:
+            - generic [ref=e110]:
+              - img [ref=e111]
+              - text: Hóa đơn
+        - generic [ref=e114]:
+          - generic [ref=e115]:
+            - img [ref=e117]
+            - paragraph [ref=e120]: "1"
+            - paragraph [ref=e121]: Tổng phòng
+          - generic [ref=e122]:
+            - img [ref=e124]
+            - paragraph [ref=e129]: "1"
+            - paragraph [ref=e130]: Đang thuê
+          - generic [ref=e131]:
+            - img [ref=e133]
+            - paragraph [ref=e136]: "0"
+            - paragraph [ref=e137]: Phòng trống
+        - generic [ref=e138]:
+          - button "Thu / Chi" [ref=e139] [cursor=pointer]:
+            - img [ref=e141]
+            - generic [ref=e144]: Thu / Chi
+          - button "Hợp đồng" [ref=e145] [cursor=pointer]:
+            - img [ref=e147]
+            - generic [ref=e150]: Hợp đồng
+          - button "Báo cáo" [ref=e151] [cursor=pointer]:
+            - img [ref=e153]
+            - generic [ref=e155]: Báo cáo
+        - generic [ref=e156]:
+          - generic [ref=e157]:
+            - heading "Chưa thanh toán" [level=2] [ref=e158]
+            - link "Xem tất cả →" [ref=e159] [cursor=pointer]:
+              - /url: /invoices
+          - generic [ref=e160]: 🎉 Tất cả hóa đơn đã được thanh toán
+    - generic [ref=e46]:
+      - generic [ref=e47] [cursor=pointer]:
+        - img [ref=e50]
+        - generic [ref=e55]: Tổng quan
+      - generic [ref=e56] [cursor=pointer]:
+        - img [ref=e59]
+        - generic [ref=e62]: Phòng
+      - generic [ref=e63] [cursor=pointer]:
+        - img [ref=e66]
+        - generic [ref=e69]: Hóa đơn
+      - generic [ref=e70] [cursor=pointer]:
+        - img [ref=e73]
+        - generic [ref=e76]: Cài đặt
+  - alert [ref=e77]

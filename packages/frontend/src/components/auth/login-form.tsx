@@ -1,16 +1,29 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Eye, EyeOff } from 'lucide-react';
 import { Button, Input } from 'antd-mobile';
+import { useRouter } from 'next/navigation';
 import { useAuth } from '@/hooks/use-auth';
+import { createBrowserClient } from '@/lib/supabase/client';
 
 export function LoginForm() {
   const { loading, error, signInWithGoogle, signInWithEmail } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    const supabase = createBrowserClient();
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN' && session) {
+        router.replace('/dashboard');
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, [router]);
 
   const handleSubmit = async () => {
     await signInWithEmail(email, password);
@@ -35,7 +48,7 @@ export function LoginForm() {
         fill="outline"
         onClick={signInWithGoogle}
         disabled={loading}
-        className="!rounded-xl !border-gray-200 !text-gray-700 !font-medium"
+        className="!border-gray-200 !text-gray-700 !font-medium"
       >
         <span className="flex items-center justify-center gap-3">
           <svg className="h-5 w-5 shrink-0" viewBox="0 0 24 24">
@@ -64,7 +77,7 @@ export function LoginForm() {
             placeholder="your@email.com"
             value={email}
             onChange={setEmail}
-            className="[--font-size:15px]"
+            style={{ '--font-size': '15px' } as React.CSSProperties}
           />
         </div>
 
@@ -77,7 +90,7 @@ export function LoginForm() {
                 placeholder="••••••••"
                 value={password}
                 onChange={setPassword}
-                className="[--font-size:15px]"
+                style={{ '--font-size': '15px' } as React.CSSProperties}
               />
             </div>
             <Button
@@ -97,11 +110,10 @@ export function LoginForm() {
         <Button
           block
           color="primary"
-          size="large"
           loading={loading}
           disabled={!email || !password}
           onClick={handleSubmit}
-          className="!rounded-xl !text-base !font-semibold"
+          className="!text-base !font-semibold"
         >
           Đăng nhập
         </Button>

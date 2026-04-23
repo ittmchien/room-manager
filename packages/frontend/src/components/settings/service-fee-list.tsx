@@ -37,7 +37,7 @@ export function ServiceFeeList({ propertyId, fees }: Props) {
   return (
     <div className="space-y-1">
       {fees.length > 0 && (
-        <List className="[--border-top:none] [--border-bottom:none]">
+        <List style={{ '--border-top': 'none', '--border-bottom': 'none' } as React.CSSProperties}>
           {fees.map((fee) => (
             <List.Item
               key={fee.id}
@@ -64,9 +64,9 @@ export function ServiceFeeList({ propertyId, fees }: Props) {
         trigger={
           <Button
             block
-            size="small"
-            fill="outline"
-            className="rounded-xl! mt-2"
+            color="primary"
+            fill="solid"
+            className="mt-2"
           >
             <Space>
               <PlusOutlined className="h-4 w-4" />

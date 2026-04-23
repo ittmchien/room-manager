@@ -1,0 +1,62 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e6] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=e7]:
+      - img [ref=e8]
+    - generic [ref=e11]:
+      - button "Open issues overlay" [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]: "0"
+          - generic [ref=e15]: "1"
+        - generic [ref=e16]: Issue
+      - button "Collapse issues badge" [ref=e17]:
+        - img [ref=e18]
+  - generic [ref=e25]:
+    - generic [ref=e26]:
+      - button
+      - button "Chi nhánh hiện tại Chien" [ref=e104] [cursor=pointer]:
+        - generic [ref=e29]: Chi nhánh hiện tại
+        - generic [ref=e31]: Chien
+      - button [ref=e33] [cursor=pointer]:
+        - img [ref=e34]
+    - main [ref=e38]:
+      - generic [ref=e39]:
+        - generic [ref=e40]:
+          - generic [ref=e41]:
+            - heading "Phòng trọ" [level=1] [ref=e42]
+            - paragraph [ref=e125]: 1/1 đang thuê · 0 trống
+          - button "Thêm phòng" [ref=e106] [cursor=pointer]:
+            - generic [ref=e107]:
+              - img [ref=e108]
+              - text: Thêm phòng
+        - generic [ref=e126]:
+          - tablist [ref=e128]:
+            - tab "Tất cả (1)" [selected] [ref=e131] [cursor=pointer]
+            - tab "Trống (0)" [ref=e133] [cursor=pointer]
+            - tab "Đang thuê (1)" [ref=e135] [cursor=pointer]
+          - button "Phòng 101 3.000.000 đ/tháng Nguyễn Văn Bình Đang thuê" [ref=e138] [cursor=pointer]:
+            - generic [ref=e140]:
+              - generic [ref=e141]:
+                - generic [ref=e143]: Phòng 101
+                - generic [ref=e144]:
+                  - generic [ref=e145]: 3.000.000
+                  - generic [ref=e146]: đ/tháng
+                - generic [ref=e147]:
+                  - img [ref=e148]
+                  - generic [ref=e153]: Nguyễn Văn Bình
+              - generic [ref=e154]:
+                - generic [ref=e155]: Đang thuê
+                - img [ref=e157]
+    - generic [ref=e72]:
+      - generic [ref=e73] [cursor=pointer]:
+        - img [ref=e76]
+        - generic [ref=e81]: Tổng quan
+      - generic [ref=e82] [cursor=pointer]:
+        - img [ref=e85]
+        - generic [ref=e88]: Phòng
+      - generic [ref=e89] [cursor=pointer]:
+        - img [ref=e92]
+        - generic [ref=e95]: Hóa đơn
+      - generic [ref=e96] [cursor=pointer]:
+        - img [ref=e99]
+        - generic [ref=e102]: Cài đặt
+  - alert [ref=e103]

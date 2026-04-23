@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { List, Button, Dialog, Tag } from 'antd-mobile';
+import { List, Button, Dialog, Tag, Collapse } from 'antd-mobile';
 import { UserRound } from 'lucide-react';
 import { Tenant, useCheckoutTenant } from '@/hooks/use-tenants';
 
@@ -36,7 +36,7 @@ export function TenantList({ tenants, roomId }: { tenants: Tenant[]; roomId: str
   return (
     <div className="space-y-2">
       {active.length > 0 && (
-        <List className="[--border-top:none] [--border-bottom:none] [--border-inner:none]">
+        <List style={{ '--border-top': 'none', '--border-bottom': 'none', '--border-inner': 'none' } as React.CSSProperties}>
           {active.map((tenant) => (
             <List.Item
               key={tenant.id}
@@ -61,7 +61,7 @@ export function TenantList({ tenants, roomId }: { tenants: Tenant[]; roomId: str
                   Trả phòng
                 </Button>
               }
-              className="[--padding-left:0] [--padding-right:0]"
+              style={{ '--padding-left': '0', '--padding-right': '0' } as React.CSSProperties}
             >
               <span className="font-semibold text-gray-900">{tenant.name}</span>
             </List.Item>
@@ -70,32 +70,31 @@ export function TenantList({ tenants, roomId }: { tenants: Tenant[]; roomId: str
       )}
 
       {movedOut.length > 0 && (
-        <details className="mt-2">
-          <summary className="cursor-pointer text-sm text-gray-400 py-1">
-            {movedOut.length} người đã trả phòng
-          </summary>
-          <List className="mt-2 [--border-top:none] [--border-bottom:none] [--border-inner:none]">
-            {movedOut.map((tenant) => (
-              <List.Item
-                key={tenant.id}
-                prefix={
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100">
-                    <UserRound className="h-4 w-4 text-gray-400" />
-                  </div>
-                }
-                description={
-                  <span className="text-xs text-gray-400">
-                    {formatDate(tenant.moveInDate)} → {tenant.moveOutDate ? formatDate(tenant.moveOutDate) : '?'}
-                  </span>
-                }
-                extra={<Tag color="default">Đã trả</Tag>}
-                className="[--padding-left:0] [--padding-right:0]"
-              >
-                <span className="text-sm text-gray-500">{tenant.name}</span>
-              </List.Item>
-            ))}
-          </List>
-        </details>
+        <Collapse className="mt-2">
+          <Collapse.Panel key="moved-out" title={<span className="text-sm text-gray-400">{movedOut.length} người đã trả phòng</span>}>
+            <List style={{ '--border-top': 'none', '--border-bottom': 'none', '--border-inner': 'none' } as React.CSSProperties}>
+              {movedOut.map((tenant) => (
+                <List.Item
+                  key={tenant.id}
+                  prefix={
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100">
+                      <UserRound className="h-4 w-4 text-gray-400" />
+                    </div>
+                  }
+                  description={
+                    <span className="text-xs text-gray-400">
+                      {formatDate(tenant.moveInDate)} → {tenant.moveOutDate ? formatDate(tenant.moveOutDate) : '?'}
+                    </span>
+                  }
+                  extra={<Tag color="default">Đã trả</Tag>}
+                  style={{ '--padding-left': '0', '--padding-right': '0' } as React.CSSProperties}
+                >
+                  <span className="text-sm text-gray-500">{tenant.name}</span>
+                </List.Item>
+              ))}
+            </List>
+          </Collapse.Panel>
+        </Collapse>
       )}
     </div>
   );

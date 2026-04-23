@@ -33,30 +33,16 @@ export function RegisterForm() {
       </div>
 
       <div className="flex w-full flex-col gap-3">
-        {/* Name */}
         <div className="rounded-xl bg-gray-50 px-3">
           <p className="pt-2.5 text-xs text-gray-400">Họ và tên</p>
-          <Input
-            placeholder="Nguyễn Văn A"
-            value={name}
-            onChange={setName}
-            className="[--font-size:15px]"
-          />
+          <Input placeholder="Nguyễn Văn A" value={name} onChange={setName} style={{ '--font-size': '15px' } as React.CSSProperties} />
         </div>
 
-        {/* Email */}
         <div className="rounded-xl bg-gray-50 px-3">
           <p className="pt-2.5 text-xs text-gray-400">Email</p>
-          <Input
-            type="email"
-            placeholder="your@email.com"
-            value={email}
-            onChange={setEmail}
-            className="[--font-size:15px]"
-          />
+          <Input type="email" placeholder="your@email.com" value={email} onChange={setEmail} style={{ '--font-size': '15px' } as React.CSSProperties} />
         </div>
 
-        {/* Password */}
         <div className="rounded-xl bg-gray-50 px-3">
           <p className="pt-2.5 text-xs text-gray-400">Mật khẩu</p>
           <div className="flex items-center">
@@ -66,7 +52,7 @@ export function RegisterForm() {
                 placeholder="Tối thiểu 6 ký tự"
                 value={password}
                 onChange={setPassword}
-                className="[--font-size:15px]"
+                style={{ '--font-size': '15px' } as React.CSSProperties}
               />
             </div>
             <Button
@@ -79,11 +65,10 @@ export function RegisterForm() {
           </div>
         </div>
 
-        {/* Terms */}
         <Checkbox
           checked={agreed}
           onChange={setAgreed}
-          className="[--icon-size:16px] [--font-size:14px] [--gap:10px]"
+          style={{ '--icon-size': '16px', '--font-size': '14px', '--gap': '10px' } as React.CSSProperties}
         >
           <span className="text-gray-500 leading-relaxed">
             Tôi đồng ý với{' '}
@@ -100,11 +85,10 @@ export function RegisterForm() {
         <Button
           block
           color="primary"
-          size="large"
           loading={loading}
           disabled={!agreed || !email || !password || !name}
           onClick={handleSubmit}
-          className="!rounded-xl !text-base !font-semibold"
+          className="!text-base !font-semibold"
         >
           Đăng ký
         </Button>

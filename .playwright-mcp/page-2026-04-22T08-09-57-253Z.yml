@@ -1,0 +1,47 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e6] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=e7]:
+      - img [ref=e8]
+    - generic [ref=e11]:
+      - button "Open issues overlay" [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]: "0"
+          - generic [ref=e15]: "1"
+        - generic [ref=e16]: Issue
+      - button "Collapse issues badge" [ref=e17]:
+        - img [ref=e18]
+  - generic [ref=e25]:
+    - generic [ref=e26]:
+      - button
+      - button "Chi nhánh hiện tại Chien" [ref=e103] [cursor=pointer]:
+        - generic [ref=e29]: Chi nhánh hiện tại
+        - generic [ref=e31]: Chien
+      - button [ref=e33] [cursor=pointer]:
+        - img [ref=e34]
+    - main [ref=e38]:
+      - generic [ref=e39]:
+        - generic [ref=e40]:
+          - heading "Hợp đồng" [level=1] [ref=e41]
+          - button "Thêm" [ref=e105] [cursor=pointer]:
+            - generic [ref=e106]:
+              - img [ref=e107]
+              - text: Thêm
+        - generic [ref=e108]:
+          - img [ref=e110]
+          - generic [ref=e132]:
+            - generic [ref=e133]: Không tìm thấy thứ bạn cần
+            - generic [ref=e134]: Chưa có hợp đồng nào
+    - generic [ref=e71]:
+      - generic [ref=e72] [cursor=pointer]:
+        - img [ref=e75]
+        - generic [ref=e80]: Tổng quan
+      - generic [ref=e81] [cursor=pointer]:
+        - img [ref=e84]
+        - generic [ref=e87]: Phòng
+      - generic [ref=e88] [cursor=pointer]:
+        - img [ref=e91]
+        - generic [ref=e94]: Hóa đơn
+      - generic [ref=e95] [cursor=pointer]:
+        - img [ref=e98]
+        - generic [ref=e101]: Cài đặt
+  - alert [ref=e102]

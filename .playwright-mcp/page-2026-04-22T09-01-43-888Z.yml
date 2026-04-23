@@ -1,0 +1,41 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e6] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=e7]:
+      - img [ref=e8]
+    - generic [ref=e11]:
+      - button "Open issues overlay" [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]: "0"
+          - generic [ref=e15]: "1"
+        - generic [ref=e16]: Issue
+      - button "Collapse issues badge" [ref=e17]:
+        - img [ref=e18]
+  - paragraph [ref=e23]: Đang tải...
+  - generic [ref=e26]:
+    - generic [ref=e27]:
+      - button
+      - button "Chi nhánh hiện tại ..." [ref=e29] [cursor=pointer]:
+        - generic [ref=e30]: Chi nhánh hiện tại
+        - generic [ref=e32]: ...
+      - button [ref=e34] [cursor=pointer]:
+        - img [ref=e35]
+    - main [ref=e39]:
+      - generic [ref=e40]:
+        - heading "Hóa đơn" [level=1] [ref=e42]
+        - generic [ref=e43]:
+          - paragraph [ref=e44]: 🏘️
+          - paragraph [ref=e45]: Chưa có khu trọ
+    - generic [ref=e48]:
+      - generic [ref=e49] [cursor=pointer]:
+        - img [ref=e52]
+        - generic [ref=e57]: Tổng quan
+      - generic [ref=e58] [cursor=pointer]:
+        - img [ref=e61]
+        - generic [ref=e64]: Phòng
+      - generic [ref=e65] [cursor=pointer]:
+        - img [ref=e68]
+        - generic [ref=e71]: Hóa đơn
+      - generic [ref=e72] [cursor=pointer]:
+        - img [ref=e75]
+        - generic [ref=e78]: Cài đặt
+  - alert [ref=e79]

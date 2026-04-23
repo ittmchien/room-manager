@@ -93,8 +93,7 @@ export default function InvoicesPage() {
                   {formatPeriod(period)}
                 </span>
               }
-              className="mb-3"
-              style={{ '--border-top': 'none', '--border-bottom': 'none' } as React.CSSProperties}
+              className="mb-3 no-border"
             >
               {items.map((invoice) => {
                 const cfg = statusConfig[invoice.status];

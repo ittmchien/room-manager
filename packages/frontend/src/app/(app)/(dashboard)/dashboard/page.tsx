@@ -172,7 +172,7 @@ export default function DashboardPage() {
             Tất cả hóa đơn đã được thanh toán
           </div>
         ) : (
-          <List className="-mx-3" style={{ '--border-top': 'none', '--border-bottom': 'none', '--border-inner': 'none' } as React.CSSProperties}>
+          <List className="-mx-3 no-border">
             {pendingInvoices.slice(0, 5).map((inv, idx) => (
               <Fragment key={inv.id}>
                 {idx > 0 && <div className="mx-3 h-px bg-gray-100" />}

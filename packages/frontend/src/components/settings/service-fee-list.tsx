@@ -37,7 +37,7 @@ export function ServiceFeeList({ propertyId, fees }: Props) {
   return (
     <div className="space-y-1">
       {fees.length > 0 && (
-        <List style={{ '--border-top': 'none', '--border-bottom': 'none' } as React.CSSProperties}>
+        <List className="no-border">
           {fees.map((fee) => (
             <List.Item
               key={fee.id}
@@ -47,7 +47,7 @@ export function ServiceFeeList({ propertyId, fees }: Props) {
                   fill="none"
                   onClick={() => handleDelete(fee.id, fee.name)}
                   disabled={deletingId === fee.id}
-                  className="!text-red-400 !p-1 !min-w-0"
+                  className="!text-red-400 !p-2 !min-w-0"
                 >
                   <Trash2 className="h-4 w-4" />
                 </Button>

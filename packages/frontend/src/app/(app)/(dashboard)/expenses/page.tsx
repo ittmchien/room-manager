@@ -69,7 +69,7 @@ function ExpenseBody({ propertyId, month }: { propertyId: string; month: string 
         </Card>
       </div>
 
-      <List style={{ '--border-top': 'none', '--border-bottom': 'none' } as React.CSSProperties}>
+      <List className="no-border">
         {expenses.map((e) => (
           <List.Item
             key={e.id}
@@ -79,7 +79,7 @@ function ExpenseBody({ propertyId, month }: { propertyId: string; month: string 
                 <span className={cn('font-semibold', e.type === 'EXPENSE' ? 'text-red-500' : 'text-green-600')}>
                   {e.type === 'EXPENSE' ? '-' : '+'}{e.amount.toLocaleString('vi-VN')}đ
                 </span>
-                <Button fill="none" onClick={() => handleDelete(e.id, e.note)} className="!text-red-400 !p-1 !min-w-0">
+                <Button fill="none" onClick={() => handleDelete(e.id, e.note)} className="!text-red-400 !p-2 !min-w-0">
                   <Trash2 className="h-4 w-4" />
                 </Button>
               </div>

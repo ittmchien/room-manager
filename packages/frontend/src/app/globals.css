@@ -38,6 +38,13 @@ body {
   --title-font-size: 14px;
 }
 
+/* Remove borders from List used as plain containers */
+.adm-list.no-border {
+  --border-top: none;
+  --border-bottom: none;
+  --border-inner: none;
+}
+
 /* Constrain antd-mobile portals to the max-w-md (448px) app container.
    .adm-mask is intentionally excluded — mask should cover the full viewport. */
 /* .adm-popup,

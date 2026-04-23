@@ -52,7 +52,6 @@ export default function RoomsPage() {
         <Tabs
           activeKey={activeTab}
           onChange={(key) => setActiveTab(key as FilterTab)}
-          style={{ '--title-font-size': '14px' } as React.CSSProperties}
         >
           <Tabs.Tab title={`Tất cả (${rooms?.length ?? 0})`} key="all">
             {isPending ? (

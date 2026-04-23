@@ -1,3 +1,5 @@
+'use client';
+
 import { Card, Col, Row, Statistic, Typography } from 'antd';
 import { UserOutlined, TagsOutlined, CreditCardOutlined, SettingOutlined } from '@ant-design/icons';
 

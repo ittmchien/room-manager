@@ -36,7 +36,7 @@ export function TenantList({ tenants, roomId }: { tenants: Tenant[]; roomId: str
   return (
     <div className="space-y-2">
       {active.length > 0 && (
-        <List style={{ '--border-top': 'none', '--border-bottom': 'none', '--border-inner': 'none' } as React.CSSProperties}>
+        <List className="no-border">
           {active.map((tenant) => (
             <List.Item
               key={tenant.id}
@@ -72,7 +72,7 @@ export function TenantList({ tenants, roomId }: { tenants: Tenant[]; roomId: str
       {movedOut.length > 0 && (
         <Collapse className="mt-2">
           <Collapse.Panel key="moved-out" title={<span className="text-sm text-gray-400">{movedOut.length} người đã trả phòng</span>}>
-            <List style={{ '--border-top': 'none', '--border-bottom': 'none', '--border-inner': 'none' } as React.CSSProperties}>
+            <List className="no-border">
               {movedOut.map((tenant) => (
                 <List.Item
                   key={tenant.id}

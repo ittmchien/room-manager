@@ -1,6 +1,8 @@
 import type { NextConfig } from 'next';
+import path from 'path';
 
 const nextConfig: NextConfig = {
+  outputFileTracingRoot: path.join(__dirname, '../../'),
   transpilePackages: ['@room-manager/shared', 'antd-mobile', 'antd', '@ant-design/icons'],
   images: {
     remotePatterns: [

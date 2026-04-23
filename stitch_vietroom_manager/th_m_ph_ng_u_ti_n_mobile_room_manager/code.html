@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Room Manager - Onboarding Step 2</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "surface-variant": "#dfe3e7",
+                  "error": "#ba1a1a",
+                  "on-tertiary": "#ffffff",
+                  "on-secondary-fixed": "#002109",
+                  "on-error-container": "#93000a",
+                  "primary-fixed-dim": "#b4c5ff",
+                  "on-primary-fixed": "#00174b",
+                  "secondary-fixed": "#6bff8f",
+                  "on-surface": "#171c1f",
+                  "surface-container": "#eaeef2",
+                  "on-primary-fixed-variant": "#003ea8",
+                  "surface-container-low": "#f0f4f8",
+                  "tertiary": "#943700",
+                  "surface-dim": "#d6dade",
+                  "outline-variant": "#c3c6d7",
+                  "tertiary-fixed": "#ffdbcd",
+                  "on-tertiary-fixed-variant": "#7d2d00",
+                  "primary-fixed": "#dbe1ff",
+                  "inverse-primary": "#b4c5ff",
+                  "secondary-fixed-dim": "#4ae176",
+                  "inverse-surface": "#2c3134",
+                  "surface-container-lowest": "#ffffff",
+                  "secondary": "#006e2f",
+                  "on-primary-container": "#eeefff",
+                  "primary": "#004ac6",
+                  "on-background": "#171c1f",
+                  "on-secondary": "#ffffff",
+                  "on-tertiary-container": "#ffede6",
+                  "inverse-on-surface": "#edf1f5",
+                  "on-secondary-fixed-variant": "#005321",
+                  "surface-tint": "#0053db",
+                  "surface-container-high": "#e4e9ed",
+                  "error-container": "#ffdad6",
+                  "surface-container-highest": "#dfe3e7",
+                  "on-tertiary-fixed": "#360f00",
+                  "secondary-container": "#6bff8f",
+                  "surface": "#f6fafe",
+                  "on-secondary-container": "#007432",
+                  "surface-bright": "#f6fafe",
+                  "tertiary-fixed-dim": "#ffb596",
+                  "outline": "#737686",
+                  "tertiary-container": "#bc4800",
+                  "on-surface-variant": "#434655",
+                  "on-primary": "#ffffff",
+                  "background": "#f6fafe",
+                  "primary-container": "#2563eb",
+                  "on-error": "#ffffff"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "full": "9999px"
+          },
+          "fontFamily": {
+                  "headline": [
+                          "Be Vietnam Pro"
+                  ],
+                  "body": [
+                          "Inter"
+                  ],
+                  "label": [
+                          "Inter"
+                  ]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface antialiased min-h-screen flex flex-col items-center pb-24 md:pb-0">
+<!-- Suppressed Navigation Shells: Onboarding is a linear/transactional flow -->
+<!-- Top AppBar for Onboarding (Simplified) -->
+<header class="w-full bg-surface-container-lowest px-6 py-4 sticky top-0 z-40 shadow-[0_4px_24px_rgba(23,28,31,0.02)]">
+<div class="max-w-md mx-auto flex items-center justify-between">
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center w-10 h-10 rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-xl">arrow_back</span>
+</button>
+<div class="flex space-x-2">
+<div class="w-2 h-2 rounded-full bg-surface-container-high"></div>
+<div class="w-8 h-2 rounded-full bg-primary"></div>
+<div class="w-2 h-2 rounded-full bg-surface-container-high"></div>
+</div>
+<div class="w-10"></div> <!-- Spacer for balance -->
+</div>
+</header>
+<main class="w-full max-w-md mx-auto px-6 py-8 flex-grow flex flex-col">
+<div class="mb-10 text-center">
+<h1 class="font-headline text-3xl font-bold tracking-tight text-on-surface mb-2">Thêm phòng đầu tiên</h1>
+<p class="font-body text-body-md text-on-surface-variant">Thiết lập không gian của bạn. Bạn có thể thêm nhiều phòng hơn sau.</p>
+</div>
+<form class="flex-grow flex flex-col space-y-6">
+<!-- Room Name Input -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_4px_24px_rgba(23,28,31,0.03)] border border-outline-variant/15 flex flex-col relative overflow-hidden group focus-within:border-primary/50 transition-colors">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-surface-container-high group-focus-within:bg-primary transition-colors"></div>
+<label class="font-headline text-label-sm font-semibold text-on-surface-variant uppercase tracking-wider mb-2" for="room_name">Tên Phòng</label>
+<div class="flex items-center">
+<span class="material-symbols-outlined text-outline mr-3">door_front</span>
+<input class="w-full bg-transparent border-none p-0 focus:ring-0 font-headline text-title-md font-medium text-on-surface placeholder-outline/50" id="room_name" placeholder="Ví dụ: P.101" required="" type="text"/>
+</div>
+</div>
+<!-- Floor Input -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_4px_24px_rgba(23,28,31,0.03)] border border-outline-variant/15 flex flex-col relative overflow-hidden group focus-within:border-primary/50 transition-colors">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-surface-container-high group-focus-within:bg-primary transition-colors"></div>
+<label class="font-headline text-label-sm font-semibold text-on-surface-variant uppercase tracking-wider mb-2" for="floor">Tầng / Khu vực</label>
+<div class="flex items-center">
+<span class="material-symbols-outlined text-outline mr-3">layers</span>
+<input class="w-full bg-transparent border-none p-0 focus:ring-0 font-body text-body-md text-on-surface placeholder-outline/50" id="floor" placeholder="Ví dụ: Tầng 1" type="text"/>
+</div>
+</div>
+<!-- Price Input -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_4px_24px_rgba(23,28,31,0.03)] border border-outline-variant/15 flex flex-col relative overflow-hidden group focus-within:border-primary/50 transition-colors">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-surface-container-high group-focus-within:bg-primary transition-colors"></div>
+<label class="font-headline text-label-sm font-semibold text-on-surface-variant uppercase tracking-wider mb-2" for="price">Giá Thuê Cơ Bản</label>
+<div class="flex items-center">
+<span class="material-symbols-outlined text-outline mr-3">payments</span>
+<input class="w-full bg-transparent border-none p-0 focus:ring-0 font-headline text-display-sm font-bold text-on-surface placeholder-outline/30 text-right" id="price" placeholder="0" required="" type="number"/>
+<span class="font-headline text-title-md text-on-surface-variant ml-2 font-medium">đ</span>
+</div>
+</div>
+<!-- Status Toggles -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_4px_24px_rgba(23,28,31,0.03)] border border-outline-variant/15 flex flex-col">
+<h3 class="font-headline text-label-sm font-semibold text-on-surface-variant uppercase tracking-wider mb-4">Trạng Thái</h3>
+<div class="flex flex-col space-y-4">
+<!-- Toggle 1 -->
+<label class="flex items-center justify-between cursor-pointer group">
+<div class="flex items-center">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed/20 flex items-center justify-center mr-4 text-secondary-container">
+<span class="material-symbols-outlined text-xl">check_circle</span>
+</div>
+<div>
+<span class="font-body text-body-md font-medium text-on-surface block">Đã có người thuê</span>
+<span class="font-body text-label-sm text-on-surface-variant block mt-0.5">Phòng đang hoạt động</span>
+</div>
+</div>
+<div class="relative">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</div>
+</label>
+<div class="h-px w-full bg-surface-container-high/50"></div>
+<!-- Toggle 2 -->
+<label class="flex items-center justify-between cursor-pointer group">
+<div class="flex items-center">
+<div class="w-10 h-10 rounded-full bg-error-container/50 flex items-center justify-center mr-4 text-error">
+<span class="material-symbols-outlined text-xl">build</span>
+</div>
+<div>
+<span class="font-body text-body-md font-medium text-on-surface block">Cần sửa chữa</span>
+<span class="font-body text-label-sm text-on-surface-variant block mt-0.5">Bảo trì trước khi cho thuê</span>
+</div>
+</div>
+<div class="relative">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-error"></div>
+</div>
+</label>
+</div>
+</div>
+<!-- Action Button fixed at bottom for mobile -->
+<div class="mt-8 pt-4 pb-8">
+<button class="w-full bg-gradient-to-r from-primary to-primary-container text-on-primary font-headline text-title-md font-semibold py-4 px-6 rounded-xl shadow-[0_8px_30px_rgba(0,74,198,0.2)] hover:shadow-[0_12px_40px_rgba(0,74,198,0.3)] transition-all active:scale-[0.98] flex items-center justify-center" type="submit">
+          Tiếp Tục
+          <span class="material-symbols-outlined ml-2 text-xl" style="font-variation-settings: 'FILL' 1;">arrow_forward</span>
+</button>
+<button class="w-full mt-4 text-primary font-body text-body-md font-medium py-3 rounded-lg hover:bg-primary/5 transition-colors" type="button">
+            Bỏ qua bước này
+        </button>
+</div>
+</form>
+</main>
+</body></html>

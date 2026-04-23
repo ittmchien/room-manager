@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Đăng ký - Modern Sanctuary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#dfe3e7",
+                    "error": "#ba1a1a",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed": "#002109",
+                    "on-error-container": "#93000a",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-primary-fixed": "#00174b",
+                    "secondary-fixed": "#6bff8f",
+                    "on-surface": "#171c1f",
+                    "surface-container": "#eaeef2",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "surface-container-low": "#f0f4f8",
+                    "tertiary": "#943700",
+                    "surface-dim": "#d6dade",
+                    "outline-variant": "#c3c6d7",
+                    "tertiary-fixed": "#ffdbcd",
+                    "on-tertiary-fixed-variant": "#7d2d00",
+                    "primary-fixed": "#dbe1ff",
+                    "inverse-primary": "#b4c5ff",
+                    "secondary-fixed-dim": "#4ae176",
+                    "inverse-surface": "#2c3134",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary": "#006e2f",
+                    "on-primary-container": "#eeefff",
+                    "primary": "#004ac6",
+                    "on-background": "#171c1f",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-container": "#ffede6",
+                    "inverse-on-surface": "#edf1f5",
+                    "on-secondary-fixed-variant": "#005321",
+                    "surface-tint": "#0053db",
+                    "surface-container-high": "#e4e9ed",
+                    "error-container": "#ffdad6",
+                    "surface-container-highest": "#dfe3e7",
+                    "on-tertiary-fixed": "#360f00",
+                    "secondary-container": "#6bff8f",
+                    "surface": "#f6fafe",
+                    "on-secondary-container": "#007432",
+                    "surface-bright": "#f6fafe",
+                    "tertiary-fixed-dim": "#ffb596",
+                    "outline": "#737686",
+                    "tertiary-container": "#bc4800",
+                    "on-surface-variant": "#434655",
+                    "on-primary": "#ffffff",
+                    "background": "#f6fafe",
+                    "primary-container": "#2563eb",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Be Vietnam Pro"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: theme('colors.surface');
+            color: theme('colors.on-surface');
+        }
+        h1, h2, h3, .headline {
+            font-family: 'Be Vietnam Pro', sans-serif;
+        }
+        /* No lines rule - use tonal shifts instead */
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px theme('colors.primary-fixed');
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col items-center justify-center p-6 antialiased relative overflow-hidden">
+<!-- Decorative Ambient Background Elements -->
+<div class="absolute top-[-10%] right-[-20%] w-96 h-96 bg-primary-fixed-dim/30 rounded-full blur-3xl z-0 pointer-events-none"></div>
+<div class="absolute bottom-[-10%] left-[-10%] w-72 h-72 bg-secondary-fixed-dim/20 rounded-full blur-3xl z-0 pointer-events-none"></div>
+<!-- Main Registration Card - Glassmorphism touch -->
+<main class="w-full max-w-md bg-surface/80 backdrop-blur-xl rounded-[2rem] p-8 z-10 flex flex-col gap-8">
+<!-- Header Section -->
+<header class="text-center space-y-2 mt-4">
+<h1 class="font-headline text-[2.25rem] font-bold text-primary leading-tight tracking-tight">
+                Tạo tài khoản
+            </h1>
+<p class="font-body text-[0.875rem] text-on-surface-variant max-w-[250px] mx-auto">
+                Bắt đầu quản lý không gian của bạn dễ dàng hơn bao giờ hết.
+            </p>
+</header>
+<!-- Form Section -->
+<form action="#" class="flex flex-col gap-5 w-full" method="POST">
+<!-- Name Field -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label text-[0.6875rem] font-semibold text-on-surface-variant uppercase tracking-wider ml-1" for="fullName">Họ và tên</label>
+<div class="relative flex items-center bg-surface-container-low rounded-xl px-4 py-3 transition-colors hover:bg-surface-container-high/50">
+<span class="material-symbols-outlined text-outline mr-3" data-icon="person">person</span>
+<input class="w-full bg-transparent border-none p-0 text-[0.875rem] text-on-surface placeholder:text-outline/60 focus:ring-0 font-body" id="fullName" name="fullName" placeholder="Nguyễn Văn A" required="" type="text"/>
+</div>
+</div>
+<!-- Phone Field -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label text-[0.6875rem] font-semibold text-on-surface-variant uppercase tracking-wider ml-1" for="phone">Số điện thoại</label>
+<div class="relative flex items-center bg-surface-container-low rounded-xl px-4 py-3 transition-colors hover:bg-surface-container-high/50">
+<span class="material-symbols-outlined text-outline mr-3" data-icon="phone_iphone">phone_iphone</span>
+<input class="w-full bg-transparent border-none p-0 text-[0.875rem] text-on-surface placeholder:text-outline/60 focus:ring-0 font-body" id="phone" name="phone" placeholder="090 123 4567" required="" type="tel"/>
+</div>
+</div>
+<!-- Email Field -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label text-[0.6875rem] font-semibold text-on-surface-variant uppercase tracking-wider ml-1" for="email">Email</label>
+<div class="relative flex items-center bg-surface-container-low rounded-xl px-4 py-3 transition-colors hover:bg-surface-container-high/50">
+<span class="material-symbols-outlined text-outline mr-3" data-icon="mail">mail</span>
+<input class="w-full bg-transparent border-none p-0 text-[0.875rem] text-on-surface placeholder:text-outline/60 focus:ring-0 font-body" id="email" name="email" placeholder="email@example.com" required="" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label text-[0.6875rem] font-semibold text-on-surface-variant uppercase tracking-wider ml-1" for="password">Mật khẩu</label>
+<div class="relative flex items-center bg-surface-container-low rounded-xl px-4 py-3 transition-colors hover:bg-surface-container-high/50">
+<span class="material-symbols-outlined text-outline mr-3" data-icon="lock">lock</span>
+<input class="w-full bg-transparent border-none p-0 text-[0.875rem] text-on-surface placeholder:text-outline/60 focus:ring-0 font-body" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+<button aria-label="Toggle password visibility" class="text-outline hover:text-on-surface transition-colors focus:outline-none" type="button">
+<span class="material-symbols-outlined" data-icon="visibility_off">visibility_off</span>
+</button>
+</div>
+</div>
+<!-- Terms Text -->
+<p class="font-label text-[0.6875rem] text-on-surface-variant/80 text-center mt-2">
+                Bằng việc đăng ký, bạn đồng ý với <a class="text-primary font-medium hover:underline" href="#">Điều khoản dịch vụ</a> và <a class="text-primary font-medium hover:underline" href="#">Chính sách bảo mật</a> của chúng tôi.
+            </p>
+<!-- Submit Button -->
+<button class="mt-4 w-full bg-gradient-to-r from-primary to-primary-container text-on-primary font-headline font-semibold text-[1.125rem] py-4 rounded-xl shadow-[0_8px_20px_rgba(0,74,198,0.2)] hover:shadow-[0_12px_24px_rgba(0,74,198,0.3)] transition-all active:scale-[0.98] flex items-center justify-center gap-2" type="submit">
+                Tạo tài khoản
+                <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</form>
+<!-- Footer Link -->
+<div class="text-center pb-4">
+<p class="font-body text-[0.875rem] text-on-surface-variant">
+                Đã có tài khoản? 
+                <a class="font-headline font-semibold text-primary hover:text-primary-container transition-colors" href="/login">
+                    Đăng nhập ngay
+                </a>
+</p>
+</div>
+</main>
+</body></html>

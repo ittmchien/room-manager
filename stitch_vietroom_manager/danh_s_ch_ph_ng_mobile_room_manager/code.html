@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Room Manager - Danh sách phòng</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#dfe3e7",
+                        "error": "#ba1a1a",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#002109",
+                        "on-error-container": "#93000a",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-primary-fixed": "#00174b",
+                        "secondary-fixed": "#6bff8f",
+                        "on-surface": "#171c1f",
+                        "surface-container": "#eaeef2",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "surface-container-low": "#f0f4f8",
+                        "tertiary": "#943700",
+                        "surface-dim": "#d6dade",
+                        "outline-variant": "#c3c6d7",
+                        "tertiary-fixed": "#ffdbcd",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "primary-fixed": "#dbe1ff",
+                        "inverse-primary": "#b4c5ff",
+                        "secondary-fixed-dim": "#4ae176",
+                        "inverse-surface": "#2c3134",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#006e2f",
+                        "on-primary-container": "#eeefff",
+                        "primary": "#004ac6",
+                        "on-background": "#171c1f",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#ffede6",
+                        "inverse-on-surface": "#edf1f5",
+                        "on-secondary-fixed-variant": "#005321",
+                        "surface-tint": "#0053db",
+                        "surface-container-high": "#e4e9ed",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#dfe3e7",
+                        "on-tertiary-fixed": "#360f00",
+                        "secondary-container": "#6bff8f",
+                        "surface": "#f6fafe",
+                        "on-secondary-container": "#007432",
+                        "surface-bright": "#f6fafe",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "outline": "#737686",
+                        "tertiary-container": "#bc4800",
+                        "on-surface-variant": "#434655",
+                        "on-primary": "#ffffff",
+                        "background": "#f6fafe",
+                        "primary-container": "#2563eb",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {},
+                    "fontFamily": {
+                        "headline": ["Be Vietnam Pro"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body antialiased min-h-screen flex flex-col md:hidden">
+<!-- TopNavBar -->
+<header class="bg-[#f6fafe] dark:bg-slate-900 flex justify-between items-center px-6 py-3 w-full sticky top-0 z-40">
+<div class="text-lg font-bold text-[#171c1f] dark:text-slate-100 font-['Be_Vietnam_Pro'] tracking-tight">Room Manager</div>
+<div class="flex items-center gap-4">
+<button class="text-[#004ac6] dark:text-blue-400 hover:bg-[#f0f4f8] dark:hover:bg-slate-800 transition-colors p-2 rounded-full">
+<span class="material-symbols-outlined text-2xl">notifications</span>
+</button>
+<img alt="User Avatar" class="w-8 h-8 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNaV9Pz8Nzn5-X1PO0RwvmNCOgUDkz9cOeQ0VArv61hJxt0TrrWJFwN_APHkiszR8XHc1md6DWIbwrDxL3puWC7z7nMCILCOxBGRckZD7c_fkPixtKKRGUS1P36qcQNjvcs9xDvZKp766ev5PgKeRq3SLo94evsP2v5VU1U-9xWvw9F4jIhNve5fOahiNs_gqjxG8sR45EB10SuVeOpH5gkC5Jxko41QuTIo26JgwQPs6EX_yWY0-dhZWtj52WDaCo3qGHbfWWp_A"/>
+</div>
+</header>
+<div class="bg-[#f0f4f8] dark:bg-slate-800 h-[1px] w-full"></div>
+<!-- Main Content Canvas -->
+<main class="flex-1 pb-24 overflow-y-auto px-4 py-6">
+<!-- Header & Filters -->
+<div class="mb-6">
+<h1 class="font-headline text-[1.5rem] font-bold text-on-surface mb-4">Danh sách phòng</h1>
+<div class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-primary-container text-on-primary-container font-label text-[0.875rem] font-medium shadow-[0_2px_8px_rgba(23,28,31,0.06)]">Tất cả (12)</button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-surface-container-high text-on-surface font-label text-[0.875rem] font-medium hover:bg-surface-variant transition-colors">Đang thuê (8)</button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-surface-container-high text-on-surface font-label text-[0.875rem] font-medium hover:bg-surface-variant transition-colors">Trống (2)</button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-surface-container-high text-on-surface font-label text-[0.875rem] font-medium hover:bg-surface-variant transition-colors">Nợ cước (2)</button>
+</div>
+</div>
+<!-- Room List -->
+<div class="flex flex-col gap-4">
+<!-- Room Card 1: Rented, Paid -->
+<div class="bg-surface-container-lowest rounded-xl p-4 relative shadow-[0_2px_12px_rgba(23,28,31,0.03)] border border-outline-variant/15 flex flex-col gap-3">
+<div class="absolute left-0 top-4 bottom-4 w-1 bg-secondary-fixed rounded-r-full"></div>
+<div class="flex justify-between items-start pl-3">
+<div>
+<h2 class="font-headline text-[1.125rem] font-semibold text-on-surface">P. 101</h2>
+<p class="font-body text-[0.875rem] text-on-surface-variant mt-0.5 flex items-center gap-1">
+<span class="material-symbols-outlined text-[1rem]">person</span> Nguyễn Văn A
+                        </p>
+</div>
+<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label text-[0.6875rem] font-medium uppercase tracking-wider">Đã đóng</span>
+</div>
+<div class="pl-3 flex justify-between items-end mt-1">
+<p class="font-body text-[0.875rem] text-on-surface-variant">Kỳ thanh toán: 05/2024</p>
+<p class="font-headline text-[1.25rem] font-bold text-primary">3.500.000<span class="text-[0.875rem] font-medium ml-0.5 opacity-80">đ</span></p>
+</div>
+</div>
+<!-- Room Card 2: Rented, Unpaid/Overdue -->
+<div class="bg-surface-container-lowest rounded-xl p-4 relative shadow-[0_2px_12px_rgba(23,28,31,0.03)] border border-outline-variant/15 flex flex-col gap-3">
+<div class="absolute left-0 top-4 bottom-4 w-1 bg-error-container rounded-r-full"></div>
+<div class="flex justify-between items-start pl-3">
+<div>
+<h2 class="font-headline text-[1.125rem] font-semibold text-on-surface">P. 102</h2>
+<p class="font-body text-[0.875rem] text-on-surface-variant mt-0.5 flex items-center gap-1">
+<span class="material-symbols-outlined text-[1rem]">person</span> Trần Thị B
+                        </p>
+</div>
+<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-error-container text-on-error-container font-label text-[0.6875rem] font-medium uppercase tracking-wider">Chưa đóng</span>
+</div>
+<div class="pl-3 flex justify-between items-end mt-1">
+<p class="font-body text-[0.875rem] text-error font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[1rem]">warning</span> Quá hạn 3 ngày
+                    </p>
+<p class="font-headline text-[1.25rem] font-bold text-primary">4.200.000<span class="text-[0.875rem] font-medium ml-0.5 opacity-80">đ</span></p>
+</div>
+</div>
+<!-- Room Card 3: Empty -->
+<div class="bg-surface-container-lowest rounded-xl p-4 relative shadow-[0_2px_12px_rgba(23,28,31,0.03)] border border-outline-variant/15 flex flex-col gap-3 opacity-80">
+<div class="absolute left-0 top-4 bottom-4 w-1 bg-surface-variant rounded-r-full"></div>
+<div class="flex justify-between items-start pl-3">
+<div>
+<h2 class="font-headline text-[1.125rem] font-semibold text-on-surface">P. 201</h2>
+<p class="font-body text-[0.875rem] text-on-surface-variant mt-0.5 italic">Phòng trống</p>
+</div>
+<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-surface-variant text-on-surface-variant font-label text-[0.6875rem] font-medium uppercase tracking-wider">Trống</span>
+</div>
+<div class="pl-3 flex justify-between items-end mt-1">
+<p class="font-body text-[0.875rem] text-on-surface-variant">Trống từ: 15/04/2024</p>
+<p class="font-headline text-[1.25rem] font-bold text-on-surface-variant">3.500.000<span class="text-[0.875rem] font-medium ml-0.5 opacity-80">đ</span></p>
+</div>
+</div>
+<!-- Room Card 4: Rented, Pending/Repair -->
+<div class="bg-surface-container-lowest rounded-xl p-4 relative shadow-[0_2px_12px_rgba(23,28,31,0.03)] border border-outline-variant/15 flex flex-col gap-3">
+<div class="absolute left-0 top-4 bottom-4 w-1 bg-tertiary-fixed rounded-r-full"></div>
+<div class="flex justify-between items-start pl-3">
+<div>
+<h2 class="font-headline text-[1.125rem] font-semibold text-on-surface">P. 202</h2>
+<p class="font-body text-[0.875rem] text-on-surface-variant mt-0.5 flex items-center gap-1">
+<span class="material-symbols-outlined text-[1rem]">person</span> Lê Văn C
+                        </p>
+</div>
+<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label text-[0.6875rem] font-medium uppercase tracking-wider">Đang sửa</span>
+</div>
+<div class="pl-3 flex justify-between items-end mt-1">
+<p class="font-body text-[0.875rem] text-tertiary font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[1rem]">build</span> Hỏng điều hòa
+                    </p>
+<p class="font-headline text-[1.25rem] font-bold text-primary">3.800.000<span class="text-[0.875rem] font-medium ml-0.5 opacity-80">đ</span></p>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-gradient-to-br from-primary to-primary-container text-white rounded-2xl shadow-[0_8px_24px_rgba(0,74,198,0.3)] flex justify-center items-center active:scale-95 transition-transform z-40">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 md:hidden bg-[#ffffff]/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-t-2xl border-t border-[#f0f4f8]/20 shadow-[0_-4px_24px_rgba(23,28,31,0.04)]">
+<button class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 p-2 font-['Be_Vietnam_Pro'] text-[10px] uppercase tracking-wider active:bg-slate-100 dark:active:bg-slate-800">
+<span class="material-symbols-outlined mb-1">dashboard</span>
+<span>Tổng quan</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-[#004ac6] text-white rounded-xl p-2 scale-110 font-['Be_Vietnam_Pro'] text-[10px] uppercase tracking-wider shadow-lg">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">door_front</span>
+<span>Phòng</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 p-2 font-['Be_Vietnam_Pro'] text-[10px] uppercase tracking-wider active:bg-slate-100 dark:active:bg-slate-800">
+<span class="material-symbols-outlined mb-1">receipt_long</span>
+<span>Hóa đơn</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 p-2 font-['Be_Vietnam_Pro'] text-[10px] uppercase tracking-wider active:bg-slate-100 dark:active:bg-slate-800">
+<span class="material-symbols-outlined mb-1">edit_note</span>
+<span>Ghi số</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 p-2 font-['Be_Vietnam_Pro'] text-[10px] uppercase tracking-wider active:bg-slate-100 dark:active:bg-slate-800">
+<span class="material-symbols-outlined mb-1">settings</span>
+<span>Cài đặt</span>
+</button>
+</nav>
+</body></html>

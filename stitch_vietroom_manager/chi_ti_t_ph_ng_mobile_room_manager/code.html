@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Room Manager - Room Detail</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "surface-variant": "#dfe3e7",
+                  "error": "#ba1a1a",
+                  "on-tertiary": "#ffffff",
+                  "on-secondary-fixed": "#002109",
+                  "on-error-container": "#93000a",
+                  "primary-fixed-dim": "#b4c5ff",
+                  "on-primary-fixed": "#00174b",
+                  "secondary-fixed": "#6bff8f",
+                  "on-surface": "#171c1f",
+                  "surface-container": "#eaeef2",
+                  "on-primary-fixed-variant": "#003ea8",
+                  "surface-container-low": "#f0f4f8",
+                  "tertiary": "#943700",
+                  "surface-dim": "#d6dade",
+                  "outline-variant": "#c3c6d7",
+                  "tertiary-fixed": "#ffdbcd",
+                  "on-tertiary-fixed-variant": "#7d2d00",
+                  "primary-fixed": "#dbe1ff",
+                  "inverse-primary": "#b4c5ff",
+                  "secondary-fixed-dim": "#4ae176",
+                  "inverse-surface": "#2c3134",
+                  "surface-container-lowest": "#ffffff",
+                  "secondary": "#006e2f",
+                  "on-primary-container": "#eeefff",
+                  "primary": "#004ac6",
+                  "on-background": "#171c1f",
+                  "on-secondary": "#ffffff",
+                  "on-tertiary-container": "#ffede6",
+                  "inverse-on-surface": "#edf1f5",
+                  "on-secondary-fixed-variant": "#005321",
+                  "surface-tint": "#0053db",
+                  "surface-container-high": "#e4e9ed",
+                  "error-container": "#ffdad6",
+                  "surface-container-highest": "#dfe3e7",
+                  "on-tertiary-fixed": "#360f00",
+                  "secondary-container": "#6bff8f",
+                  "surface": "#f6fafe",
+                  "on-secondary-container": "#007432",
+                  "surface-bright": "#f6fafe",
+                  "tertiary-fixed-dim": "#ffb596",
+                  "outline": "#737686",
+                  "tertiary-container": "#bc4800",
+                  "on-surface-variant": "#434655",
+                  "on-primary": "#ffffff",
+                  "background": "#f6fafe",
+                  "primary-container": "#2563eb",
+                  "on-error": "#ffffff"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "full": "9999px"
+          },
+          "spacing": {},
+          "fontFamily": {
+                  "headline": [
+                          "Be Vietnam Pro", "sans-serif"
+                  ],
+                  "body": [
+                          "Inter", "sans-serif"
+                  ],
+                  "label": [
+                          "Inter", "sans-serif"
+                  ]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body antialiased min-h-screen pb-24 md:pb-0">
+<!-- Mobile Top App Bar (Contextual) -->
+<header class="sticky top-0 z-40 bg-surface/80 backdrop-blur-md pb-2 pt-12 px-4 flex items-center gap-3">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-low text-on-surface hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+</button>
+<div class="flex-1">
+<h1 class="font-headline text-headline-sm font-semibold text-on-surface">Phòng 204</h1>
+<span class="font-label text-label-sm text-on-surface-variant">Khu nhà A - Tầng 2</span>
+</div>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary-fixed text-on-secondary-fixed">
+      Đang thuê
+    </span>
+</header>
+<main class="px-4 mt-6 max-w-lg mx-auto">
+<!-- Key Stats Bento -->
+<div class="grid grid-cols-2 gap-3 mb-8">
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_4px_24px_rgba(23,28,31,0.04)] relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary rounded-l-xl"></div>
+<div class="flex items-center gap-2 mb-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">payments</span>
+<span class="font-label text-label-sm font-medium">Tiền phòng</span>
+</div>
+<div class="font-headline text-title-md font-bold text-on-surface tracking-tight">4.500.000<span class="text-sm font-medium text-on-surface-variant">đ</span></div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_4px_24px_rgba(23,28,31,0.04)] relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-tertiary-container rounded-l-xl"></div>
+<div class="flex items-center gap-2 mb-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">contract</span>
+<span class="font-label text-label-sm font-medium">Hợp đồng</span>
+</div>
+<div class="font-headline text-title-md font-bold text-on-surface tracking-tight">6 tháng</div>
+<div class="font-label text-xs text-on-surface-variant mt-1">Còn 4 tháng</div>
+</div>
+</div>
+<!-- Tab Navigation -->
+<div class="flex gap-2 mb-6 overflow-x-auto hide-scrollbar pb-1">
+<button class="px-5 py-2 rounded-full bg-primary text-on-primary font-label text-sm font-medium whitespace-nowrap shadow-[0_4px_12px_rgba(0,74,198,0.2)]">Người thuê</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-low text-on-surface-variant font-label text-sm font-medium whitespace-nowrap hover:bg-surface-container transition-colors">Điện/Nước</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-low text-on-surface-variant font-label text-sm font-medium whitespace-nowrap hover:bg-surface-container transition-colors">Hóa đơn</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-low text-on-surface-variant font-label text-sm font-medium whitespace-nowrap hover:bg-surface-container transition-colors">Tài sản</button>
+</div>
+<!-- Tenant List -->
+<div class="space-y-4">
+<div class="flex items-center justify-between mb-2">
+<h2 class="font-headline text-title-md font-semibold text-on-surface">Danh sách người thuê (2)</h2>
+<button class="text-primary font-label text-sm font-medium flex items-center gap-1 hover:text-primary-container">
+<span class="material-symbols-outlined text-[18px]">add</span>
+          Thêm
+        </button>
+</div>
+<!-- Tenant Card 1 (Main) -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_4px_24px_rgba(23,28,31,0.04)] relative">
+<div class="absolute top-4 right-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-primary-fixed text-on-primary-fixed">Đại diện</span>
+</div>
+<div class="flex items-start gap-4 mb-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-primary font-headline font-bold text-lg overflow-hidden">
+<img alt="Avatar" class="w-full h-full object-cover" data-alt="professional headshot of a young asian man with short hair on a light background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaUZ0HEAIOAvo40NLCH3I6a25J_nsoBs1M43_4GZq2eUp6GznFbLWPdjMXGHZmQo-gmfS6JBRVWVaCPIr5nL1SQz0JGskNlVhXiQw321MnDe_L-NSZi_cdnmVQF6S_K2ARNimmUU9XdGiBDTIqpBshFlf1m9lrXdPB8h8RhYa2S51s16AV6DyS3OYP7g2hHlkaAXp6V5MlPDnDBB5ZQmleD-XMpUHoxl_iGHeDToCVBpU8DXEqjWVaUPZkEqvU6OG5yUBqUda1mlE"/>
+</div>
+<div>
+<h3 class="font-headline text-base font-semibold text-on-surface">Nguyễn Văn An</h3>
+<p class="font-label text-sm text-on-surface-variant mt-0.5">0912 345 678</p>
+<p class="font-label text-xs text-on-surface-variant mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">badge</span>
+              001092123456
+            </p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg bg-surface-container-low text-primary font-label text-sm font-medium hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">call</span>
+            Gọi điện
+          </button>
+<button class="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg bg-surface-container-low text-on-surface font-label text-sm font-medium hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+            Nhắn tin
+          </button>
+</div>
+</div>
+<!-- Tenant Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_4px_24px_rgba(23,28,31,0.04)]">
+<div class="flex items-start gap-4 mb-4">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed font-headline font-bold text-lg">
+            B
+          </div>
+<div>
+<h3 class="font-headline text-base font-semibold text-on-surface">Trần Thị Bình</h3>
+<p class="font-label text-sm text-on-surface-variant mt-0.5">0987 654 321</p>
+<p class="font-label text-xs text-on-surface-variant mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">badge</span>
+              001095123789
+            </p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg bg-surface-container-low text-primary font-label text-sm font-medium hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">call</span>
+            Gọi điện
+          </button>
+<button class="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg bg-surface-container-low text-on-surface font-label text-sm font-medium hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+            Nhắn tin
+          </button>
+</div>
+</div>
+</div>
+</main>
+<style>
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</body></html>

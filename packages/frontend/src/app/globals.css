@@ -1,6 +1,5 @@
 @layer theme, base, antd, components, utilities;
-@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap");
 @import "tailwindcss";
 @import "antd-mobile/bundle/style.css";
 
@@ -8,141 +7,40 @@
   --breakpoint-xxxs: 320px;
   --breakpoint-xxs: 375px;
   --breakpoint-xs: 425px;
-
-  /* Material Design 3 Color Tokens */
-  --color-surface: #f6fafe;
-  --color-surface-dim: #d6dade;
-  --color-surface-bright: #f6fafe;
-  --color-surface-container-lowest: #ffffff;
-  --color-surface-container-low: #f0f4f8;
-  --color-surface-container: #eaeef2;
-  --color-surface-container-high: #e4e9ed;
-  --color-surface-container-highest: #dfe3e7;
-  --color-surface-variant: #dfe3e7;
-
-  --color-primary: #004ac6;
-  --color-primary-container: #2563eb;
-  --color-on-primary: #ffffff;
-  --color-on-primary-container: #eeefff;
-  --color-on-primary-fixed: #00174b;
-  --color-on-primary-fixed-variant: #003ea8;
-  --color-primary-fixed: #dbe1ff;
-  --color-primary-fixed-dim: #b4c5ff;
-  --color-inverse-primary: #b4c5ff;
-
-  --color-secondary: #006e2f;
-  --color-secondary-container: #6bff8f;
-  --color-on-secondary: #ffffff;
-  --color-on-secondary-container: #007432;
-  --color-on-secondary-fixed: #002109;
-  --color-on-secondary-fixed-variant: #005321;
-  --color-secondary-fixed: #6bff8f;
-  --color-secondary-fixed-dim: #4ae176;
-
-  --color-tertiary: #943700;
-  --color-tertiary-container: #bc4800;
-  --color-on-tertiary: #ffffff;
-  --color-on-tertiary-container: #ffede6;
-  --color-on-tertiary-fixed: #360f00;
-  --color-on-tertiary-fixed-variant: #7d2d00;
-  --color-tertiary-fixed: #ffdbcd;
-  --color-tertiary-fixed-dim: #ffb596;
-
-  --color-error: #ba1a1a;
-  --color-error-container: #ffdad6;
-  --color-on-error: #ffffff;
-  --color-on-error-container: #93000a;
-
-  --color-on-surface: #171c1f;
-  --color-on-surface-variant: #434655;
-  --color-on-background: #171c1f;
-  --color-background: #f6fafe;
-  --color-outline: #737686;
-  --color-outline-variant: #c3c6d7;
-  --color-surface-tint: #0053db;
-  --color-inverse-surface: #2c3134;
-  --color-inverse-on-surface: #edf1f5;
-
-  /* Font families */
-  --font-headline: "Be Vietnam Pro", sans-serif;
-  --font-body: "Inter", sans-serif;
-  --font-label: "Inter", sans-serif;
 }
 
 :root {
   --font-sans: "Be Vietnam Pro", sans-serif;
-  --adm-color-primary: #004ac6;
-  --adm-font-family: "Inter", sans-serif;
+  --adm-color-primary: #2563eb;
+  --adm-font-family: "Be Vietnam Pro", sans-serif;
 }
 
 body {
-  font-family: var(--font-body);
-  background-color: var(--color-surface);
-  color: var(--color-on-surface);
-}
-
-h1, h2, h3, h4, h5, h6, .font-headline {
-  font-family: var(--font-headline);
-}
-
-/* Stitch "No-Line" Rule — override antd-mobile defaults */
-.adm-card {
-  --border-radius: 16px;
-  border: none !important;
-}
-
-.adm-list {
-  --border-top: none;
-  --border-bottom: none;
-  --border-inner: none;
-}
-
-.adm-input-element,
-.adm-text-area-element {
-  font-size: 15px !important;
-  font-family: var(--font-body);
-}
-
-.adm-tabs-tab {
-  --title-font-size: 14px;
-  font-family: var(--font-headline);
-}
-
-.adm-tab-bar {
-  --adm-color-primary: var(--color-primary);
-}
-
-/* Ambient shadow utility */
-.shadow-ambient {
-  box-shadow: 0 24px 40px rgba(23, 28, 31, 0.04);
-}
-
-.shadow-ambient-sm {
-  box-shadow: 0 4px 20px rgba(23, 28, 31, 0.02);
-}
-
-/* Ghost border utility */
-.border-ghost {
-  border: 1px solid rgba(195, 198, 215, 0.15);
-}
-
-/* Material Symbols baseline */
-.material-symbols-outlined {
-  font-family: 'Material Symbols Outlined';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px;
-  line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
-  display: inline-block;
-  white-space: nowrap;
-  word-wrap: normal;
-  direction: ltr;
-  -webkit-font-smoothing: antialiased;
+  font-family: var(--font-sans);
 }
 
 .adm-error-block-image {
   place-self: center;
   justify-self: center;
+}
+
+/* Standardize antd-mobile component defaults */
+.adm-card {
+  --border-radius: 16px;
+}
+
+.adm-input-element,
+.adm-text-area-element {
+  font-size: 15px !important;
+}
+
+.adm-tabs-tab {
+  --title-font-size: 14px;
+}
+
+/* Remove borders from List used as plain containers */
+.adm-list.no-border {
+  --border-top: none;
+  --border-bottom: none;
+  --border-inner: none;
 }

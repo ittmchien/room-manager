@@ -19,12 +19,12 @@ export function FeatureGate({ children, locked, description = 'Tính năng này 
   return (
     <>
       <div className="flex flex-col items-center justify-center gap-4 py-20 text-center">
-        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gray-100">
-          <Lock className="h-6 w-6 text-gray-400" />
+        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-surface-container">
+          <Lock className="h-6 w-6 text-on-surface-variant" />
         </div>
         <div>
-          <p className="font-semibold text-gray-700">Tính năng trả phí</p>
-          <p className="mt-1 text-sm text-gray-400">{description}</p>
+          <p className="font-semibold text-on-surface">Tính năng trả phí</p>
+          <p className="mt-1 text-sm text-on-surface-variant">{description}</p>
         </div>
         <Button color="primary" className="!rounded-xl !px-6" onClick={() => setPremiumOpen(true)}>
           Xem gói bổ sung

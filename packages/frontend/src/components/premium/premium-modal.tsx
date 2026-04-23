@@ -19,12 +19,12 @@ export function PremiumModal({ visible, onClose }: Props) {
       closeOnMaskClick
       content={
         <div className="flex flex-col items-center gap-4 py-2 text-center">
-          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-50">
-            <Crown className="h-7 w-7 text-amber-500" />
+          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-tertiary-fixed">
+            <Crown className="h-7 w-7 text-tertiary" />
           </div>
           <div>
-            <p className="mb-1 font-semibold text-gray-900">Tính năng trả phí</p>
-            <p className="text-sm text-gray-500 leading-relaxed">
+            <p className="mb-1 font-semibold text-on-surface">Tính năng trả phí</p>
+            <p className="text-sm text-on-surface-variant leading-relaxed">
               Tính năng này cần mua thêm gói bổ sung.<br />
               Xem các gói để kích hoạt cho tài khoản của bạn.
             </p>
@@ -39,7 +39,7 @@ export function PremiumModal({ visible, onClose }: Props) {
             >
               Xem gói bổ sung
             </Button>
-            <Button block fill="none" size="large" onClick={onClose} className="!text-gray-400">
+            <Button block fill="none" size="large" onClick={onClose} className="!text-on-surface-variant">
               Bỏ qua
             </Button>
           </div>

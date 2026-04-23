@@ -41,7 +41,7 @@ function BarChart({ data }: { data: { label: string; income: number; expense: nu
               width={4}
               height={incomeH}
               rx={1}
-              className="fill-blue-500"
+              className="fill-primary"
             />
             <rect
               x={groupX + 5}
@@ -55,7 +55,7 @@ function BarChart({ data }: { data: { label: string; income: number; expense: nu
               x={groupX + 4}
               y={CHART_HEIGHT + 14}
               textAnchor="middle"
-              className="fill-gray-400"
+              className="fill-on-surface-variant"
               fontSize={3.5}
             >
               {d.label}
@@ -100,12 +100,12 @@ function MonthlySection({ propertyId, year }: { propertyId: string; year: number
       <Card>
         <div className="mb-3 flex items-center gap-4">
           <div className="flex items-center gap-1.5">
-            <div className="h-2.5 w-2.5 rounded-full bg-blue-500" />
-            <span className="text-xs text-gray-500">Thu</span>
+            <div className="h-2.5 w-2.5 rounded-full bg-primary" />
+            <span className="text-xs text-on-surface-variant">Thu</span>
           </div>
           <div className="flex items-center gap-1.5">
             <div className="h-2.5 w-2.5 rounded-full bg-rose-400" />
-            <span className="text-xs text-gray-500">Chi</span>
+            <span className="text-xs text-on-surface-variant">Chi</span>
           </div>
         </div>
         <BarChart data={chartData} />
@@ -113,17 +113,17 @@ function MonthlySection({ propertyId, year }: { propertyId: string; year: number
 
       <Card>
         <div className="space-y-2">
-          <div className="flex items-center justify-between py-2 border-b border-gray-50">
-            <span className="text-sm text-gray-600">Tổng thu</span>
-            <span className="font-semibold text-blue-600">{yearTotal.collected.toLocaleString('vi-VN')}đ</span>
+          <div className="flex items-center justify-between py-2 border-b border-outline-variant/15">
+            <span className="text-sm text-on-surface-variant">Tổng thu</span>
+            <span className="font-semibold text-primary">{yearTotal.collected.toLocaleString('vi-VN')}đ</span>
           </div>
-          <div className="flex items-center justify-between py-2 border-b border-gray-50">
-            <span className="text-sm text-gray-600">Tổng chi</span>
-            <span className="font-semibold text-red-500">{yearTotal.expenses.toLocaleString('vi-VN')}đ</span>
+          <div className="flex items-center justify-between py-2 border-b border-outline-variant/15">
+            <span className="text-sm text-on-surface-variant">Tổng chi</span>
+            <span className="font-semibold text-error">{yearTotal.expenses.toLocaleString('vi-VN')}đ</span>
           </div>
-          <div className="flex items-center justify-between py-2 rounded-xl bg-blue-50 px-3">
-            <span className="text-sm font-semibold text-blue-700">Lợi nhuận</span>
-            <span className={cn('font-bold', yearTotal.profit >= 0 ? 'text-blue-700' : 'text-red-500')}>
+          <div className="flex items-center justify-between py-2 rounded-xl bg-primary-fixed px-3">
+            <span className="text-sm font-semibold text-primary">Lợi nhuận</span>
+            <span className={cn('font-bold', yearTotal.profit >= 0 ? 'text-primary' : 'text-error')}>
               {yearTotal.profit >= 0 ? '+' : ''}{yearTotal.profit.toLocaleString('vi-VN')}đ
             </span>
           </div>
@@ -131,18 +131,18 @@ function MonthlySection({ propertyId, year }: { propertyId: string; year: number
       </Card>
 
       <Card className="!p-0 overflow-hidden">
-        <div className="grid grid-cols-4 border-b border-gray-100 px-4 py-2 text-xs font-semibold text-gray-400">
+        <div className="grid grid-cols-4 border-b border-outline-variant/15 px-4 py-2 text-xs font-semibold text-on-surface-variant">
           <span>Tháng</span>
           <span className="text-right">Thu</span>
           <span className="text-right">Chi</span>
           <span className="text-right">Lãi</span>
         </div>
         {monthly.map((m) => (
-          <div key={m.month} className="grid grid-cols-4 border-b border-gray-50 px-4 py-2.5 text-sm last:border-0">
-            <span className="text-gray-600">{m.month.slice(5)}</span>
-            <span className="text-right text-blue-600">{formatPrice(m.totalCollected)}</span>
+          <div key={m.month} className="grid grid-cols-4 border-b border-outline-variant/15 px-4 py-2.5 text-sm last:border-0">
+            <span className="text-on-surface-variant">{m.month.slice(5)}</span>
+            <span className="text-right text-primary">{formatPrice(m.totalCollected)}</span>
             <span className="text-right text-rose-400">{formatPrice(m.totalExpenses)}</span>
-            <span className={cn('text-right font-medium', m.profit >= 0 ? 'text-green-600' : 'text-red-500')}>
+            <span className={cn('text-right font-medium', m.profit >= 0 ? 'text-secondary' : 'text-error')}>
               {m.profit >= 0 ? '+' : ''}{formatPrice(m.profit)}
             </span>
           </div>
@@ -163,19 +163,19 @@ export default function ReportsPage() {
     <FeatureGate locked={!canReports} description="Xem báo cáo tài chính cần mua tính năng Báo cáo.">
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-xl font-bold text-gray-900">Báo cáo</h1>
+        <h1 className="text-xl font-bold text-on-surface">Báo cáo</h1>
         <div className="flex items-center gap-1">
           <button
             onClick={() => setYear((y) => y - 1)}
-            className="flex h-7 w-7 items-center justify-center rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors"
+            className="flex h-7 w-7 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors"
             aria-label="Năm trước"
           >
             <ChevronLeft className="h-4 w-4" />
           </button>
-          <span className="min-w-[48px] text-center text-sm font-semibold text-gray-700">{year}</span>
+          <span className="min-w-[48px] text-center text-sm font-semibold text-on-surface">{year}</span>
           <button
             onClick={() => setYear((y) => y + 1)}
-            className="flex h-7 w-7 items-center justify-center rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors"
+            className="flex h-7 w-7 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors"
             aria-label="Năm sau"
           >
             <ChevronRight className="h-4 w-4" />
@@ -190,16 +190,16 @@ export default function ReportsPage() {
           {snapshot && (
             <div className="grid grid-cols-3 gap-2">
               <Card className="text-center">
-                <p className="text-2xl font-bold text-gray-900">{snapshot.occupiedRooms}</p>
-                <p className="text-xs text-gray-400">Đang thuê</p>
+                <p className="text-2xl font-bold text-on-surface">{snapshot.occupiedRooms}</p>
+                <p className="text-xs text-on-surface-variant">Đang thuê</p>
               </Card>
               <Card className="text-center">
-                <p className="text-2xl font-bold text-blue-600">{formatPrice(snapshot.totalCollectedThisMonth)}</p>
-                <p className="text-xs text-gray-400">Thu tháng này</p>
+                <p className="text-2xl font-bold text-primary">{formatPrice(snapshot.totalCollectedThisMonth)}</p>
+                <p className="text-xs text-on-surface-variant">Thu tháng này</p>
               </Card>
               <Card className="text-center">
-                <p className="text-2xl font-bold text-amber-500">{snapshot.pendingCount}</p>
-                <p className="text-xs text-gray-400">Chưa trả</p>
+                <p className="text-2xl font-bold text-tertiary">{snapshot.pendingCount}</p>
+                <p className="text-xs text-on-surface-variant">Chưa trả</p>
               </Card>
             </div>
           )}

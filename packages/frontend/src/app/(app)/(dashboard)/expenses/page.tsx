@@ -40,7 +40,7 @@ function ExpenseBody({ propertyId, month }: { propertyId: string; month: string 
     return (
       <div className="space-y-3">
         {[1, 2, 3].map((i) => (
-          <div key={i} className="rounded-2xl bg-white p-4 shadow-sm">
+          <div key={i} className="rounded-2xl bg-surface-container-lowest p-4 shadow-sm">
             <Skeleton.Title animated className="w-1/2" />
             <Skeleton.Paragraph lineCount={1} animated />
           </div>
@@ -59,9 +59,9 @@ function ExpenseBody({ propertyId, month }: { propertyId: string; month: string 
   return (
     <>
       <div className="grid grid-cols-2 gap-3">
-        <Card className="!bg-red-50">
-          <p className="text-xs text-red-400">Chi phí</p>
-          <p className="mt-1 text-lg font-bold text-red-600">{totalExpense.toLocaleString('vi-VN')}đ</p>
+        <Card className="!bg-error-container">
+          <p className="text-xs text-on-error-container/70">Chi phí</p>
+          <p className="mt-1 text-lg font-bold text-on-error-container">{totalExpense.toLocaleString('vi-VN')}đ</p>
         </Card>
         <Card className="!bg-green-50">
           <p className="text-xs text-green-500">Thu khác</p>
@@ -76,10 +76,10 @@ function ExpenseBody({ propertyId, month }: { propertyId: string; month: string 
             description={`${CATEGORY_LABEL[e.category] ?? e.category} · ${new Date(e.date).toLocaleDateString('vi-VN')}${e.room ? ` · ${e.room.name}` : ''}`}
             extra={
               <div className="flex items-center gap-2">
-                <span className={cn('font-semibold', e.type === 'EXPENSE' ? 'text-red-500' : 'text-green-600')}>
+                <span className={cn('font-semibold', e.type === 'EXPENSE' ? 'text-error' : 'text-secondary')}>
                   {e.type === 'EXPENSE' ? '-' : '+'}{e.amount.toLocaleString('vi-VN')}đ
                 </span>
-                <Button fill="none" onClick={() => handleDelete(e.id, e.note)} className="!text-red-400 !p-2 !min-w-0">
+                <Button fill="none" onClick={() => handleDelete(e.id, e.note)} className="!text-error !p-2 !min-w-0">
                   <Trash2 className="h-4 w-4" />
                 </Button>
               </div>
@@ -103,7 +103,7 @@ export default function ExpensesPage() {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-bold text-gray-900">Thu / Chi</h1>
+          <h1 className="text-xl font-bold text-on-surface">Thu / Chi</h1>
           <div className="mt-0.5 flex items-center gap-1">
             <button
               onClick={() => {
@@ -111,12 +111,12 @@ export default function ExpensesPage() {
                 const d = new Date(y, m - 2);
                 setMonth(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`);
               }}
-              className="flex h-7 w-7 items-center justify-center rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors"
+              className="flex h-7 w-7 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors"
               aria-label="Tháng trước"
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
-            <span className="min-w-[80px] text-center text-sm font-medium text-gray-600">
+            <span className="min-w-[80px] text-center text-sm font-medium text-on-surface-variant">
               Tháng {month.split('-')[1]}/{month.split('-')[0]}
             </span>
             <button
@@ -125,7 +125,7 @@ export default function ExpensesPage() {
                 const d = new Date(y, m);
                 setMonth(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`);
               }}
-              className="flex h-7 w-7 items-center justify-center rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors"
+              className="flex h-7 w-7 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors"
               aria-label="Tháng sau"
             >
               <ChevronRight className="h-4 w-4" />

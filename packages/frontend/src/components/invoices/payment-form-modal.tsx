@@ -49,16 +49,16 @@ export function PaymentFormModal({ invoiceId, remaining, trigger }: Props) {
       error={createPayment.error ? (createPayment.error as Error).message : null}
     >
       <div className="space-y-4">
-        <div className="rounded-xl bg-gray-50 px-3">
-          <p className="pt-2.5 text-xs text-gray-400">Số tiền (VND)</p>
+        <div className="rounded-xl bg-surface-container-low px-3">
+          <p className="pt-2.5 text-xs text-on-surface-variant">Số tiền (VND)</p>
           <Input type="number" value={amount} onChange={setAmount} style={{ '--font-size': '15px' } as React.CSSProperties} />
         </div>
         <div>
-          <p className="mb-2 text-xs text-gray-400">Hình thức</p>
+          <p className="mb-2 text-xs text-on-surface-variant">Hình thức</p>
           <Selector options={METHOD_OPTIONS} value={method} onChange={setMethod} style={{ '--border-radius': '10px', '--checked-color': '#2563EB' } as React.CSSProperties} />
         </div>
-        <div className="rounded-xl bg-gray-50 px-3">
-          <p className="pt-2.5 text-xs text-gray-400">Ghi chú (tuỳ chọn)</p>
+        <div className="rounded-xl bg-surface-container-low px-3">
+          <p className="pt-2.5 text-xs text-on-surface-variant">Ghi chú (tuỳ chọn)</p>
           <Input placeholder="Ghi chú..." value={note} onChange={setNote} style={{ '--font-size': '15px' } as React.CSSProperties} />
         </div>
       </div>

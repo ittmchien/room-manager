@@ -96,37 +96,37 @@ export function ContractFormModal({ propertyId, trigger }: Props) {
     >
       <div className="space-y-4">
         <div>
-          <p className="mb-2 text-xs text-gray-400">Phòng *</p>
+          <p className="mb-2 text-xs text-on-surface-variant">Phòng *</p>
           <Selector options={roomOptions} value={[roomId]} onChange={handleRoomChange} style={{ '--border-radius': '10px', '--checked-color': '#2563EB' } as React.CSSProperties} />
         </div>
         <div>
-          <p className="mb-2 text-xs text-gray-400">Người thuê *</p>
+          <p className="mb-2 text-xs text-on-surface-variant">Người thuê *</p>
           {tenantOptions.length === 0 ? (
-            <p className="text-xs text-gray-400 italic">
+            <p className="text-xs text-on-surface-variant italic">
               {roomId ? "Phòng này chưa có người thuê" : "Chọn phòng trước"}
             </p>
           ) : (
             <Selector options={tenantOptions} value={[tenantId]} onChange={(v) => setTenantId(v[0] ?? "")} style={{ '--border-radius': '10px', '--checked-color': '#2563EB' } as React.CSSProperties} />
           )}
         </div>
-        <div className="rounded-xl bg-gray-50 px-3">
-          <p className="pt-2.5 text-xs text-gray-400">Ngày bắt đầu *</p>
+        <div className="rounded-xl bg-surface-container-low px-3">
+          <p className="pt-2.5 text-xs text-on-surface-variant">Ngày bắt đầu *</p>
           <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} className="w-full bg-transparent py-2.5 text-[15px] outline-none" />
         </div>
-        <div className="rounded-xl bg-gray-50 px-3">
-          <p className="pt-2.5 text-xs text-gray-400">Ngày kết thúc</p>
+        <div className="rounded-xl bg-surface-container-low px-3">
+          <p className="pt-2.5 text-xs text-on-surface-variant">Ngày kết thúc</p>
           <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} className="w-full bg-transparent py-2.5 text-[15px] outline-none" />
         </div>
-        <div className="rounded-xl bg-gray-50 px-3">
-          <p className="pt-2.5 text-xs text-gray-400">Tiền cọc (VNĐ)</p>
+        <div className="rounded-xl bg-surface-container-low px-3">
+          <p className="pt-2.5 text-xs text-on-surface-variant">Tiền cọc (VNĐ)</p>
           <Input type="number" placeholder="0" value={depositAmount} onChange={setDepositAmount} style={{ '--font-size': '15px' } as React.CSSProperties} />
         </div>
         <div>
-          <p className="mb-2 text-xs text-gray-400">Trạng thái cọc</p>
+          <p className="mb-2 text-xs text-on-surface-variant">Trạng thái cọc</p>
           <Selector options={DEPOSIT_OPTIONS} value={depositStatus} onChange={setDepositStatus} style={{ '--border-radius': '10px', '--checked-color': '#2563EB' } as React.CSSProperties} />
         </div>
-        <div className="rounded-xl bg-gray-50 px-3">
-          <p className="pt-2.5 text-xs text-gray-400">Điều khoản (tuỳ chọn)</p>
+        <div className="rounded-xl bg-surface-container-low px-3">
+          <p className="pt-2.5 text-xs text-on-surface-variant">Điều khoản (tuỳ chọn)</p>
           <Input placeholder="Ghi chú điều khoản..." value={terms} onChange={setTerms} style={{ '--font-size': '15px' } as React.CSSProperties} />
         </div>
       </div>

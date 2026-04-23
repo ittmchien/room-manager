@@ -49,16 +49,16 @@ function MeterSection({
 
   return (
     <div className="space-y-2">
-      <p className="text-sm font-semibold text-gray-700">{label}</p>
-      <div className="rounded-xl bg-gray-50 px-4 py-3 space-y-2">
-        <div className="flex justify-between text-sm text-gray-500">
+      <p className="text-sm font-semibold text-on-surface">{label}</p>
+      <div className="rounded-xl bg-surface-container-low px-4 py-3 space-y-2">
+        <div className="flex justify-between text-sm text-on-surface-variant">
           <span>Chỉ số cũ</span>
-          <span className="font-medium text-gray-900">
+          <span className="font-medium text-on-surface">
             {previousValue !== null ? `${previousValue} ${unit}` : "—"}
           </span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-sm text-gray-500 w-20 shrink-0">
+          <span className="text-sm text-on-surface-variant w-20 shrink-0">
             Chỉ số mới
           </span>
           <Input
@@ -69,12 +69,12 @@ function MeterSection({
             min={previousValue ?? 0}
             style={{ '--font-size': '15px', '--placeholder-color': '#9ca3af' } as React.CSSProperties}
           />
-          <span className="text-sm text-gray-400 shrink-0">{unit}</span>
+          <span className="text-sm text-on-surface-variant shrink-0">{unit}</span>
         </div>
         {usage !== null && (
           <div className="flex justify-between text-sm">
-            <span className="text-gray-500">Sử dụng</span>
-            <span className="font-semibold text-blue-600">
+            <span className="text-on-surface-variant">Sử dụng</span>
+            <span className="font-semibold text-primary">
               {usage} {unit}
             </span>
           </div>
@@ -192,23 +192,23 @@ export function GenerateInvoiceModal({ visible, onClose, propertyId }: Props) {
       ) : (
         <div className="space-y-4">
           <div>
-            <p className="mb-1.5 text-xs text-gray-400">Phòng</p>
+            <p className="mb-1.5 text-xs text-on-surface-variant">Phòng</p>
             <Picker columns={roomColumns} value={[selectedRoomId]} onConfirm={(val) => handleRoomChange(val[0] as string)}>
               {(items, actions) => (
-                <button onClick={actions.open} className="w-full rounded-xl bg-gray-50 px-4 py-3 text-left flex items-center justify-between">
-                  <span className="text-[15px] text-gray-900">{selectedRoom?.name ?? "Chọn phòng"}</span>
-                  <span className="text-gray-400 text-sm">▾</span>
+                <button onClick={actions.open} className="w-full rounded-xl bg-surface-container-low px-4 py-3 text-left flex items-center justify-between">
+                  <span className="text-[15px] text-on-surface">{selectedRoom?.name ?? "Chọn phòng"}</span>
+                  <span className="text-on-surface-variant text-sm">▾</span>
                 </button>
               )}
             </Picker>
           </div>
           <div>
-            <p className="mb-1.5 text-xs text-gray-400">Kỳ tháng</p>
+            <p className="mb-1.5 text-xs text-on-surface-variant">Kỳ tháng</p>
             <DatePicker precision="month" value={selectedDate} onConfirm={(val) => setSelectedDate(val)} min={new Date(2020, 0)} max={new Date()} title="Chọn tháng">
               {(_, actions) => (
-                <button onClick={actions.open} className="w-full rounded-xl bg-gray-50 px-4 py-3 text-left flex items-center justify-between">
-                  <span className="text-[15px] text-gray-900">Tháng {selectedDate.getMonth() + 1}/{selectedDate.getFullYear()}</span>
-                  <span className="text-gray-400 text-sm">▾</span>
+                <button onClick={actions.open} className="w-full rounded-xl bg-surface-container-low px-4 py-3 text-left flex items-center justify-between">
+                  <span className="text-[15px] text-on-surface">Tháng {selectedDate.getMonth() + 1}/{selectedDate.getFullYear()}</span>
+                  <span className="text-on-surface-variant text-sm">▾</span>
                 </button>
               )}
             </DatePicker>

@@ -5,10 +5,10 @@ import { Contract } from '@/hooks/use-contracts';
 import { cn } from '@/lib/utils';
 
 const DEPOSIT_STATUS_MAP: Record<Contract['depositStatus'], { label: string; className: string }> = {
-  PENDING:  { label: 'Chưa cọc',  className: 'bg-amber-50 text-amber-700' },
-  PAID:     { label: 'Đã cọc',    className: 'bg-emerald-50 text-emerald-700' },
-  RETURNED: { label: 'Đã trả',    className: 'bg-gray-100 text-gray-600' },
-  DEDUCTED: { label: 'Khấu trừ', className: 'bg-red-50 text-red-600' },
+  PENDING:  { label: 'Chưa cọc',  className: 'bg-tertiary-fixed text-on-tertiary-fixed' },
+  PAID:     { label: 'Đã cọc',    className: 'bg-secondary-fixed text-on-secondary-fixed' },
+  RETURNED: { label: 'Đã trả',    className: 'bg-surface-container text-on-surface-variant' },
+  DEDUCTED: { label: 'Khấu trừ', className: 'bg-error-container text-on-error-container' },
 };
 
 function formatDate(dateStr: string | null) {
@@ -31,12 +31,12 @@ export function ContractCard({ contract }: Props) {
   const daysLeft = getDaysLeft(contract.endDate);
 
   return (
-    <div className="w-full rounded-2xl bg-white p-4 shadow-sm shadow-blue-100/30 text-left">
+    <div className="w-full rounded-2xl bg-surface-container-lowest p-4 shadow-sm text-left">
       <div className="flex items-start justify-between gap-2">
         <div className="flex-1 min-w-0">
-          <p className="font-semibold text-gray-900 truncate">{contract.room?.name ?? '—'}</p>
-          <p className="text-sm text-gray-500 truncate">{contract.tenant?.name ?? '—'}</p>
-          <p className="mt-1 text-xs text-gray-400">
+          <p className="font-semibold text-on-surface truncate">{contract.room?.name ?? '—'}</p>
+          <p className="text-sm text-on-surface-variant truncate">{contract.tenant?.name ?? '—'}</p>
+          <p className="mt-1 text-xs text-on-surface-variant">
             {formatDate(contract.startDate)} → {formatDate(contract.endDate)}
           </p>
         </div>
@@ -45,20 +45,20 @@ export function ContractCard({ contract }: Props) {
             {deposit.label}
           </span>
           {contract.depositAmount > 0 && (
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-on-surface-variant">
               Cọc: {contract.depositAmount.toLocaleString('vi-VN')}đ
             </p>
           )}
         </div>
       </div>
       {daysLeft !== null && daysLeft <= 30 && daysLeft > 0 && (
-        <div className="mt-2 flex items-center gap-1.5 text-xs font-medium text-amber-600">
+        <div className="mt-2 flex items-center gap-1.5 text-xs font-medium text-tertiary">
           <AlertTriangle className="h-3.5 w-3.5 shrink-0" />
           Còn {daysLeft} ngày hết hạn
         </div>
       )}
       {daysLeft !== null && daysLeft <= 0 && (
-        <p className="mt-2 text-xs font-medium text-red-500">Đã hết hạn</p>
+        <p className="mt-2 text-xs font-medium text-error">Đã hết hạn</p>
       )}
     </div>
   );

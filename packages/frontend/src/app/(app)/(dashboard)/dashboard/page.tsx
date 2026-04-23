@@ -96,7 +96,7 @@ export default function DashboardPage() {
           <Button
             size="small"
             onClick={() => router.push("/invoices")}
-            className="!bg-white/20 !border-none !text-on-primary !text-sm !font-medium"
+            className="!bg-on-primary/15 !border-none !text-on-primary !text-sm !font-medium"
           >
             <Receipt className="mr-1 inline h-4 w-4" />
             Hóa đơn

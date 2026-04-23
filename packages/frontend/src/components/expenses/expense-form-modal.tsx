@@ -69,23 +69,23 @@ export function ExpenseFormModal({ propertyId, trigger }: Props) {
     >
       <div className="space-y-4">
         <div>
-          <p className="mb-2 text-xs text-gray-400">Loại</p>
+          <p className="mb-2 text-xs text-on-surface-variant">Loại</p>
           <Selector options={TYPE_OPTIONS} value={type} onChange={setType} style={{ '--border-radius': '10px', '--checked-color': '#2563EB' } as React.CSSProperties} />
         </div>
         <div>
-          <p className="mb-2 text-xs text-gray-400">Danh mục</p>
+          <p className="mb-2 text-xs text-on-surface-variant">Danh mục</p>
           <Selector options={CATEGORY_OPTIONS} value={category} onChange={setCategory} style={{ '--border-radius': '10px', '--checked-color': '#2563EB' } as React.CSSProperties} />
         </div>
-        <div className="rounded-xl bg-gray-50 px-3">
-          <p className="pt-2.5 text-xs text-gray-400">Số tiền (VNĐ) *</p>
+        <div className="rounded-xl bg-surface-container-low px-3">
+          <p className="pt-2.5 text-xs text-on-surface-variant">Số tiền (VNĐ) *</p>
           <Input type="number" placeholder="0" value={amount} onChange={setAmount} style={{ '--font-size': '15px' } as React.CSSProperties} />
         </div>
-        <div className="rounded-xl bg-gray-50 px-3">
-          <p className="pt-2.5 text-xs text-gray-400">Ngày</p>
+        <div className="rounded-xl bg-surface-container-low px-3">
+          <p className="pt-2.5 text-xs text-on-surface-variant">Ngày</p>
           <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="w-full bg-transparent py-2.5 text-[15px] outline-none" />
         </div>
-        <div className="rounded-xl bg-gray-50 px-3">
-          <p className="pt-2.5 text-xs text-gray-400">Ghi chú (tuỳ chọn)</p>
+        <div className="rounded-xl bg-surface-container-low px-3">
+          <p className="pt-2.5 text-xs text-on-surface-variant">Ghi chú (tuỳ chọn)</p>
           <Input placeholder="Mô tả..." value={note} onChange={setNote} style={{ '--font-size': '15px' } as React.CSSProperties} />
         </div>
       </div>

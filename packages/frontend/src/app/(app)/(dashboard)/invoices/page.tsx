@@ -18,9 +18,9 @@ import { cn } from "@/lib/utils";
 const PAGE_SIZE = 3;
 
 const statusConfig = {
-  PAID: { label: "Đã thu", badge: "bg-emerald-50 text-emerald-700", bar: "bg-emerald-500" },
-  PENDING: { label: "Chưa thu", badge: "bg-red-50 text-red-600", bar: "bg-red-400" },
-  PARTIAL: { label: "Thu 1 phần", badge: "bg-amber-50 text-amber-700", bar: "bg-amber-400" },
+  PAID: { label: "Đã thu", badge: "bg-secondary-fixed text-on-secondary-fixed", bar: "bg-secondary" },
+  PENDING: { label: "Chưa thu", badge: "bg-error-container text-on-error-container", bar: "bg-error" },
+  PARTIAL: { label: "Thu 1 phần", badge: "bg-tertiary-fixed text-on-tertiary-fixed", bar: "bg-tertiary-fixed-dim" },
 } as const;
 
 function formatPeriod(period: string) {
@@ -68,11 +68,11 @@ export default function InvoicesPage() {
       </div>
 
       {!propertyId ? (
-        <div className="rounded-2xl bg-white p-8 text-center shadow-sm">
-          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50">
-            <Building2 className="h-7 w-7 text-blue-400" />
+        <div className="rounded-2xl bg-surface-container-lowest p-8 text-center shadow-sm">
+          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-fixed">
+            <Building2 className="h-7 w-7 text-primary-container" />
           </div>
-          <p className="mt-4 font-medium text-gray-700">Chưa có khu trọ</p>
+          <p className="mt-4 font-medium text-on-surface">Chưa có khu trọ</p>
         </div>
       ) : isPending ? (
         <div className="flex justify-center py-16">
@@ -89,7 +89,7 @@ export default function InvoicesPage() {
             <List
               key={period}
               header={
-                <span className="text-sm font-semibold text-gray-700">
+                <span className="text-sm font-semibold text-on-surface">
                   {formatPeriod(period)}
                 </span>
               }
@@ -107,18 +107,18 @@ export default function InvoicesPage() {
                       <div className={cn("w-1 self-stretch rounded-sm", cfg.bar)} />
                     }
                     description={
-                      <span className="text-xs text-gray-400">
+                      <span className="text-xs text-on-surface-variant">
                         {formatPeriod(invoice.billingPeriod)}
                         {invoice.tenant?.name && ` · ${invoice.tenant.name}`}
                       </span>
                     }
                     extra={
                       <div className="text-right">
-                        <p className="font-bold text-gray-900">
+                        <p className="font-bold text-on-surface">
                           {invoice.total.toLocaleString("vi-VN")}đ
                         </p>
                         {invoice.status !== "PAID" && remaining > 0 && (
-                          <p className="text-xs text-gray-400">
+                          <p className="text-xs text-on-surface-variant">
                             Còn {remaining.toLocaleString("vi-VN")}đ
                           </p>
                         )}
@@ -127,7 +127,7 @@ export default function InvoicesPage() {
                     arrow
                   >
                     <div className="flex items-center gap-2">
-                      <span className="font-bold text-gray-900">
+                      <span className="font-bold text-on-surface">
                         {invoice.room?.name ?? "—"}
                       </span>
                       <span className={cn("rounded-full px-2 py-0.5 text-[11px] font-semibold", cfg.badge)}>
@@ -146,9 +146,9 @@ export default function InvoicesPage() {
             hasMore={hasMore}
           >
             {hasMore ? (
-              <span className="text-xs text-gray-400">Đang tải...</span>
+              <span className="text-xs text-on-surface-variant">Đang tải...</span>
             ) : (
-              <span className="text-xs text-gray-400">Đã hiển thị tất cả</span>
+              <span className="text-xs text-on-surface-variant">Đã hiển thị tất cả</span>
             )}
           </InfiniteScroll>
         </div>

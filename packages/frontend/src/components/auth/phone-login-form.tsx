@@ -26,8 +26,8 @@ export function PhoneLoginForm() {
   if (!otpSent) {
     return (
       <div className="flex w-full flex-col gap-3">
-        <div className="rounded-xl bg-gray-50 px-3">
-          <p className="pt-2.5 text-xs text-gray-400">Số điện thoại</p>
+        <div className="rounded-xl bg-surface-container-low px-3">
+          <p className="pt-2.5 text-xs text-on-surface-variant">Số điện thoại</p>
           <Input
             type="tel"
             placeholder="+84 xxx xxx xxx"
@@ -48,7 +48,7 @@ export function PhoneLoginForm() {
           Gửi mã OTP
         </Button>
         {error && (
-          <p className="rounded-lg bg-red-50 px-3 py-2 text-center text-sm text-red-600">{error}</p>
+          <p className="rounded-lg bg-error-container px-3 py-2 text-center text-sm text-on-error-container">{error}</p>
         )}
       </div>
     );
@@ -56,8 +56,8 @@ export function PhoneLoginForm() {
 
   return (
     <div className="flex w-full flex-col gap-3">
-      <div className="rounded-xl bg-gray-50 px-3">
-        <p className="pt-2.5 text-xs text-gray-400">Mã OTP</p>
+      <div className="rounded-xl bg-surface-container-low px-3">
+        <p className="pt-2.5 text-xs text-on-surface-variant">Mã OTP</p>
         <Input
           type="text"
           placeholder="000000"
@@ -83,12 +83,12 @@ export function PhoneLoginForm() {
         fill="none"
         size="small"
         onClick={() => setOtpSent(false)}
-        className="!text-gray-500 underline underline-offset-1"
+        className="!text-on-surface-variant underline underline-offset-1"
       >
         Đổi số điện thoại
       </Button>
       {error && (
-        <p className="rounded-lg bg-red-50 px-3 py-2 text-center text-sm text-red-600">{error}</p>
+        <p className="rounded-lg bg-error-container px-3 py-2 text-center text-sm text-on-error-container">{error}</p>
       )}
     </div>
   );

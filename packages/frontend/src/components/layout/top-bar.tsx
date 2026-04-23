@@ -69,8 +69,8 @@ export function TopBar() {
 
         {/* TODO: implement in-app notification inbox before re-enabling */}
         {/* <button className="relative p-1">
-          <Bell className="h-5 w-5 text-gray-500" />
-          <span className="absolute right-0.5 top-0.5 h-2 w-2 rounded-full bg-red-500 ring-2 ring-white" />
+          <Bell className="h-5 w-5 text-on-surface-variant" />
+          <span className="absolute right-0.5 top-0.5 h-2 w-2 rounded-full bg-error ring-2 ring-surface-container-lowest" />
         </button> */}
       </div>
 

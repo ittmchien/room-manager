@@ -111,7 +111,7 @@ export const UtilityConfigForm = forwardRef<UtilityConfigFormHandle, Props>(
 
     return (
       <div className="space-y-3">
-        <p className="text-sm font-semibold text-gray-700">{label}</p>
+        <p className="text-sm font-semibold text-on-surface">{label}</p>
 
         <Selector
           options={options}
@@ -122,12 +122,12 @@ export const UtilityConfigForm = forwardRef<UtilityConfigFormHandle, Props>(
 
         {calcType === 'FIXED' && (
           loading ? (
-            <div className="rounded-xl bg-gray-50 px-3 py-3">
+            <div className="rounded-xl bg-surface-container-low px-3 py-3">
               <Skeleton.Paragraph lineCount={1} animated />
             </div>
           ) : (
             <div className="flex items-center gap-2">
-              <div className="flex-1 rounded-xl bg-gray-50 px-3 py-1.5">
+              <div className="flex-1 rounded-xl bg-surface-container-low px-3 py-1.5">
                 <Input
                   type="number"
                   min={0}
@@ -137,19 +137,19 @@ export const UtilityConfigForm = forwardRef<UtilityConfigFormHandle, Props>(
                   style={{ '--font-size': '16px' } as React.CSSProperties}
                 />
               </div>
-              <span className="shrink-0 text-xs text-gray-400">VND/{unit}</span>
+              <span className="shrink-0 text-xs text-on-surface-variant">VND/{unit}</span>
             </div>
           )
         )}
 
         {calcType === 'PER_PERSON' && (
           loading ? (
-            <div className="rounded-xl bg-gray-50 px-3 py-3">
+            <div className="rounded-xl bg-surface-container-low px-3 py-3">
               <Skeleton.Paragraph lineCount={1} animated />
             </div>
           ) : (
             <div className="flex items-center gap-2">
-              <div className="flex-1 rounded-xl bg-gray-50 px-3 py-1.5">
+              <div className="flex-1 rounded-xl bg-surface-container-low px-3 py-1.5">
                 <Input
                   type="number"
                   min={0}
@@ -159,19 +159,19 @@ export const UtilityConfigForm = forwardRef<UtilityConfigFormHandle, Props>(
                   style={{ '--font-size': '16px' } as React.CSSProperties}
                 />
               </div>
-              <span className="shrink-0 text-xs text-gray-400">VND/người</span>
+              <span className="shrink-0 text-xs text-on-surface-variant">VND/người</span>
             </div>
           )
         )}
 
         {calcType === 'FIXED_PER_ROOM' && (
           loading ? (
-            <div className="rounded-xl bg-gray-50 px-3 py-3">
+            <div className="rounded-xl bg-surface-container-low px-3 py-3">
               <Skeleton.Paragraph lineCount={1} animated />
             </div>
           ) : (
             <div className="flex items-center gap-2">
-              <div className="flex-1 rounded-xl bg-gray-50 px-3 py-1.5">
+              <div className="flex-1 rounded-xl bg-surface-container-low px-3 py-1.5">
                 <Input
                   type="number"
                   min={0}
@@ -181,14 +181,14 @@ export const UtilityConfigForm = forwardRef<UtilityConfigFormHandle, Props>(
                   style={{ '--font-size': '16px' } as React.CSSProperties}
                 />
               </div>
-              <span className="shrink-0 text-xs text-gray-400">VND/phòng</span>
+              <span className="shrink-0 text-xs text-on-surface-variant">VND/phòng</span>
             </div>
           )
         )}
 
         {calcType === 'TIERED' && (
           <div className="space-y-1.5">
-            <div className="grid grid-cols-[1.5rem_1fr_3.5rem_1.5rem] gap-2 px-1 text-[11px] text-gray-400">
+            <div className="grid grid-cols-[1.5rem_1fr_3.5rem_1.5rem] gap-2 px-1 text-[11px] text-on-surface-variant">
               <span>#</span>
               <span>Giá (đ/kWh)</span>
               <span>Đến kWh</span>
@@ -196,8 +196,8 @@ export const UtilityConfigForm = forwardRef<UtilityConfigFormHandle, Props>(
             </div>
             {tiers.map((tier, i) => (
               <div key={i} className="grid grid-cols-[1.5rem_1fr_3.5rem_1.5rem] gap-2 items-center">
-                <span className="text-center text-xs text-gray-400">{i + 1}</span>
-                <div className="rounded-xl bg-gray-50 px-3 py-1.5">
+                <span className="text-center text-xs text-on-surface-variant">{i + 1}</span>
+                <div className="rounded-xl bg-surface-container-low px-3 py-1.5">
                   <Input
                     type="number"
                     min={0}
@@ -208,7 +208,7 @@ export const UtilityConfigForm = forwardRef<UtilityConfigFormHandle, Props>(
                   />
                 </div>
                 {i < tiers.length - 1 ? (
-                  <div className="rounded-xl bg-gray-50 px-2 py-1.5">
+                  <div className="rounded-xl bg-surface-container-low px-2 py-1.5">
                     <Input
                       type="number"
                       min={0}
@@ -218,12 +218,12 @@ export const UtilityConfigForm = forwardRef<UtilityConfigFormHandle, Props>(
                     />
                   </div>
                 ) : (
-                  <span className="text-center text-sm text-gray-300">∞</span>
+                  <span className="text-center text-sm text-outline">∞</span>
                 )}
                 <button
                   onClick={() => removeTier(i)}
                   disabled={tiers.length <= 1}
-                  className="p-0.5 text-red-300 disabled:opacity-30"
+                  className="p-0.5 text-error-container disabled:opacity-30"
                 >
                   <Trash2 className="h-3.5 w-3.5" />
                 </button>
@@ -231,7 +231,7 @@ export const UtilityConfigForm = forwardRef<UtilityConfigFormHandle, Props>(
             ))}
             <button
               onClick={addTier}
-              className="flex items-center gap-1 pl-1 pt-1 text-xs text-blue-500"
+              className="flex items-center gap-1 pl-1 pt-1 text-xs text-primary"
             >
               <Plus className="h-3 w-3" />
               Thêm bậc

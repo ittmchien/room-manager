@@ -1,14 +1,16 @@
-import { Tag } from 'antd-mobile';
+import { cn } from '@/lib/utils';
+import { roomStatusStyles } from '@/lib/design-tokens';
 
 type RoomStatus = 'VACANT' | 'OCCUPIED' | 'MAINTENANCE';
 
-const statusConfig: Record<RoomStatus, { label: string; color: 'primary' | 'success' | 'warning' }> = {
-  OCCUPIED: { label: 'Đang thuê', color: 'success' },
-  VACANT: { label: 'Trống', color: 'primary' },
-  MAINTENANCE: { label: 'Sửa chữa', color: 'warning' },
-};
-
 export function RoomStatusBadge({ status }: { status: RoomStatus }) {
-  const { label, color } = statusConfig[status];
-  return <Tag color={color}>{label}</Tag>;
+  const cfg = roomStatusStyles[status];
+  return (
+    <span className={cn(
+      'inline-flex items-center px-2.5 py-1 rounded-full font-label text-[0.6875rem] font-medium uppercase tracking-wider',
+      cfg.badge
+    )}>
+      {cfg.label}
+    </span>
+  );
 }

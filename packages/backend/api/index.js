@@ -1,14 +1,16 @@
-const { NestFactory } = require('@nestjs/core');
-const { ExpressAdapter } = require('@nestjs/platform-express');
-const { ValidationPipe } = require('@nestjs/common');
 const express = require('express');
-const { AppModule } = require('../dist/app.module');
 
 const expressApp = express();
 let cachedApp = null;
 
 async function bootstrap() {
   if (cachedApp) return cachedApp;
+
+  // Dynamic require — dist/ only exists after buildCommand runs
+  const { NestFactory } = require('@nestjs/core');
+  const { ExpressAdapter } = require('@nestjs/platform-express');
+  const { ValidationPipe } = require('@nestjs/common');
+  const { AppModule } = require('../dist/app.module');
 
   const app = await NestFactory.create(AppModule, new ExpressAdapter(expressApp));
 
